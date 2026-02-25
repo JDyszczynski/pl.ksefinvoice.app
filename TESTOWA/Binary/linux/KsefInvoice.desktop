@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=BS Ksef Invoice
+Comment=Aplikacja do obsługi KSeF
+Exec=AppRun %F
+Icon=ksef_invoice
+Categories=Office;Finance;
+Terminal=false
+StartupNotify=true
