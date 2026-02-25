@@ -1,5 +1,0 @@
-# Ignoruj katalogi generowane przez Visual Studio i proces kompilacji .NET
-.vs/
-bin/
-obj/
-appsettings.Development.json
