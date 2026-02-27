@@ -4,7 +4,7 @@
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>LicenseRef-proprietary</project_license>
   <name>KsefInvoice</name>
-  <summary>Darmowy program do faktur z pełną integracją KSeF</summary>
+  <summary>Faktury KSeF Polska</summary>
   <description>
     <p>
       KsefInvoice to nowoczesne fakturowanie z pełną integracją KSeF — za darmo, na zawsze!
@@ -60,6 +60,7 @@
   <url type="donation">https://buycoffee.to/jarekd</url>
   <content_rating type="oars-1.1" />
   <releases>
+    <release version="1.0.4" date="2026-02-27" />
     <release version="1.0.3" date="2026-02-25" />
     <release version="1.0.2" date="2026-02-15" />
   </releases>
