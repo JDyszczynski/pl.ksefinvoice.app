@@ -1,0 +1,213 @@
+========================================================
+KSeF Invoice - Budowanie wersji Linux (AppImage)
+========================================================
+[1/6] Przygotowanie izolowanego środowiska w /tmp/KsefInvoice_Build_Lin_1772194459...
+Kopiowanie źródeł...
+Katalog roboczy (temp): /tmp/KsefInvoice_Build_Lin_1772194459/src
+Instalacja zależności...
+[2/6] Budowanie pliku binarnego (PyInstaller)...
+26 INFO: PyInstaller: 6.19.0, contrib hooks: 2026.1
+26 INFO: Python: 3.13.7
+28 INFO: Platform: Linux-6.17.0-14-generic-x86_64-with-glibc2.42
+28 INFO: Python environment: /tmp/KsefInvoice_Build_Lin_1772194459/venv
+29 INFO: Removing temporary files and cleaning cache in /home/jaroslawd/.cache/pyinstaller
+29 INFO: Module search paths (PYTHONPATH):
+['/tmp/KsefInvoice_Build_Lin_1772194459/src',
+ '/usr/lib/python313.zip',
+ '/usr/lib/python3.13',
+ '/usr/lib/python3.13/lib-dynload',
+ '/tmp/KsefInvoice_Build_Lin_1772194459/venv/lib/python3.13/site-packages',
+ '/tmp/KsefInvoice_Build_Lin_1772194459/src']
+109 INFO: Appending 'datas' from .spec
+109 INFO: checking Analysis
+109 INFO: Building Analysis because Analysis-00.toc is non existent
+109 INFO: Looking for Python shared library...
+120 INFO: Using Python shared library: /lib/x86_64-linux-gnu/libpython3.13.so.1.0
+120 INFO: Running Analysis Analysis-00.toc
+120 INFO: Target bytecode optimization level: 0
+120 INFO: Initializing module dependency graph...
+120 INFO: Initializing module graph hook caches...
+125 INFO: Analyzing modules for base_library.zip ...
+463 INFO: Processing standard module hook 'hook-heapq.py' from '/tmp/KsefInvoice_Build_Lin_1772194459/venv/lib/python3.13/site-packages/PyInstaller/hooks'
+612 INFO: Processing standard module hook 'hook-encodings.py' from '/tmp/KsefInvoice_Build_Lin_1772194459/venv/lib/python3.13/site-packages/PyInstaller/hooks'
+1402 INFO: Processing standard module hook 'hook-pickle.py' from '/tmp/KsefInvoice_Build_Lin_1772194459/venv/lib/python3.13/site-packages/PyInstaller/hooks'
+2183 INFO: Caching module dependency graph...
+2202 INFO: Analyzing /tmp/KsefInvoice_Build_Lin_1772194459/src/main_qt.py
+2209 INFO: Processing standard module hook 'hook-cryptography.py' from '/tmp/KsefInvoice_Build_Lin_1772194459/venv/lib/python3.13/site-packages/_pyinstaller_hooks_contrib/stdhooks'
+2441 INFO: hook-cryptography: cryptography does not seem to be using dynamically linked OpenSSL.
+2447 INFO: Processing standard module hook 'hook-PySide6.py' from '/tmp/KsefInvoice_Build_Lin_1772194459/venv/lib/python3.13/site-packages/PyInstaller/hooks'
+2509 INFO: Processing standard module hook 'hook-shiboken6.py' from '/tmp/KsefInvoice_Build_Lin_1772194459/venv/lib/python3.13/site-packages/PyInstaller/hooks'
+2598 INFO: Processing standard module hook 'hook-PySide6.QtNetwork.py' from '/tmp/KsefInvoice_Build_Lin_1772194459/venv/lib/python3.13/site-packages/PyInstaller/hooks'
+3116 INFO: Processing standard module hook 'hook-PySide6.QtCore.py' from '/tmp/KsefInvoice_Build_Lin_1772194459/venv/lib/python3.13/site-packages/PyInstaller/hooks'
+3600 INFO: Processing standard module hook 'hook-PySide6.QtWidgets.py' from '/tmp/KsefInvoice_Build_Lin_1772194459/venv/lib/python3.13/site-packages/PyInstaller/hooks'
+4117 INFO: Processing standard module hook 'hook-PySide6.QtGui.py' from '/tmp/KsefInvoice_Build_Lin_1772194459/venv/lib/python3.13/site-packages/PyInstaller/hooks'
+4532 INFO: Processing standard module hook 'hook-sqlalchemy.py' from '/tmp/KsefInvoice_Build_Lin_1772194459/venv/lib/python3.13/site-packages/PyInstaller/hooks'
+4837 INFO: Processing standard module hook 'hook-platform.py' from '/tmp/KsefInvoice_Build_Lin_1772194459/venv/lib/python3.13/site-packages/PyInstaller/hooks'
+4850 INFO: Processing standard module hook 'hook-_ctypes.py' from '/tmp/KsefInvoice_Build_Lin_1772194459/venv/lib/python3.13/site-packages/PyInstaller/hooks'
+4866 INFO: Processing standard module hook 'hook-sysconfig.py' from '/tmp/KsefInvoice_Build_Lin_1772194459/venv/lib/python3.13/site-packages/PyInstaller/hooks'
+4924 INFO: Processing pre-safe-import-module hook 'hook-typing_extensions.py' from '/tmp/KsefInvoice_Build_Lin_1772194459/venv/lib/python3.13/site-packages/PyInstaller/hooks/pre_safe_import_module'
+4924 INFO: SetuptoolsInfo: initializing cached setuptools info...
+5192 INFO: Processing standard module hook 'hook-multiprocessing.util.py' from '/tmp/KsefInvoice_Build_Lin_1772194459/venv/lib/python3.13/site-packages/PyInstaller/hooks'
+5287 INFO: Processing standard module hook 'hook-xml.py' from '/tmp/KsefInvoice_Build_Lin_1772194459/venv/lib/python3.13/site-packages/PyInstaller/hooks'
+5650 INFO: Processing pre-safe-import-module hook 'hook-importlib_metadata.py' from '/tmp/KsefInvoice_Build_Lin_1772194459/venv/lib/python3.13/site-packages/PyInstaller/hooks/pre_safe_import_module'
+5650 INFO: Setuptools: 'importlib_metadata' appears to be a setuptools-vendored copy - creating alias to 'setuptools._vendor.importlib_metadata'!
+5654 INFO: Processing standard module hook 'hook-setuptools.py' from '/tmp/KsefInvoice_Build_Lin_1772194459/venv/lib/python3.13/site-packages/PyInstaller/hooks'
+5660 INFO: Processing pre-safe-import-module hook 'hook-distutils.py' from '/tmp/KsefInvoice_Build_Lin_1772194459/venv/lib/python3.13/site-packages/PyInstaller/hooks/pre_safe_import_module'
+5675 INFO: Processing pre-safe-import-module hook 'hook-jaraco.py' from '/tmp/KsefInvoice_Build_Lin_1772194459/venv/lib/python3.13/site-packages/PyInstaller/hooks/pre_safe_import_module'
+5675 INFO: Setuptools: 'jaraco' appears to be a full setuptools-vendored copy - creating alias to 'setuptools._vendor.jaraco'!
+5681 INFO: Processing pre-safe-import-module hook 'hook-more_itertools.py' from '/tmp/KsefInvoice_Build_Lin_1772194459/venv/lib/python3.13/site-packages/PyInstaller/hooks/pre_safe_import_module'
+5681 INFO: Setuptools: 'more_itertools' appears to be a setuptools-vendored copy - creating alias to 'setuptools._vendor.more_itertools'!
+5825 INFO: Processing pre-safe-import-module hook 'hook-packaging.py' from '/tmp/KsefInvoice_Build_Lin_1772194459/venv/lib/python3.13/site-packages/PyInstaller/hooks/pre_safe_import_module'
+5919 INFO: Processing standard module hook 'hook-setuptools._vendor.jaraco.text.py' from '/tmp/KsefInvoice_Build_Lin_1772194459/venv/lib/python3.13/site-packages/PyInstaller/hooks'
+5920 INFO: Processing pre-safe-import-module hook 'hook-importlib_resources.py' from '/tmp/KsefInvoice_Build_Lin_1772194459/venv/lib/python3.13/site-packages/PyInstaller/hooks/pre_safe_import_module'
+6034 INFO: Processing pre-safe-import-module hook 'hook-backports.py' from '/tmp/KsefInvoice_Build_Lin_1772194459/venv/lib/python3.13/site-packages/PyInstaller/hooks/pre_safe_import_module'
+6034 INFO: Setuptools: 'backports' appears to be a full setuptools-vendored copy - creating alias to 'setuptools._vendor.backports'!
+6247 INFO: Processing pre-safe-import-module hook 'hook-tomli.py' from '/tmp/KsefInvoice_Build_Lin_1772194459/venv/lib/python3.13/site-packages/PyInstaller/hooks/pre_safe_import_module'
+6248 INFO: Setuptools: 'tomli' appears to be a setuptools-vendored copy - creating alias to 'setuptools._vendor.tomli'!
+6518 INFO: Processing pre-safe-import-module hook 'hook-wheel.py' from '/tmp/KsefInvoice_Build_Lin_1772194459/venv/lib/python3.13/site-packages/PyInstaller/hooks/pre_safe_import_module'
+6518 INFO: Setuptools: 'wheel' appears to be a setuptools-vendored copy - creating alias to 'setuptools._vendor.wheel'!
+6554 INFO: Processing standard module hook 'hook-setuptools._vendor.importlib_metadata.py' from '/tmp/KsefInvoice_Build_Lin_1772194459/venv/lib/python3.13/site-packages/PyInstaller/hooks'
+6565 INFO: Processing pre-safe-import-module hook 'hook-zipp.py' from '/tmp/KsefInvoice_Build_Lin_1772194459/venv/lib/python3.13/site-packages/PyInstaller/hooks/pre_safe_import_module'
+6565 INFO: Setuptools: 'zipp' appears to be a setuptools-vendored copy - creating alias to 'setuptools._vendor.zipp'!
+8645 INFO: Processing standard module hook 'hook-xml.etree.cElementTree.py' from '/tmp/KsefInvoice_Build_Lin_1772194459/venv/lib/python3.13/site-packages/PyInstaller/hooks'
+8649 INFO: Processing standard module hook 'hook-xml.dom.domreg.py' from '/tmp/KsefInvoice_Build_Lin_1772194459/venv/lib/python3.13/site-packages/PyInstaller/hooks'
+8765 INFO: Processing standard module hook 'hook-urllib3.py' from '/tmp/KsefInvoice_Build_Lin_1772194459/venv/lib/python3.13/site-packages/_pyinstaller_hooks_contrib/stdhooks'
+9078 INFO: Processing standard module hook 'hook-charset_normalizer.py' from '/tmp/KsefInvoice_Build_Lin_1772194459/venv/lib/python3.13/site-packages/_pyinstaller_hooks_contrib/stdhooks'
+9320 INFO: Processing standard module hook 'hook-certifi.py' from '/tmp/KsefInvoice_Build_Lin_1772194459/venv/lib/python3.13/site-packages/_pyinstaller_hooks_contrib/stdhooks'
+9380 INFO: Processing standard module hook 'hook-lxml.py' from '/tmp/KsefInvoice_Build_Lin_1772194459/venv/lib/python3.13/site-packages/_pyinstaller_hooks_contrib/stdhooks'
+9467 INFO: Processing standard module hook 'hook-lxml.etree.py' from '/tmp/KsefInvoice_Build_Lin_1772194459/venv/lib/python3.13/site-packages/_pyinstaller_hooks_contrib/stdhooks'
+9660 INFO: Processing standard module hook 'hook-PySide6.QtPrintSupport.py' from '/tmp/KsefInvoice_Build_Lin_1772194459/venv/lib/python3.13/site-packages/PyInstaller/hooks'
+9780 INFO: Processing standard module hook 'hook-PIL.py' from '/tmp/KsefInvoice_Build_Lin_1772194459/venv/lib/python3.13/site-packages/PyInstaller/hooks'
+9844 INFO: Processing standard module hook 'hook-PIL.Image.py' from '/tmp/KsefInvoice_Build_Lin_1772194459/venv/lib/python3.13/site-packages/PyInstaller/hooks'
+10223 INFO: Processing standard module hook 'hook-PIL.ImageFilter.py' from '/tmp/KsefInvoice_Build_Lin_1772194459/venv/lib/python3.13/site-packages/PyInstaller/hooks'
+10526 INFO: Analyzing hidden import 'pymysql'
+10592 INFO: Processing module hooks (post-graph stage)...
+10670 INFO: Processing standard module hook 'hook-difflib.py' from '/tmp/KsefInvoice_Build_Lin_1772194459/venv/lib/python3.13/site-packages/PyInstaller/hooks'
+10925 INFO: Processing standard module hook 'hook-lxml.isoschematron.py' from '/tmp/KsefInvoice_Build_Lin_1772194459/venv/lib/python3.13/site-packages/_pyinstaller_hooks_contrib/stdhooks'
+10932 INFO: Processing standard module hook 'hook-lxml.objectify.py' from '/tmp/KsefInvoice_Build_Lin_1772194459/venv/lib/python3.13/site-packages/_pyinstaller_hooks_contrib/stdhooks'
+10945 INFO: Processing standard module hook 'hook-sqlalchemy.py' from '/tmp/KsefInvoice_Build_Lin_1772194459/venv/lib/python3.13/site-packages/PyInstaller/hooks'
+11082 WARNING: Hidden import "pysqlite2" not found!
+11082 WARNING: Hidden import "MySQLdb" not found!
+11082 WARNING: Hidden import "psycopg2" not found!
+11574 INFO: Processing standard module hook 'hook-sqlite3.py' from '/tmp/KsefInvoice_Build_Lin_1772194459/venv/lib/python3.13/site-packages/PyInstaller/hooks'
+11901 INFO: Processing standard module hook 'hook-PySide6.QtDBus.py' from '/tmp/KsefInvoice_Build_Lin_1772194459/venv/lib/python3.13/site-packages/PyInstaller/hooks'
+12143 INFO: Processing standard module hook 'hook-PIL.SpiderImagePlugin.py' from '/tmp/KsefInvoice_Build_Lin_1772194459/venv/lib/python3.13/site-packages/PyInstaller/hooks'
+12177 INFO: Performing binary vs. data reclassification (183 entries)
+12260 INFO: Looking for ctypes DLLs
+12302 INFO: Analyzing run-time hooks ...
+12304 INFO: Including run-time hook 'pyi_rth_inspect.py' from '/tmp/KsefInvoice_Build_Lin_1772194459/venv/lib/python3.13/site-packages/PyInstaller/hooks/rthooks'
+12306 INFO: Including run-time hook 'pyi_rth_pyside6.py' from '/tmp/KsefInvoice_Build_Lin_1772194459/venv/lib/python3.13/site-packages/PyInstaller/hooks/rthooks'
+12306 INFO: Processing pre-find-module-path hook 'hook-_pyi_rth_utils.py' from '/tmp/KsefInvoice_Build_Lin_1772194459/venv/lib/python3.13/site-packages/PyInstaller/hooks/pre_find_module_path'
+12307 INFO: Processing standard module hook 'hook-_pyi_rth_utils.py' from '/tmp/KsefInvoice_Build_Lin_1772194459/venv/lib/python3.13/site-packages/PyInstaller/hooks'
+12308 INFO: Including run-time hook 'pyi_rth_pkgutil.py' from '/tmp/KsefInvoice_Build_Lin_1772194459/venv/lib/python3.13/site-packages/PyInstaller/hooks/rthooks'
+12309 INFO: Including run-time hook 'pyi_rth_multiprocessing.py' from '/tmp/KsefInvoice_Build_Lin_1772194459/venv/lib/python3.13/site-packages/PyInstaller/hooks/rthooks'
+12310 INFO: Including run-time hook 'pyi_rth_setuptools.py' from '/tmp/KsefInvoice_Build_Lin_1772194459/venv/lib/python3.13/site-packages/PyInstaller/hooks/rthooks'
+12310 INFO: Including run-time hook 'pyi_rth_cryptography_openssl.py' from '/tmp/KsefInvoice_Build_Lin_1772194459/venv/lib/python3.13/site-packages/_pyinstaller_hooks_contrib/rthooks'
+12318 INFO: Creating base_library.zip...
+12326 INFO: Looking for dynamic libraries
+13701 WARNING: Library not found: could not resolve 'libtiff.so.5', dependency of '/tmp/KsefInvoice_Build_Lin_1772194459/venv/lib/python3.13/site-packages/PySide6/Qt/plugins/imageformats/libqtiff.so'.
+13716 INFO: Warnings written to /tmp/KsefInvoice_Build_Lin_1772194459/build/ksef_invoice/warn-ksef_invoice.txt
+13737 INFO: Graph cross-reference written to /tmp/KsefInvoice_Build_Lin_1772194459/build/ksef_invoice/xref-ksef_invoice.html
+13750 INFO: checking PYZ
+13750 INFO: Building PYZ because PYZ-00.toc is non existent
+13750 INFO: Building PYZ (ZlibArchive) /tmp/KsefInvoice_Build_Lin_1772194459/build/ksef_invoice/PYZ-00.pyz
+14297 INFO: Building PYZ (ZlibArchive) /tmp/KsefInvoice_Build_Lin_1772194459/build/ksef_invoice/PYZ-00.pyz completed successfully.
+14303 WARNING: Ignoring icon; supported only on Windows and macOS!
+14309 INFO: checking PKG
+14309 INFO: Building PKG because PKG-00.toc is non existent
+14309 INFO: Building PKG (CArchive) KsefInvoice.pkg
+14324 INFO: Building PKG (CArchive) KsefInvoice.pkg completed successfully.
+14324 INFO: Bootloader /tmp/KsefInvoice_Build_Lin_1772194459/venv/lib/python3.13/site-packages/PyInstaller/bootloader/Linux-64bit-intel/run
+14324 INFO: checking EXE
+14325 INFO: Building EXE because EXE-00.toc is non existent
+14325 INFO: Building EXE from EXE-00.toc
+14325 INFO: Copying bootloader EXE to /tmp/KsefInvoice_Build_Lin_1772194459/build/ksef_invoice/KsefInvoice
+14325 INFO: Appending PKG archive to custom ELF section in EXE
+14335 INFO: Building EXE from EXE-00.toc completed successfully.
+14338 INFO: checking COLLECT
+14339 INFO: Building COLLECT because COLLECT-00.toc is non existent
+14339 INFO: Building COLLECT COLLECT-00.toc
+14393 INFO: Building COLLECT COLLECT-00.toc completed successfully.
+14396 INFO: Build complete! The results are available in: /tmp/KsefInvoice_Build_Lin_1772194459/dist
+[3/6] Przygotowanie struktury AppDir...
+Using FlatHub source: /home/jaroslawd/projekty/KsefInvoice/FlatHub
+OSTRZEŻENIE: Brak 'imagemagick'. Kopiuję logo.ico jako logo.png.
+[4/6] Weryfikacja narzędzia appimagetool...
+Pobieranie appimagetool z GitHub...
+[5/6] Generowanie pliku .AppImage...
+appimagetool, continuous build (git version 8c8c91f), build 295 built on 2025-12-04 17:56:36 UTC
+Using architecture x86_64
+/tmp/KsefInvoice_Build_Lin_1772194459/AppDir should be packaged as /home/jaroslawd/projekty/KsefInvoice/DEPLOY/linux/AppImage/KsefInvoice-Linux-x86_64.AppImage
+Deleting pre-existing .DirIcon
+Creating .DirIcon symlink based on information from desktop file
+WARNING: AppStream upstream metadata is missing, please consider creating it
+         in usr/share/metainfo/KsefInvoice.appdata.xml
+         Please see https://www.freedesktop.org/software/appstream/docs/chap-Quickstart.html#sect-Quickstart-DesktopApps
+         for more information or use the generator at
+         https://docs.appimage.org/packaging-guide/optional/appstream.html#using-the-appstream-generator
+Generating squashfs...
+Downloading runtime file from https://github.com/AppImage/type2-runtime/releases/download/continuous/runtime-x86_64
+Downloaded runtime binary of size 944632
+Parallel mksquashfs: Using 20 processors
+Creating 4.0 filesystem on /home/jaroslawd/projekty/KsefInvoice/DEPLOY/linux/AppImage/KsefInvoice-Linux-x86_64.AppImage, block size 131072.
+[=============================================================|] 2135/2135 100%
+
+Exportable Squashfs 4.0 filesystem, zstd compressed, data block size 131072
+	compressed data, compressed metadata, compressed fragments,
+	compressed xattrs, compressed ids
+	duplicates are removed
+Filesystem size 88810.23 Kbytes (86.73 Mbytes)
+	36.91% of uncompressed filesystem size (240587.30 Kbytes)
+Inode table size 10192 bytes (9.95 Kbytes)
+	41.64% of uncompressed inode table size (24477 bytes)
+Directory table size 5990 bytes (5.85 Kbytes)
+	44.69% of uncompressed directory table size (13403 bytes)
+Number of duplicate files found 6
+Number of inodes 485
+Number of files 386
+Number of fragments 68
+Number of symbolic links 45
+Number of device nodes 0
+Number of fifo nodes 0
+Number of socket nodes 0
+Number of directories 54
+Number of hard-links 0
+Number of ids (unique uids + gids) 1
+Number of uids 1
+	root (0)
+Number of gids 1
+	root (0)
+Embedding ELF...
+Marking the AppImage as executable...
+Embedding MD5 digest
+Success
+
+Please consider submitting your AppImage to AppImageHub, the crowd-sourced
+central directory of available AppImages, by opening a pull request
+at https://github.com/AppImage/appimage.github.io
+[6/6] Generowanie paczki Flatpak i version.txt...
+Using Custom Deploy Root: /home/jaroslawd/projekty/KsefInvoice/DEPLOY
+Project Root (for version check): /tmp/KsefInvoice_Build_Lin_1772194459/src
+Detected Version: 1.0.4 (Beta)
+Created /home/jaroslawd/projekty/KsefInvoice/DEPLOY/linux/Flatpak/version.txt
+Renamed AppImage to KsefInvoice_Linux_v1.0.4_Beta.AppImage
+Creating TAR.GZ archive: /home/jaroslawd/projekty/KsefInvoice/DEPLOY/linux/Flatpak/KsefInvoice-1.0.4.tar.gz...
+TAR.GZ created.
+Archive SHA256: 1d463964233c931a7338535d2f4a4a345a942a2256aa3930752d08cf290c6d23
+Found wrapper script: ksef_wrapper.sh
+Wrapper SHA256: 78d7e2d970581103b7d9513d50a8bfd49ed9041ffbf732aca196f3296d803841
+Checking template at: /tmp/KsefInvoice_Build_Lin_1772194459/src/FlatHub/pl.ksefinvoice.app.json
+Warning: Template /tmp/KsefInvoice_Build_Lin_1772194459/src/FlatHub/pl.ksefinvoice.app.json not found.
+
+[LINUX RELEASE READY]
+Deploy Root: /home/jaroslawd/projekty/KsefInvoice/DEPLOY/linux
+  > AppImage/ (contains executable for website)
+  > Flatpak/  (contains all files for Server/Repository)
+[7/7] Pominięto aktualizację FlatHub (brak skryptu update_flathub.py)
+Sprzątanie plików tymczasowych...
+Czyszczenie katalogu PRODUKCYJNA...
+========================================================
+SUKCES! Gotowe pliki w: /home/jaroslawd/projekty/KsefInvoice/DEPLOY/linux
+  - /home/jaroslawd/projekty/KsefInvoice/DEPLOY/linux/AppImage (Plik .AppImage)
+  - /home/jaroslawd/projekty/KsefInvoice/DEPLOY/linux/Flatpak  (Pliki dla serwera: tar.gz, json, txt)
+========================================================

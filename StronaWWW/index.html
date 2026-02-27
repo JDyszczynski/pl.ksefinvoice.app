@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KsefInvoice - Darmowy Program do KSeF i Faktur (Windows/Linux) Bez Abonamentu</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Pobierz KsefInvoice - w 100% darmowy program do fakturowania z pełną integracją KSeF. Bez reklam, bez abonamentu. Twoje dane są bezpieczne i przechowywane lokalnie. Generuj JPK_V7, weryfikuj w GUS/VIES.">
+    <meta name="keywords" content="KSeF 2026, darmowy program do faktur, KSeF bez abonamentu, KSeF desktop, fakturowanie offline, bezpieczny KSeF, JPK_V7, faktura VAT, Linux, Windows, integracja KSeF, biała lista podatników, VIES, program magazynowy za darmo">
+    <meta name="author" content="Jarosław Dyszczyński">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.dyszczynski.pl/KSEF/">
+    <link rel="icon" type="image/x-icon" href="logo.ico">
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.dyszczynski.pl/KSEF/">
+    <meta property="og:title" content="KsefInvoice - Darmowy program do KSeF | Bez Abonamentu">
+    <meta property="og:description" content="Bezpieczna, darmowa aplikacja desktopowa. Twoje faktury zawsze pod kontrolą, bez reklam i opłat. Pełna integracja z KSeF, JPK, GUS i VIES.">
+    <meta property="og:image" content="https://www.dyszczynski.pl/KSEF/img/dashboard.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="KsefInvoice - Twoje Faktury w KSeF">
+    <meta name="twitter:description" content="Pobierz aplikację do obsługi KSeF i fakturowania. Działa na Windows i Linux.">
+    <meta name="twitter:image" content="https://www.dyszczynski.pl/KSEF/img/dashboard.png">
+
+    <!-- Styles & Fonts -->
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="logo.ico">
+
+    <!-- Schema.org for Software Application -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "KsefInvoice",
+      "operatingSystem": "Windows, Linux",
+      "applicationCategory": "BusinessApplication",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "PLN"
+      },
+      "description": "Aplikacja desktopowa do wystawiania faktur z integracją KSeF (Krajowy System e-Faktur), generowaniem JPK i weryfikacją kontrahentów.",
+      "author": {
+        "@type": "Person",
+        "name": "Jarosław Dyszczyński"
+      }
+    }
+    </script>
+</head>
+<body>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="container hero-content">
+            <div class="hero-text">
+                <h1 style="display: flex; align-items: center; gap: 10px;">
+                    <img src="logo.ico" alt="" style="width: 48px; height: 48px;">
+                    KsefInvoice
+                </h1>
+                <p class="tagline">Nowoczesne fakturowanie z pełną integracją KSeF <span style="color: #2563eb; font-weight: bold;">— za darmo, na zawsze!</span></p>
+                <div class="version-badge" id="hero-version" style="display:none; margin-bottom: 1rem; color: #aaa; font-size: 0.9em;">
+                    Wersja: <span class="ver-number">sprawdzanie...</span>
+                </div>
+                <p class="description">
+                    W pełni darmowa, bezpieczna aplikacja desktopowa do zarządzania fakturami, kontrahentami i wysyłką do KSeF. Bez abonamentu, bez reklam i ukrytych opłat. Twoje dane pozostają lokalnie na Twoim komputerze.
+                </p>
+                <a href="#download" class="btn btn-primary">Pobierz teraz</a>
+                <a href="#modules" class="btn btn-secondary">Zobacz funkcje</a>
+            </div>
+            <div class="hero-image">
+                <!-- MIEJSCE NA GŁÓWNY ZRZUT EKRANU (np. Dashboard) -->
+                <div class="screenshot-placeholder" style="background: none; border: none;">
+                    <img src="img/dashboard.png" alt="Widok główny KsefInvoice" style="max-width: 100%; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Modules Section -->
+    <main id="modules">
+        <div class="container">
+            <h2 class="section-title">Moduły aplikacji</h2>
+
+            <!-- Moduł 1: KSeF -->
+            <section class="module-row">
+                <div class="module-text">
+                    <h3>Integracja z KSeF</h3>
+                    <p>
+                        Pełna obsługa Krajowego Systemu e-Faktur. Wysyłaj faktury sprzedaży i pobieraj faktury zakupu bezpośrednio z serwerów Ministerstwa Finansów.
+                    </p>
+                    <ul class="feature-list">
+                        <li>Autoryzacja tokenem lub podpisem kwalifikowanym</li>
+                        <li>Masowa wysyłka faktur</li>
+                        <li>Pobieranie Urzędowego Poświadczenia Odbioru (UPO)</li>
+                    </ul>
+                </div>
+                <div class="module-image">
+                    <!-- MIEJSCE NA ZRZUT EKRANU KSeF -->
+                    <div class="screenshot-placeholder" style="background: none; border: none;">
+                        <img src="img/ksef_list.png" alt="Lista faktur KSeF" style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Moduł 2: Kontrahenci (GUS/VIES) -->
+            <section class="module-row reverse">
+                <div class="module-text">
+                    <h3>Baza Kontrahentów i Weryfikacja</h3>
+                    <p>
+                        Zapomnij o ręcznym wpisywaniu danych. KsefInvoice automatycznie pobiera dane firm.
+                    </p>
+                    <ul class="feature-list">
+                        <li>Pobieranie danych z rejestrów publicznych</li>
+                        <li>Weryfikacja numeru VAT EU w VIES</li>
+                        <li>Sprawdzanie Białej Listy Podatników VAT</li>
+                    </ul>
+                </div>
+                <div class="module-image">
+                    <!-- MIEJSCE NA ZRZUT EKRANU KONTRAHENTÓW -->
+                    <div class="screenshot-placeholder" style="background: none; border: none;">
+                        <img src="img/kontrahent_edit.png" alt="Edycja kontrahenta" style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Moduł 3: Fakturowanie i Waluty -->
+            <section class="module-row">
+                <div class="module-text">
+                    <h3>Fakturowanie i Rodzaje Dokumentów</h3>
+                    <p>
+                        Kompletna obsługa wszystkich typów dokumentów sprzedażowych. Wystawiaj faktury w dowolnej walucie szybko i zgodnie z przepisami.
+                    </p>
+                    <ul class="feature-list">
+                        <li>Faktury VAT, Korekty, Rachunki</li>
+                        <li>Obsługa procedur specjalnych: Marża, Ryczałt, OO</li>
+                        <li>Swobodne fakturowanie w walutach obcych</li>
+                        <li>Wybór procedur VAT (np. OSS, MPP) i eksport do PDF</li>
+                    </ul>
+                </div>
+                <div class="module-image">
+                    <!-- MIEJSCE NA ZRZUT EKRANU FAKTURY -->
+                    <div class="screenshot-placeholder" style="background: none; border: none;">
+                        <img src="img/invoice_editor.png" alt="Edytor faktury" style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Moduł 4: JPK, Rejestry i PPE -->
+            <section class="module-row reverse">
+                <div class="module-text">
+                    <h3>Rejestry VAT, JPK i Deklaracje PPE</h3>
+                    <p>
+                        Kompletne narzędzie do raportowania. Generuj pliki JPK_V7M, JPK_V7K, deklaracje PPE oraz przeglądaj rejestry.
+                    </p>
+                    <ul class="feature-list">
+                        <li>Generowanie plików XML zgodnych ze schemą MF</li>
+                        <li>Podgląd rejestru sprzedaży i zakupu</li>
+                        <li>Obsługa deklaracji PPE</li>
+                        <li>Walidacja poprawności danych przed wysyłką</li>
+                    </ul>
+                </div>
+                <div class="module-image">
+                    <!-- MIEJSCE NA ZRZUT EKRANU REJESTRÓW -->
+                    <div class="screenshot-placeholder" style="background: none; border: none;">
+                        <img src="img/jpk_v7.png" alt="Generator JPK" style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Moduł 5: Rozrachunki -->
+            <section class="module-row">
+                <div class="module-text">
+                    <h3>Moduł Rozrachunków</h3>
+                    <p>
+                        Trzymaj rękę na pulsie płatności. Monitoruj należności i zobowiązania w czasie rzeczywistym.
+                    </p>
+                    <ul class="feature-list">
+                        <li>Kontrola terminów płatności faktur</li>
+                        <li>Obsługa płatności częściowych</li>
+                        <li>Przejrzysty widok salda kontrahentów</li>
+                        <li>Szybkie oznaczanie faktur jako opłacone</li>
+                    </ul>
+                </div>
+                <div class="module-image">
+                    <div class="screenshot-placeholder" style="background: none; border: none;">
+                        <img src="img/rozrachunki.png" alt="Moduł Rozrachunków" style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Moduł 6: Konfiguracja Firmy -->
+            <section class="module-row reverse">
+                <div class="module-text">
+                    <h3>Pełna Konfiguracja Firmy</h3>
+                    <p>
+                        Zaawansowane dostosowanie aplikacji do Twoich potrzeb.
+                    </p>
+                    <ul class="feature-list">
+                        <li>Własna metoda opodatkowania</li>
+                        <li>Definiowanie rejestrów NIP, REGON, KRS, BDO</li>
+                        <li>Własna numeracja dokumentów</li>
+                        <li>Wybór trybu pracy KSeF (online/offline)</li>
+                        <li>Zarządzanie lokalną bazą danych i archiwizacja</li>
+                        <li>Zarządzanie użytkownikami i uprawnieniami</li>
+                    </ul>
+                </div>
+                <div class="module-image">
+                    <div class="screenshot-placeholder" style="background: none; border: none;">
+                        <img src="img/konfiguracja.png" alt="Konfiguracja Firmy" style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Download Section -->
+    <section id="download" class="download-section">
+        <div class="container">
+            <h2 class="section-title white">Pobierz KsefInvoice</h2>
+            <p class="download-desc">Wybierz wersję odpowiednią dla Twojego systemu operacyjnego.</p>
+            
+            <div class="download-grid">
+                <!-- Linux (Flatpak) -->
+                <a href="https://flathub.org/apps/details/com.example.KsefInvoice" class="download-card" target="_blank">
+                    <div class="os-icon">
+                        <!-- Ikona Flatpak (uproszczona) lub Linux -->
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 0C5.398 0 .023 5.372.023 12.002c0 5.297 3.424 9.774 8.169 11.365l.002-.178.106-1.571-1.258.261c-1.637.337-1.996-1.745-1.996-1.745-.361-.914-.881-1.15-.881-1.15-.717-.492.055-.482.055-.482.795.056 1.213.818 1.213.818.706 1.212 1.85.862 2.302.659.07-.512.277-.862.504-1.06-2.583-.292-5.298-1.29-5.298-5.744 0-1.268.452-2.305 1.196-3.118-.119-.294-.52-1.476.115-3.076 0 0 .975-.312 3.195 1.193a11.107 11.107 0 012.908-.392c.987.004 1.98.133 2.91.393 2.217-1.506 3.192-1.193 3.192-1.193.636 1.6.235 2.782.116 3.076.745.813 1.194 1.85 1.194 3.118 0 4.464-2.72 5.448-5.31 5.736.286.246.54.732.54 1.475v2.205s-.012.275.291.565c4.767-1.581 8.211-6.075 8.211-11.385C24.038 5.372 18.664 0 12.031 0z"/></svg>
+                    </div>
+                    <h3>Linux (Flatpak)</h3>
+                    <span class="version">Dostępne na Flathub</span>
+                    <span class="btn-download">Pobierz z Flathub</span>
+                </a>
+
+                <!-- AppImage -->
+                <a href="#" class="download-card" id="btn-linux">
+                    <div class="os-icon">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L1.605 6v12L12 24l10.395-6V6L12 0zm0 2.22l8.471 4.89v9.78L12 21.78 3.529 16.89V7.11L12 2.22zm4.717 8.019L13.79 8.312l-1.395 2.416 1.395 2.417 2.927-1.69a1.69 1.69 0 000-1.216zm-5.706-3.292l-2.926 1.69 1.395 2.416 2.926-1.69-1.395-2.416zm-1.805 7.42l1.396 2.417 2.926-1.69-1.395-2.417-2.927 1.69z"/></svg>
+                    </div>
+                    <h3>AppImage</h3>
+                    <span class="version" class="dynamic-version">Linux (sprawdzanie...)</span>
+                    <span class="btn-download">Pobierz .AppImage</span>
+                </a>
+
+                <!-- Windows -->
+                <a href="win/KSeFInvoiceSetup.exe" class="download-card" id="btn-windows" download>
+                    <div class="os-icon">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
+                    </div>
+                    <h3>Windows (10/11)</h3>
+                    <span class="version" class="dynamic-version">Windows 10/11</span>
+                    <span class="btn-download">Pobierz .exe</span>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-content">
+            <p>&copy; 2026 Jarosław Dyszczyński.</p>
+            <nav class="footer-links">
+                <a href="https://github.com/dyszczynski/KsefInvoice/wiki" target="_blank">Dokumentacja</a>
+                <a href="usage_rules.html">Zasady Używania</a>
+                <a href="report_bug.html">Zgłoś błąd</a>
+                <a href="contact.html">Kontakt</a>
+            </nav>
+        </div>
+    </footer>
+
+    <!-- Skrypt do dynamicznego pobierania wersji i linków -->
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const versionElements = document.querySelectorAll('.dynamic-version');
+            const heroVersionBadge = document.getElementById('hero-version');
+            const heroVersionText = heroVersionBadge && heroVersionBadge.querySelector('.ver-number');
+            const linuxBtn = document.getElementById('btn-linux');
+            const winBtn = document.getElementById('btn-windows');
+            
+            // Konfiguracja ścieżek
+            const PATH_VERSION = 'version.txt';       // Plik z wersją w głównym katalogu
+            const PATH_LINUX_DIR = 'Linux/';          // Katalog z AppImage
+            
+            try {
+                // 1. Pobierz wersję
+                const verResponse = await fetch(PATH_VERSION + '?t=' + new Date().getTime()); // cache busting
+                if (verResponse.ok) {
+                    const version = (await verResponse.text()).trim();
+                    if(heroVersionText) heroVersionText.textContent = version;
+                    if(heroVersionBadge) heroVersionBadge.style.display = 'block';
+                    
+                    // Aktualizuj badge przy przyciskach
+                    const linuxVersionSpan = linuxBtn.querySelector('.version');
+                    if (linuxVersionSpan) linuxVersionSpan.textContent = `Wersja ${version}`;
+                    
+                    const winVersionSpan = winBtn.querySelector('.version');
+                    if (winVersionSpan) winVersionSpan.textContent = `Wersja ${version}`;
+
+                    // 2. Znajdź plik Linux (AppImage)
+                    // Format z builda: KsefInvoice_Linux_v1.0.3_Beta.AppImage
+                    // Wersja w pliku main_qt: 1.0.3 (Beta)
+                    
+                    // Normalizujemy wersję do nazwy pliku
+                    let safeVersion = version.replace(/[\(\)]/g, '').replace(/\s+/g, '_');
+                    
+                    const linuxFilename = `KsefInvoice_Linux_v${safeVersion}.AppImage`;
+                    const linuxPath = `${PATH_LINUX_DIR}${linuxFilename}`;
+                    
+                    linuxBtn.href = linuxPath;
+                    linuxBtn.setAttribute('download', '');
+                    
+                    console.log(`Zaktualizowano link Linux: ${linuxPath}`);
+                } else {
+                    console.error('Nie udało się pobrać wersji (status != 200)');
+                }
+            } catch (e) {
+                console.error('Błąd podczas pobierania wersji:', e);
+            }
+        });
+    </script>
+</body>
+</html>

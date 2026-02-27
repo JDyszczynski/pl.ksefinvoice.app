@@ -1,0 +1,45 @@
+{
+    "app-id": "pl.ksefinvoice.app",
+    "runtime": "org.freedesktop.Platform",
+    "runtime-version": "23.08",
+    "sdk": "org.freedesktop.Sdk",
+    "command": "ksef_wrapper.sh",
+    "finish-args": [
+        "--share=ipc",
+        "--socket=x11",
+        "--socket=wayland",
+        "--share=network",
+        "--filesystem=host",
+        "--device=dri"
+    ],
+    "modules": [
+        {
+            "name": "ksef-binary",
+            "buildsystem": "simple",
+            "build-commands": [
+                "mkdir -p /app/lib/ksef",
+                "cp -r KsefInvoice/* /app/lib/ksef/"
+            ],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://www.dyszczynski.pl/KSEF/Flatpak/KsefInvoice_Linux_Bin_v1.0.2_Beta.tar.gz",
+                    "sha256": "71bb807a7dffc3181c5d515c1a930446f73218c86118c49f5a00f01ce5911a15"
+                }
+            ]
+        },
+        {
+            "name": "launcher",
+            "buildsystem": "simple",
+            "build-commands": [
+                "install -D ksef_wrapper.sh /app/bin/ksef_wrapper.sh"
+            ],
+            "sources": [
+                {
+                    "type": "file",
+                    "path": "ksef_wrapper.sh"
+                }
+            ]
+        }
+    ]
+}

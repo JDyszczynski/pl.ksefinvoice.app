@@ -1,0 +1,38 @@
+package pl.akmf.ksef.sdk.client.model.session;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
+
+public enum SessionType {
+
+    ONLINE("Online"),
+
+    BATCH("Batch");
+
+    private final String value;
+
+    SessionType(String value) {
+        this.value = value;
+    }
+
+    @JsonValue
+    public String getValue() {
+        return value;
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(value);
+    }
+
+    @JsonCreator
+    public static SessionType fromValue(String value) {
+        for (SessionType b : SessionType.values()) {
+            if (b.value.equals(value)) {
+                return b;
+            }
+        }
+        throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    }
+}
+
