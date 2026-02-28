@@ -13,8 +13,13 @@ Bez abonamentu, bez reklam i ukrytych opłat. Twoje dane pozostają lokalnie na 
 *   **Integracja z KSeF:** Pełna obsługa Krajowego Systemu e-Faktur. Wysyłaj faktury sprzedaży i pobieraj faktury zakupu bezpośrednio z serwerów Ministerstwa Finansów.
 *   **Baza Kontrahentów:** Automatyczne pobieranie danych firm z GUS, weryfikacja numeru VAT EU w VIES oraz sprawdzanie Białej Listy Podatników VAT.
 *   **Fakturowanie:** Kompletna obsługa dokumentów sprzedażowych (Faktury VAT, Korekty, Rachunki, Marża, Ryczałt) w dowolnej walucie.
+
+![Edytor Faktur](FlatHub/invoice_editor.png)
+
 *   **JPK i Rejestry:** Generowanie plików JPK_V7M, JPK_V7K, deklaracji PPE oraz podgląd rejestrów VAT.
 *   **Rozrachunki:** Monitoruj należności i zobowiązania, kontroluj terminy płatności i oznaczaj faktury jako opłacone.
+
+![Rozrachunki](FlatHub/rozrachunki.png)
 
 ## Instalacja (Flatpak)
 
