@@ -6,6 +6,8 @@ KsefInvoice to nowoczesne fakturowanie z pełną integracją KSeF — za darmo, 
 Jest to w pełni darmowa, bezpieczna aplikacja desktopowa do zarządzania fakturami, kontrahentami i wysyłką do Krajowego Systemu e-Faktur (KSeF).
 Bez abonamentu, bez reklam i ukrytych opłat. Twoje dane pozostają lokalnie na Twoim komputerze.
 
+![Główny ekran aplikacji](FlatHub/dashboard.png)
+
 ## Funkcje
 
 *   **Integracja z KSeF:** Pełna obsługa Krajowego Systemu e-Faktur. Wysyłaj faktury sprzedaży i pobieraj faktury zakupu bezpośrednio z serwerów Ministerstwa Finansów.
