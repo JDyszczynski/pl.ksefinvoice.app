@@ -28,4 +28,4 @@ flatpak install flathub pl.ksefinvoice.app
 Program jest udostępniany na licencji bezpłatnej (Freeware).
 Możesz go używać w celach komercyjnych i prywatnych bez żadnych opłat.
 
-Więcej informacji na stronie domowej: https://www.dyszczynski.pl/KSEF/
+Więcej informacji na stronie domowej: https://www.kseinvoice.pl/
