@@ -8,3 +8,10 @@ venv/
 env/
 ksef_invoice.db
 .vscode/
+
+# Build artifacts
+DEPLOY/
+*/Binary/linux/dist/
+*/Binary/linux/release/
+*/Binary/linux/repo/
+*,flatpak
