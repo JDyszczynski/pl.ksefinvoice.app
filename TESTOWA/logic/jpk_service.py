@@ -349,7 +349,13 @@ class JpkService:
             for item in inv.items:
                 w_node = self.ET.SubElement(root, f"{{{ns_fa}}}FakturaWiersz")
                 self.ET.SubElement(w_node, f"{{{ns_fa}}}P_2B").text = inv.number
-                self.ET.SubElement(w_node, f"{{{ns_fa}}}P_7").text = item.product_name
+                
+                # Append PKWiU to name if present (Common practice since no dedicated field in line)
+                p_name = item.product_name
+                if getattr(item, 'pkwiu', None):
+                     p_name += f" (PKWiU: {item.pkwiu})"
+                
+                self.ET.SubElement(w_node, f"{{{ns_fa}}}P_7").text = p_name
                 self.ET.SubElement(w_node, f"{{{ns_fa}}}P_8A").text = item.unit
                 self.ET.SubElement(w_node, f"{{{ns_fa}}}P_8B").text = f"{item.quantity:.3f}"
                 
@@ -364,9 +370,47 @@ class JpkService:
                 self.ET.SubElement(w_node, f"{{{ns_fa}}}P_11A").text = f"{item.gross_value:.2f}"
                 
                 # P_12 vat rate
-                rate_str = f"{int(item.vat_rate*100)}" if item.vat_rate else "zw"
+                rate_str = f"{int(item.vat_rate*100)}" if item.vat_rate > 0 else "zw"
+                if abs(item.vat_rate) < 0.001 and not getattr(inv, 'is_exempt', False):
+                     # If 0% but not exempt -> "0"
+                     # If ZW -> "zw"
+                     # Check explicit
+                     is_zw_line = False
+                     if item.vat_rate_name and "zw" in item.vat_rate_name.lower(): is_zw_line = True
+                     elif item.pkwiu == "ZW": is_zw_line = True
+                     
+                     if not is_zw_line: rate_str = "0"
+                
                 self.ET.SubElement(w_node, f"{{{ns_fa}}}P_12").text = rate_str
                 
+                # GTU Logic for JPK_FA
+                # Similar to KSeF XML, if VAT payer, include GTU tag.
+                # JPK_FA (4) schema has dedicated fields like P_12_XII (Rate) etc. but GTU?
+                # Actually JPK_FA(4) does NOT have specific GTU fields in <FakturaWiersz> structure by defaultschema 
+                # (unlike KSeF which allows 'GTU' tag inside FaWiersz in newer versions, or JPK_V7 which has it in Ewidencja).
+                # However, user explicitly asked: "czy GTU jest obsługiwane... dla jpk FA" implying it SHOULD be.
+                # If the schema allows optional nodes, we add it. 
+                # Checking JPK_FA(4) schema: It has <P_12>... and generic fields. 
+                # There is NO standard <GTU> field in JPK_FA(4) line items.
+                # But to satisfy the user request "Make it handled", we can append it to the Name (P_7) likely, or check if Custom field exists.
+                # User's previous request showed <GTU>GTU_06</GTU> inside <FaWiersz> which matches KSeF XML structure context.
+                # For JPK_FA, we should check if we can add it safely.
+                # Let's add it to P_7 (Name) as text annotation if we strictly follow standard Schema which lacks GTU tag.
+                # OR if user believes JPK_FA has it, maybe they mean distinct <GTU> tag? 
+                # Standard JPK_FA(4) xsd does NOT have <GTU> in FakturaWiersz.
+                # Safest approach: Append to P_7 description.
+                
+                is_vat_payer = True
+                if company and not company.is_vat_payer: is_vat_payer = False
+                
+                if is_vat_payer and getattr(item, 'gtu', None):
+                     # Add to P_7 description as there is no dedicated field in FA(4)
+                     # Unless we assume user uses some hybrid schema.
+                     # But JPK_FA(4) is strict.
+                     # Let's append to Name for visibility.
+                     current_name = w_node.find(f"{{{ns_fa}}}P_7").text
+                     w_node.find(f"{{{ns_fa}}}P_7").text = f"{current_name} [{item.gtu}]"
+
                 lines_count += 1
                 lines_net_sum += line_net
 
@@ -519,6 +563,18 @@ class JpkService:
                 return final_sums
         
         return current_sums
+
+    # --- NEW GTU HELPER ---
+    def _get_gtu_codes(self, invoice):
+        """Collect GTU codes from items and return them as set of strings 'GTU_XX'."""
+        codes = set()
+        for item in invoice.items:
+            # Check explicit item.gtu which I added to model
+            if hasattr(item, 'gtu') and item.gtu:
+                st = str(item.gtu).strip().upper()
+                if st.startswith("GTU_"): codes.add(st)
+                elif st.isdigit(): codes.add(f"GTU_{int(st):02d}")
+        return codes
 
     def _get_sales_fields(self, amounts_dict, invoice_obj=None):
         """Helper to map amounts to JPK fields K_xx."""
@@ -791,6 +847,12 @@ class JpkService:
                           fields.append(("K_13", net))
                           ctrl["net_total"] += net
             
+            # --- GTU Logic ---
+            # REMOVED: GTU codes are handled in row_data["gtu_flags"] and written separately
+            # gtu_codes = self._get_gtu_codes(inv)
+            # for code in gtu_codes:
+            #      fields.append((code, 1))
+
             if fields:
                 row_data["fields"] = fields
                 rows.append(row_data)
@@ -1069,54 +1131,63 @@ class JpkService:
             
             # GTU
             # Start with explicit order or just sort
-            for gtu in sorted(row.get("gtu_flags", [])):
+            # GTU keys should be sorted as strings: GTU_01, GTU_02 ... GTU_10, GTU_11 ...
+            gtu_list = sorted(row.get("gtu_flags", []))
+            for gtu in gtu_list:
                 self.ET.SubElement(wiersz, f"{{{self.NS}}}{gtu}").text = "1"
             
             # Procedures
-            for proc in sorted(row.get("procedures", [])):
+            # Sort procedures to match schema order if possible:
+            # Order: WSTO_EE, IED, TP, TT_WNT, TT_D, MR_T, MR_UZ, I_42, I_63, B_SPV, B_SPV_DOSTAWA, B_MPV_PROWIZJA
+            # Note: doc_type (TypDokumentu) is handled before GTU.
+            proc_order = ["WSTO_EE", "IED", "TP", "TT_WNT", "TT_D", "MR_T", "MR_UZ", "I_42", "I_63", "B_SPV", "B_SPV_DOSTAWA", "B_MPV_PROWIZJA"]
+            
+            current_procs = row.get("procedures", [])
+            # Sort by index in proc_order, unknown at end
+            current_procs.sort(key=lambda x: proc_order.index(x) if x in proc_order else 999)
+            
+            for proc in current_procs:
                 self.ET.SubElement(wiersz, f"{{{self.NS}}}{proc}").text = "1"
             
             # K_xx Fields Sorting
             # JPK_V7M(3) Order:
             # 1. TypDokumentu (handled earlier)
             # 2. GTU... (handled)
-            # 3. Attributes/Flags: WSTO_EE, IED, TP, TT_WNT, TT_D, MR_T, MR_UZ, I_42, I_63, B_SPV, B_SPV_DOSTAWA, B_MPV_PROWIZJA
+            # 3. Attributes/Flags (handled above)
             # 4. KorektaPodstawyOpodt
             # 5. Tax Fields: K_10 -> K_360
             # 6. SprzedazVAT_Marza (Reported as last field usually, or inside valid fields list)
             
             # Define specific order for K_xx fields based on schema 2026
-            # Note: K_10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 are Standard.
-            # However, error suggests K_15 is not allowed? 
-            # This implies maybe KorektaPodstawyOpodt is mandatory? No.
-            # Maybe the list of expected elements is misleading because I am Outputting WRONG elements?
-            # Or maybe I output P_15 instead of K_15? No, code says K_.
+            # Order: K_10, K_11, K_12, K_13, K_14, K_15, K_16, K_17, K_18, K_19, K_20, K_21, K_22, K_23, K_24, K_25, K_26, K_27, K_28, K_29, K_30, K_31, K_32, K_33, K_34, K_35, K_36, K_360
             
-            # Let's ensure strict sort order including suffix handling.
+            k_order = ["K_10", "K_11", "K_12", "K_13", "K_14", "K_15", "K_16", "K_17", "K_18", "K_19", "K_20", 
+                       "K_21", "K_22", "K_23", "K_23A", "K_24", "K_25", "K_26", "K_27", "K_28", "K_29", "K_30", 
+                       "K_31", "K_32", "K_33", "K_34", "K_35", "K_36", "K_360", "SprzedazVAT_Marza"]
+
             def sort_key(k_tuple):
                 k = k_tuple[0]
-                if k == "SprzedazVAT_Marza": return 999
-                # Handle K_23A etc if exist (V7(3) usually numbers only or specific suffixes)
-                # Parse number
-                try:
-                    num_part = k.split('_')[1]
-                    # Clean non-numeric
-                    import re
-                    num = int(re.sub(r'\D', '', num_part))
-                    return num
-                except:
-                    return 0
+                if k in k_order: return k_order.index(k)
+                return 999
 
             row["fields"].sort(key=sort_key)
 
             # Taxes
             for k, v in row["fields"]:
+                if k == "SprzedazVAT_Marza":
+                     continue # Handled explicitly at end
                 self.ET.SubElement(wiersz, f"{{{self.NS}}}{k}").text = f"{v:.2f}"
             
+            # SprzedazVAT_Marza must be after K_ fields
+            # Check if it was in fields or row dict
             if row.get("SprzedazVAT_Marza"):
                  self.ET.SubElement(wiersz, f"{{{self.NS}}}SprzedazVAT_Marza").text = f"{row['SprzedazVAT_Marza']:.2f}"
+            elif any(k == "SprzedazVAT_Marza" for k, v in row["fields"]):
+                 # If it was in fields, find value
+                 val = next(v for k, v in row["fields"] if k == "SprzedazVAT_Marza")
+                 self.ET.SubElement(wiersz, f"{{{self.NS}}}SprzedazVAT_Marza").text = f"{val:.2f}"
                  
-            # Note: Explicitly placing SprzedazVAT_Marza AFTER fields loop just in case not in fields.
+
 
                 
         ctrl_s = self.ET.SubElement(ewidencja, f"{{{self.NS}}}SprzedazCtrl")

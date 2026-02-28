@@ -169,12 +169,10 @@
                     <label for="website">Strona WWW (Zostaw puste)</label>
                     <input type="text" id="website" name="website" autocomplete="off" tabindex="-1">
                 </div>
-
-                 <div class="form-group">
-                    <label for="math_answer">Pytanie kontrolne: Ile to jest 2 + 3?</label>
-                    <input type="number" id="math_answer" name="math_answer" required style="width: 100px;">
-                    <small style="display:block; margin-top:5px; color:#666;">Zabezpieczenie przed SPAMem.</small>
-                </div>
+                
+                <!-- Hidden Anti-Spam Tokens (Populated by JS) -->
+                <input type="hidden" id="timestamp" name="timestamp" value="">
+                <input type="hidden" id="spam_token" name="spam_token" value="">
 
                 <button type="submit" class="btn-submit">Wyślij Zgłoszenie</button>
             </form>
@@ -195,20 +193,26 @@
     </footer>
 
     <script>
+        // Anti-Spam: Set timestamp and secure token on page load
+        document.addEventListener('DOMContentLoaded', () => {
+             const ts = Math.floor(Date.now() / 1000);
+             const token = 'ksef-secure-2026';
+             
+             if(document.getElementById('timestamp')) {
+                 document.getElementById('timestamp').value = ts;
+             }
+             if(document.getElementById('spam_token')) {
+                 document.getElementById('spam_token').value = token;
+             }
+        });
+
         document.getElementById('bugForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             const form = e.target;
             const statusDiv = document.getElementById('bug-status');
             const btn = form.querySelector('button[type="submit"]');
 
-             // Basic client-side validation for math
-            const math = document.getElementById('math_answer').value;
-            if (parseInt(math) !== 5) {
-                statusDiv.textContent = "Błędny wynik działania matematycznego.";
-                statusDiv.className = "status-message status-error";
-                statusDiv.style.display = "block";
-                return;
-            }
+            // Remove client-side math validation (it's gone)
             
             btn.disabled = true;
             btn.textContent = "Wysyłanie...";

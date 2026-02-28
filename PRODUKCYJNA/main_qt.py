@@ -16,7 +16,7 @@ from gui_qt.resource_path import resource_path
 from gui_qt.utils import safe_restore_geometry, save_geometry
 
 class MainWindow(QMainWindow):
-    APP_VERSION = "1.0.4 (Beta)"
+    APP_VERSION = "1.0.5 (Beta)"
 
     def __init__(self):
         super().__init__()

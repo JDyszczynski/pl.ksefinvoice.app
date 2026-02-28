@@ -5,13 +5,13 @@ from PySide6.QtWidgets import (QWidget, QVBoxLayout, QHBoxLayout, QTableView, QH
 from PySide6.QtCore import Qt, QAbstractTableModel, QModelIndex
 from PySide6.QtGui import QAction
 from database.engine import get_db
-from database.models import Product, VatRate, InvoiceItem
+from database.models import Product, VatRate, InvoiceItem, CompanyConfig
 
 class ProductTableModel(QAbstractTableModel):
     def __init__(self, products=None):
         super().__init__()
         self.products = products or []
-        self.headers = ["Nazwa", "SKU", "Cena Netto", "VAT", "Jednostka"]
+        self.headers = ["Nazwa", "SKU", "PKWiU", "Cena Netto", "VAT", "Jednostka"]
 
     def rowCount(self, parent=QModelIndex()):
         return len(self.products)
@@ -27,11 +27,12 @@ class ProductTableModel(QAbstractTableModel):
         if role == Qt.DisplayRole:
             if col == 0: return p.name
             elif col == 1: return p.sku or "-"
-            elif col == 2: return f"{p.net_price:.2f}"
-            elif col == 3: 
+            elif col == 2: return p.pkwiu or "-"
+            elif col == 3: return f"{p.net_price:.2f}"
+            elif col == 4: 
                 # Display VAT as percentage
                 return f"{int(p.vat_rate*100)}%" if p.vat_rate is not None else "0%"
-            elif col == 4: return p.unit
+            elif col == 5: return p.unit
         return None
 
     def headerData(self, section, orientation, role=Qt.DisplayRole):
@@ -56,6 +57,7 @@ class ProductDialog(QDialog):
         self.product = product_model
         # Pobierz stawki
         db = next(get_db())
+        self.config = db.query(CompanyConfig).first()
         self.rates = db.query(VatRate).all()
         db.close()
         
@@ -65,9 +67,15 @@ class ProductDialog(QDialog):
         layout = QFormLayout(self)
         
         is_edit = self.product is not None
+        is_vat_payer = True
+        if self.config and not self.config.is_vat_payer:
+             is_vat_payer = False
         
         self.name_edit = QLineEdit(self.product.name if is_edit else "")
         self.sku_edit = QLineEdit(self.product.sku if is_edit else "")
+        # Add PKWiU field
+        self.pkwiu_edit = QLineEdit(self.product.pkwiu if is_edit else "")
+        
         self.unit_edit = QLineEdit(self.product.unit if is_edit else "szt.")
         
         self.purchase_net_edit = QLineEdit(str(self.product.purchase_net_price) if is_edit else "0.00")
@@ -130,8 +138,26 @@ class ProductDialog(QDialog):
         self.markup_edit.textEdited.connect(lambda: self.recalculate("markup"))
         self.margin_edit.textEdited.connect(lambda: self.recalculate("margin"))
 
+        # Kod GTU
+        self.gtu_combo = QComboBox()
+        self.gtu_combo.addItem("Brak", None)
+        for i in range(1, 14):
+            code = f"GTU_{i:02d}"
+            self.gtu_combo.addItem(code, code)
+        
+        # Set current GTU
+        current_gtu = getattr(self.product, 'gtu', None)
+        if current_gtu:
+             idx = self.gtu_combo.findText(current_gtu)
+             if idx >= 0: self.gtu_combo.setCurrentIndex(idx)
+
         layout.addRow("Nazwa:", self.name_edit)
         layout.addRow("SKU:", self.sku_edit)
+        layout.addRow("PKWiU (lub CN/PKOB):", self.pkwiu_edit)
+        
+        if is_vat_payer:
+             layout.addRow("Kod GTU:", self.gtu_combo)
+             
         layout.addRow("Jednostka:", self.unit_edit)
         layout.addRow("Cena Zakupu (Netto):", self.purchase_net_edit)
         layout.addRow("Narzut (%):", self.markup_edit)
@@ -260,11 +286,13 @@ class ProductDialog(QDialog):
         return {
             "name": self.name_edit.text(),
             "sku": self.sku_edit.text(),
+            "pkwiu": self.pkwiu_edit.text(),
+            "gtu": self.gtu_combo.currentText() if self.gtu_combo.currentText() != "Brak" else None,
             "unit": self.unit_edit.text(),
-            "purchase_net_price": float(self.purchase_net_edit.text().replace(",", ".") or 0),
+            "purchase_net_price": float(self.purchase_net_edit.text().replace(",", ".") or 0) if self.purchase_net_edit.text() else 0.0,
             "vat_rate": self.vat_combo.currentData(),
-            "net_price": float(self.sales_net_edit.text().replace(",", ".") or 0),
-            "gross_price": float(self.sales_gross_edit.text().replace(",", ".") or 0),
+            "net_price": float(self.sales_net_edit.text().replace(",", ".") or 0) if self.sales_net_edit.text() else 0.0,
+            "gross_price": float(self.sales_gross_edit.text().replace(",", ".") or 0) if self.sales_gross_edit.text() else 0.0,
             "is_gross_mode": self.mode_gross.isChecked()
         }
 

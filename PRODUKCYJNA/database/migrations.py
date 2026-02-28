@@ -2,7 +2,7 @@ import logging
 import sqlalchemy
 from sqlalchemy import inspect, text
 from database.engine import get_db, engine
-from database.models import CompanyConfig, Invoice, InvoiceItem, User, VatRate, LumpSumRate
+from database.models import CompanyConfig, Invoice, InvoiceItem, User, VatRate, LumpSumRate, Product
 
 logger = logging.getLogger(__name__)
 
@@ -25,7 +25,8 @@ def check_and_migrate_db():
         ("invoice_items", InvoiceItem),
         ("users", User),
         ("vat_rates", VatRate),
-        ("lump_sum_rates", LumpSumRate)
+        ("lump_sum_rates", LumpSumRate),
+        ("products", Product)
     ]
     
     with engine.connect() as conn:

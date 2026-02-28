@@ -9,9 +9,9 @@ import zipfile
 from pathlib import Path
 
 # Configuration
-URL_BASE_FLATPAK = "https://www.dyszczynski.pl/KSEF/Flatpak"
-URL_BASE_APPIMAGE = "https://www.dyszczynski.pl/KSEF/Linux"
-URL_BASE_WIN = "http://www.dyszczynski.pl/KSEF/win"
+URL_BASE_FLATPAK = "https://www.ksefinvoice.pl/KSEF/Flatpak"
+URL_BASE_APPIMAGE = "https://www.ksefinvoice.pl/KSEF/Linux"
+URL_BASE_WIN = "https://www.ksefinvoice.pl/KSEF/win"
 
 def get_version(project_root):
     main_qt_path = project_root / "main_qt.py"
@@ -202,7 +202,7 @@ def process_linux(project_root, binary_root, version, workspace_root=None):
     # 4. Generate Flatpak Manifest using FlatHub template, but update it IN PLACE in FlatHub folder
     # NOTE: The user requested to update files in FlatHub directory directly.
     # The 'manifest_dst' should be the file in FlatHub, not in DEPLOY.
-    template_path = workspace_root / "FlatHub" / "pl.ksefinvoice.app.json"
+    template_path = workspace_root / "FlatHub" / "pl.ksefinvoice.KsefInvoice.json"
     manifest_dst = template_path # We update the source file directly!
     
     print(f"Updating FlatHub Manifest at: {manifest_dst}")
@@ -259,7 +259,7 @@ def process_linux(project_root, binary_root, version, workspace_root=None):
         print(f"Warning: Template {template_path} not found.")
 
     # 5. Update Metainfo.xml in FlatHub
-    metainfo_path = workspace_root / "FlatHub" / "pl.ksefinvoice.app.metainfo.xml"
+    metainfo_path = workspace_root / "FlatHub" / "pl.ksefinvoice.KsefInvoice.metainfo.xml"
     if metainfo_path.exists():
         update_metainfo(metainfo_path, clean_version)
     else:

@@ -68,8 +68,9 @@ DIRS_TO_SYNC = [
     'mf_whitelist',
     'nbp',
     'vies',
-    'templates',
-    'Binary'
+    'templates'
+    # 'Binary' - WYKLUCZONO: zawiera skrypty budowania (build.bat, build.sh) specyficzne dla środowiska.
+    # Wersja TEST ma inne ścieżki (KsefInvoice_TEST) niż PROD. Nadpisanie zepsułoby build na produkcji.
 ]
 
 # Pliki do skopiowania z głównego katalogu

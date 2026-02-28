@@ -24,9 +24,19 @@ if (!empty($_POST['website'])) {
     send_response(true, "Wiadomość wysłana pomyślnie."); // Fałszywy sukces dla bota
 }
 
-// 2. Ochrona przed botami (Pytanie matematyczne)
-if (!isset($_POST['math_answer']) || intval($_POST['math_answer']) !== 5) {
-    send_response(false, "Niepoprawna odpowiedź na pytanie zabezpieczające.");
+// 2. Ochrona przed botami (Time Trap & JS Token)
+$min_seconds = 3;
+$timestamp = isset($_POST['timestamp']) ? intval($_POST['timestamp']) : 0;
+$current_time = time();
+
+if ($timestamp == 0 || ($current_time - $timestamp) < $min_seconds) {
+    // Zbyt szybkie wypełnienie formularza (bot) lub brak JS
+    // Dla bota zwracamy błąd lub fałszywy sukces
+    send_response(false, "Formularz wypełniono zbyt szybko. Jesteś robotem?");
+}
+
+if (!isset($_POST['spam_token']) || $_POST['spam_token'] !== 'ksef-secure-2026') {
+     send_response(false, "Błąd weryfikacji anty-spamowej. Włącz JavaScript.");
 }
 
 // Pobierz i oczyść dane wejściowe

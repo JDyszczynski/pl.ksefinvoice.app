@@ -491,15 +491,28 @@ class InvoiceDialog(QDialog):
         # Initialize Items Table early to avoid AttributeError during UI setup
         self.items_table = QTableWidget()
         # Dynamic Columns
-        cols = ["Nazwa", "Indeks/GTU", "JM", "Ilość", "Cena", "VAT %"]
+        # cols = ["Nazwa", "Indeks/GTU", "PKWiU", "JM", "Ilość", "Cena", "VAT %"] # Old
+        cols = ["Nazwa", "Indeks", "PKWiU", "JM", "Ilość", "Cena", "VAT %", "GTU"] # New: Added GTU at end of base cols
+        
+        # Determine index of 'Wartość' (Total) column dynamically based on modes
+        # Default order: 
+        # 0:Name, 1:SKU, 2:PKWiU, 3:Unit, 4:Qty, 5:Price, 6:VAT, 7:GTU
+        
         if self.is_ryczalt_mode:
-            cols.append("Ryczałt %") # Extra column
-        cols.append("Wartość") # Total line value
+            cols.append("Ryczałt %") # Extra column for Ryczałt
+        
+        cols.append("Wartość") # Total line value at the very end
+        
         self.items_table.setColumnCount(len(cols))
         self.items_table.setHorizontalHeaderLabels(cols)
         self.items_table.horizontalHeader().setSectionResizeMode(0, QHeaderView.Stretch)
         self.items_table.itemChanged.connect(self.calculate_row_totals)
         
+        # Domyślnie ukryj kolumnę PKWiU (indeks 2) oraz GTU (indeks 7) dla podmiotów zwolnionych (nie-vatowców)
+        if self.is_exempt_mode:
+            self.items_table.setColumnHidden(2, True) # PKWiU
+            self.items_table.setColumnHidden(7, True) # GTU
+
         # Init totals labels early
         self.total_net_lbl = QLabel("Netto: 0.00")
         self.total_gross_lbl = QLabel("Brutto: 0.00")
@@ -1479,12 +1492,16 @@ class InvoiceDialog(QDialog):
         sku_val = product_data.sku if product_data and product_data.sku else ""
         self.items_table.setItem(row, 1, QTableWidgetItem(sku_val))
         
+        # PKWiU
+        pkwiu_val = product_data.pkwiu if product_data and getattr(product_data, 'pkwiu', None) else ""
+        self.items_table.setItem(row, 2, QTableWidgetItem(pkwiu_val))
+
         # Unit
         unit_val = product_data.unit if product_data else "szt."
-        self.items_table.setItem(row, 2, QTableWidgetItem(unit_val))
+        self.items_table.setItem(row, 3, QTableWidgetItem(unit_val))
         
         # Quantity
-        self.items_table.setItem(row, 3, QTableWidgetItem("1.00"))
+        self.items_table.setItem(row, 4, QTableWidgetItem("1.00"))
         
         # Check current Mode (Net/Gross)
         is_gross_mode = (self.price_type_combo.currentText() == "Brutto")
@@ -1547,16 +1564,32 @@ class InvoiceDialog(QDialog):
              else:
                   price_val = product_data.net_price
 
-        self.items_table.setItem(row, 4, QTableWidgetItem(f"{price_val:.2f}"))
+        self.items_table.setItem(row, 5, QTableWidgetItem(f"{price_val:.2f}"))
         
         # If exempt mode, lock VAT combo? User request: "pole zablokowane do edycji"
         if self.is_exempt_mode:
              vat_combo.setEnabled(False)
         
         vat_combo.currentIndexChanged.connect(lambda: self.recalculate_totals())
-        self.items_table.setCellWidget(row, 5, vat_combo)
+        self.items_table.setCellWidget(row, 6, vat_combo)
         
-        next_col = 6
+        # GTU Column (Index 7)
+        gtu_combo = QComboBox()
+        gtu_combo.addItem("Brak", None)
+        for i in range(1, 14):
+            code = f"GTU_{i:02d}"
+            gtu_combo.addItem(code, code)
+        
+        if product_data and getattr(product_data, 'gtu', None):
+             gtu_idx = gtu_combo.findText(product_data.gtu)
+             if gtu_idx >= 0: gtu_combo.setCurrentIndex(gtu_idx)
+
+        # Handle Ryczałt Mode shift
+        gtu_col_idx = 7
+        next_col = 8
+
+        self.items_table.setCellWidget(row, gtu_col_idx, gtu_combo)
+
         if self.is_ryczalt_mode:
             # Ryczałt Combo
             ryc_combo = QComboBox()
@@ -1567,8 +1600,17 @@ class InvoiceDialog(QDialog):
                 ryc_combo.addItem(r.name, r.rate)
                 if abs(r.rate - def_r_val) < 0.001: def_idx = i
             ryc_combo.setCurrentIndex(def_idx)
-            self.items_table.setCellWidget(row, 6, ryc_combo)
-            next_col = 7
+            
+            # If Ryczałt mode, GTU is at 7, Ryczałt at 8, Total at 9
+            # Wait, wait. 
+            # Normal: [Name, SKU, PKPiU, Unit, Qty, Price, VAT, GTU, Total]
+            # Indices: 0,    1,   2,     3,    4,   5,     6,   7,   8
+            
+            # Ryczałt: [Name, SKU, PKPiU, Unit, Qty, Price, VAT, GTU, Ryczałt, Total]
+            # Indices: 0,    1,   2,     3,    4,   5,     6,   7,   8,       9
+            
+            self.items_table.setCellWidget(row, 8, ryc_combo)
+            next_col = 9
             
         # Total Value (Readonly)
         val_item = QTableWidgetItem("0.00")
@@ -1589,10 +1631,10 @@ class InvoiceDialog(QDialog):
         try:
             for r in range(self.items_table.rowCount()):
                 try:
-                    price_item = self.items_table.item(r, 4)
+                    price_item = self.items_table.item(r, 5)
                     current_price = float(price_item.text().replace(',', '.') or 0)
                     
-                    vat_widget = self.items_table.cellWidget(r, 5)
+                    vat_widget = self.items_table.cellWidget(r, 6)
                     vat_rate = vat_widget.currentData() if vat_widget else 0.0
                     
                     new_price = 0.0
@@ -1620,7 +1662,11 @@ class InvoiceDialog(QDialog):
         currency = self.currency.currentText()
         is_gross_mode = (self.price_type_combo.currentText() == "Brutto")
         
-        val_col_idx = 7 if self.is_ryczalt_mode else 6
+        # Calculate index of 'Wartość' column
+        # Normal (Non-Ryczałt): [Name, SKU, PKWiU, Unit, Qty, Price, VAT (6), GTU (7), Total (8)]
+        # Ryczałt:              [Name, SKU, PKWiU, Unit, Qty, Price, VAT (6), GTU (7), Ryczałt (8), Total (9)]
+        
+        val_col_idx = 9 if self.is_ryczalt_mode else 8
         
         has_oo_item = False
 
@@ -1628,33 +1674,44 @@ class InvoiceDialog(QDialog):
             try:
                 def parse(t): return float(t.replace(",", ".") or 0)
                 
-                qty = parse(self.items_table.item(r, 3).text())
-                price = parse(self.items_table.item(r, 4).text())
+                # Check if items exist (might be None during init)
+                item_qty = self.items_table.item(r, 4)
+                item_price = self.items_table.item(r, 5)
                 
-                combo_vat = self.items_table.cellWidget(r, 5)
-                vat_rate = combo_vat.currentData() if combo_vat else 0.0
-                vat_name = combo_vat.currentText() if combo_vat else ""
-                
-                if vat_name.lower() in ["oo", "np", "np.", "odwrotne obciążenie"]:
-                     has_oo_item = True
+                if item_qty and item_price:
+                    qty = parse(item_qty.text())
+                    price = parse(item_price.text())
+                    
+                    combo_vat = self.items_table.cellWidget(r, 6)
+                    vat_rate = combo_vat.currentData() if combo_vat else 0.0
+                    vat_name = combo_vat.currentText() if combo_vat else ""
+                    
+                    if vat_name.lower() in ["oo", "np", "np.", "odwrotne obciążenie"]:
+                         has_oo_item = True
 
-                if is_gross_mode:
-                    # Input Price is Gross
-                    gross_line = qty * price
-                    # Calc net backwards
-                    net_line = gross_line / (1.0 + vat_rate)
-                else:
-                    # Input Price is Net
-                    net_line = qty * price
-                    gross_line = net_line * (1.0 + vat_rate)
-                
-                # Update Value Column
-                # Usually we show Gross value in total
-                self.items_table.item(r, val_col_idx).setText(f"{gross_line:.2f}")
-                
-                total_net += net_line
-                total_gross += gross_line
-            except: pass
+                    if is_gross_mode:
+                        # Input Price is Gross
+                        gross_line = qty * price
+                        # Calc net backwards
+                        if (1.0 + vat_rate) != 0:
+                             net_line = gross_line / (1.0 + vat_rate)
+                        else: net_line = gross_line
+                    else:
+                        # Input Price is Net
+                        net_line = qty * price
+                        gross_line = net_line * (1.0 + vat_rate)
+                    
+                    # Update Value Column
+                    # Usually we show Gross value in total
+                    val_item = self.items_table.item(r, val_col_idx)
+                    if val_item:
+                         val_item.setText(f"{gross_line:.2f}")
+                    
+                    total_net += net_line
+                    total_gross += gross_line
+            except Exception as e: 
+                # print(f"Recalc error row {r}: {e}")
+                pass
             
         self.total_net_lbl.setText(f"Netto: {total_net:.2f} {currency}")
         self.total_gross_lbl.setText(f"Brutto: {total_gross:.2f} {currency}")
@@ -1900,17 +1957,19 @@ class InvoiceDialog(QDialog):
                     r = self.items_table.rowCount() - 1
                     self.items_table.item(r, 0).setText(item.product_name)
                     self.items_table.item(r, 1).setText(item.sku or "")
-                    self.items_table.item(r, 2).setText(item.unit)
+                    # PKWiU
+                    self.items_table.item(r, 2).setText(item.pkwiu or "")
+                    self.items_table.item(r, 3).setText(item.unit)
                     
                     # Correction Logic: Copy quantity 1:1 from source (Latest State)
                     # User requested to avoid zeroing out to match "Status Quo" logic.
-                    self.items_table.item(r, 3).setText(f"{item.quantity}")
+                    self.items_table.item(r, 4).setText(f"{item.quantity}")
                     
                     price_val = item.net_price if inv.price_type != "GROSS" else item.gross_value/item.quantity if item.quantity else 0
-                    self.items_table.item(r, 4).setText(f"{price_val:.2f}") 
+                    self.items_table.item(r, 5).setText(f"{price_val:.2f}") 
                     
                     # Set VAT
-                    v_combo = self.items_table.cellWidget(r, 5)
+                    v_combo = self.items_table.cellWidget(r, 6)
                     v_found = False
                     # 1. Try Match by Name (Preferred for ZW vs 0%)
                     if getattr(item, 'vat_rate_name', None):
@@ -1924,9 +1983,19 @@ class InvoiceDialog(QDialog):
                         for i in range(v_combo.count()):
                             if abs(v_combo.itemData(i) - item.vat_rate) < 0.001:
                                 v_combo.setCurrentIndex(i); break
-                    # Set Ryczałt if mode
+                    
+                    # Set GTU (Column 7)
+                    if item.gtu:
+                        gtu_combo = self.items_table.cellWidget(r, 7)
+                        if gtu_combo:
+                            idx = gtu_combo.findText(item.gtu)
+                            if idx >= 0:
+                                gtu_combo.setCurrentIndex(idx)
+
+
+                    # Set Ryczałt if mode (Column 8)
                     if self.is_ryczalt_mode and item.lump_sum_rate is not None:
-                        r_combo = self.items_table.cellWidget(r, 6)
+                        r_combo = self.items_table.cellWidget(r, 8)
                         for i in range(r_combo.count()):
                             if abs(r_combo.itemData(i) - item.lump_sum_rate) < 0.001:
                                 r_combo.setCurrentIndex(i); break
@@ -2076,11 +2145,11 @@ class InvoiceDialog(QDialog):
              try:
                  def parse(t): return float(t.replace(",", ".") or 0)
                  # Check if item exists
-                 if not self.items_table.item(r, 3) or not self.items_table.item(r, 4): continue
+                 if not self.items_table.item(r, 4) or not self.items_table.item(r, 5): continue
                  
-                 qty = parse(self.items_table.item(r, 3).text())
-                 price = parse(self.items_table.item(r, 4).text())
-                 vat_rate_w = self.items_table.cellWidget(r, 5)
+                 qty = parse(self.items_table.item(r, 4).text())
+                 price = parse(self.items_table.item(r, 5).text())
+                 vat_rate_w = self.items_table.cellWidget(r, 6)
                  vat_rate = vat_rate_w.currentData() if vat_rate_w else 0.0
                  if is_gross_mode:
                     lg = qty * price
@@ -2135,7 +2204,7 @@ class InvoiceDialog(QDialog):
              
              # Let's scan items.
              for r in range(self.items_table.rowCount()):
-                  vat_w = self.items_table.cellWidget(r, 5)
+                  vat_w = self.items_table.cellWidget(r, 6)
                   if vat_w:
                        rate_name = vat_w.currentText().lower()
                        rate_val = vat_w.currentData()
@@ -2454,17 +2523,30 @@ class InvoiceDialog(QDialog):
                     if not name: continue # Skip empty rows
 
                     sku = sanitize_text(self.items_table.item(r, 1).text())
-                    unit = sanitize_text(self.items_table.item(r, 2).text())
-                    qty = parse(self.items_table.item(r, 3).text())
-                    price = parse(self.items_table.item(r, 4).text())
+                    pkwiu = sanitize_text(self.items_table.item(r, 2).text())
+                    unit = sanitize_text(self.items_table.item(r, 3).text())
+                    qty = parse(self.items_table.item(r, 4).text())
+                    price = parse(self.items_table.item(r, 5).text())
                     
-                    vat_widget = self.items_table.cellWidget(r, 5)
+                    vat_widget = self.items_table.cellWidget(r, 6)
                     vat_rate = vat_widget.currentData()
                     vat_rate_name = vat_widget.currentText()
                     
+                    gtu_val = None
                     lump_rate = None
+                    
+                    # GTU is at index 7 now
+                    gtu_w = self.items_table.cellWidget(r, 7)
+                    if gtu_w and isinstance(gtu_w, QComboBox):
+                        gtu_tmp = gtu_w.currentData()
+                        if gtu_tmp and gtu_tmp != "Brak":
+                             gtu_val = gtu_tmp
+
                     if self.is_ryczalt_mode:
-                        lump_rate = self.items_table.cellWidget(r, 6).currentData()
+                        # Ryczałt moved to index 8
+                        lump_w = self.items_table.cellWidget(r, 8)
+                        if lump_w:
+                             lump_rate = lump_w.currentData()
                         
                     # Descriptions
                     name_item = self.items_table.item(r, 0)
@@ -2505,11 +2587,13 @@ class InvoiceDialog(QDialog):
                                      new_prod = Product(
                                           name=s_name,
                                           sku=sku,
+                                          pkwiu=pkwiu,
                                           unit=unit,
                                           net_price=prod_net,
                                           gross_price=prod_gross,
                                           vat_rate=vat_rate,
-                                          is_gross_mode=is_gross_mode
+                                          is_gross_mode=is_gross_mode,
+                                          gtu=gtu_val # Also save GTU
                                      )
                                      self.db.add(new_prod)
                                      # Flush to get ID if needed, though commit is at end
@@ -2521,6 +2605,7 @@ class InvoiceDialog(QDialog):
                     item = InvoiceItem(invoice_id=inv.id)
                     item.product_name = name
                     item.sku = sku
+                    item.pkwiu = pkwiu
                     item.quantity = qty
                     item.unit = unit
                     item.net_price = net_price
@@ -2530,8 +2615,13 @@ class InvoiceDialog(QDialog):
                     item.lump_sum_rate = lump_rate
                     item.description_key = desc_k
                     item.description_value = desc_v
+                    item.gtu = gtu_val # Save GTU to item
                     self.db.add(item)
-                except: pass
+                except Exception as e: 
+                    print(f"[ERROR] Row processing failed: {e}")
+                    import traceback
+                    traceback.print_exc()
+                    pass
             
             # Update Invoice Totals
             inv.total_net = agg_total_net

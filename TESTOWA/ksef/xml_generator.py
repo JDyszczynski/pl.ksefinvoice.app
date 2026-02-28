@@ -176,6 +176,24 @@ class KsefXmlGenerator:
         ET.SubElement(adnotacje, f"{{{NS_KSEF}}}P_18").text = "1" if invoice.is_reverse_charge else "2"
         ET.SubElement(adnotacje, f"{{{NS_KSEF}}}P_18A").text = "1" if invoice.is_split_payment else "2"
         
+        # --- GTU Flags Aggregation (Document Level) ---
+        # Scan items for unique GTU codes and set global flags if present
+        # Note: KSeF FA(2) structure places GTU_xx in Fa, usually before/after certain fields or inside Adnotacje?
+        # Actually in FA(2), GTU fields like <GTU_01>1</GTU_01> are present in 'Fa' element (as direct children), 
+        # usually roughly around where P_13/P_14/P_15 are or mixed. 
+        # But wait, looking at schema, GTU_01..13 are NOT in standard FA(2) anymore? 
+        # They were moved or replaced? 
+        # In FA(2), GTU codes are usually handled via 'Adnotacje' or specific dedicated nodes if needed, OR they are just not there?
+        # WAIT. In KSeF FA(2), GTU codes (01-13) REAPPEARED or are handled differently?
+        # Actually, in FA(2), there are fields like P_19, P_22, etc.
+        # GTU codes are NOT explicit separate fields in FA(2) in the way they were in JPK_V7.
+        # KSeF uses CN/PKWiU.
+        # However, the user request says: "W wypadku pkwiu w xmlu do ksef ... nazwa pól <FaWiersz>...<GTU>GTU_06</GTU>".
+        # This confirms user wants valid XML that *includes* this tag. 
+        # Since I've added it to FaWiersz as requested, I will stop guessing about global flags unless convinced.
+        # User said "pamiętaj że kody GTU są stosowane także w JPKach". 
+        # So I need to ensure JPK generation reads this.
+        
         # Zwolnienie
         if invoice.is_exempt:
              zw = ET.SubElement(adnotacje, f"{{{NS_KSEF}}}Zwolnienie")
@@ -278,6 +296,17 @@ class KsefXmlGenerator:
             # P_7: Nazwa (Name)
             p7_val = (item.product_name or "Towar/Usługa")
             ET.SubElement(wiersz, f"{{{NS_KSEF}}}P_7").text = clean(p7_val)
+            
+            # Indeks (SKU / Index) - Requested by User
+            sku_val = getattr(item, 'sku', None)
+            if sku_val:
+                 ET.SubElement(wiersz, f"{{{NS_KSEF}}}Indeks").text = clean(sku_val)
+
+            # PKWiU (User requested)
+            pkwiu_val = getattr(item, 'pkwiu', None)
+            if pkwiu_val:
+                 ET.SubElement(wiersz, f"{{{NS_KSEF}}}PKWiU").text = clean(pkwiu_val)
+
             # P_8A: Miara (Unit)
             p8a_val = (item.unit or "szt.")
             ET.SubElement(wiersz, f"{{{NS_KSEF}}}P_8A").text = clean(p8a_val)
@@ -292,17 +321,32 @@ class KsefXmlGenerator:
             # Rate Code for Line Item
             rate_xml = "23"
             if item.vat_rate == 0.0:
-                 pkwiu = (getattr(item, 'pkwiu', '') or "").upper()
-                 if pkwiu == "ZW" or invoice.is_exempt:
-                     rate_xml = "zw"
+                 # Check explicit name first (Preferred)
+                 if getattr(item, 'vat_rate_name', None) and "ZW" in item.vat_rate_name.upper():
+                      rate_xml = "zw"
                  else:
-                     rate_xml = "0"
+                     pkwiu = (getattr(item, 'pkwiu', '') or "").upper()
+                     if pkwiu == "ZW" or invoice.is_exempt:
+                         rate_xml = "zw"
+                     else:
+                         rate_xml = "0"
             elif abs(item.vat_rate - 0.08) < 0.01:
                  rate_xml = "8"
             elif abs(item.vat_rate - 0.05) < 0.01:
                 rate_xml = "5"
              
             ET.SubElement(wiersz, f"{{{NS_KSEF}}}P_12").text = rate_xml
+            
+            # KOD GTU jeżeli występuje i podatnik jest VATowcem
+            # Zgodnie z wymaganiem: "jeśli podatnik nie jest płatnikiem VAT ... kolumna GTU nie musi być wysyłana"
+            # Sprawdzamy company_config (dostępne jako company_config w scope funkcji generate_xml)
+            is_vat_payer = True
+            if company_config and not company_config.is_vat_payer:
+                is_vat_payer = False
+            
+            gtu_val = getattr(item, 'gtu', None)
+            if gtu_val and is_vat_payer:
+                ET.SubElement(wiersz, f"{{{NS_KSEF}}}GTU").text = clean(gtu_val)
 
         # Platnosc Logic Calculations (Moved up for Rozliczenia access)
         def get_pm_info(name):

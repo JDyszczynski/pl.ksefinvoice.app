@@ -200,6 +200,8 @@ class Product(Base):
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String(255), nullable=False)
     sku = Column(String(50), nullable=True) # Kod produktu
+    pkwiu = Column(String(20), nullable=True) # Kod PKWiU (dla towarów/usług)
+    gtu = Column(String(10), nullable=True) # Kod GTU (01-13)
     unit = Column(String(20), default="szt.")
     purchase_net_price = Column(Float, default=0.0)
     net_price = Column(Float, nullable=False)

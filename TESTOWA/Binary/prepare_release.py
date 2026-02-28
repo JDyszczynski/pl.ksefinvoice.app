@@ -9,9 +9,9 @@ import zipfile
 from pathlib import Path
 
 # Configuration
-URL_BASE_FLATPAK = "https://www.dyszczynski.pl/KSEF/Flatpak"
-URL_BASE_APPIMAGE = "https://www.dyszczynski.pl/KSEF/Linux"
-URL_BASE_WIN = "http://www.dyszczynski.pl/KSEF/win"
+URL_BASE_FLATPAK = "https://www.ksefinvoice.pl/KSEF/Flatpak"
+URL_BASE_APPIMAGE = "https://www.ksefinvoice.pl/KSEF/Linux"
+URL_BASE_WIN = "https://www.ksefinvoice.pl/KSEF/win"
 
 def get_version(project_root):
     main_qt_path = project_root / "main_qt.py"

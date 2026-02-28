@@ -37,8 +37,8 @@ class ProductSelector(QDialog):
         
         # Table
         self.table = QTableWidget()
-        self.table.setColumnCount(4)
-        self.table.setHorizontalHeaderLabels(["Nazwa", "Indeks/SKU", "Cena Netto", "JM"])
+        self.table.setColumnCount(5)
+        self.table.setHorizontalHeaderLabels(["Nazwa", "Indeks/SKU", "PKWiU", "Cena Netto", "JM"])
         self.table.horizontalHeader().setSectionResizeMode(0, QHeaderView.Stretch)
         self.table.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.table.setSelectionMode(QAbstractItemView.SingleSelection)
@@ -100,7 +100,7 @@ class ProductSelector(QDialog):
 
     def filter_products(self, text):
         text = text.lower()
-        filtered = [p for p in self.products if text in p.name.lower() or (p.sku and text in p.sku.lower())]
+        filtered = [p for p in self.products if text in p.name.lower() or (p.sku and text in p.sku.lower()) or (p.pkwiu and text in p.pkwiu.lower())]
         self.update_table(filtered)
 
     def update_table(self, products):
@@ -111,8 +111,9 @@ class ProductSelector(QDialog):
             
             self.table.setItem(row, 0, QTableWidgetItem(p.name))
             self.table.setItem(row, 1, QTableWidgetItem(p.sku or ""))
-            self.table.setItem(row, 2, QTableWidgetItem(f"{p.net_price:.2f}"))
-            self.table.setItem(row, 3, QTableWidgetItem(p.unit))
+            self.table.setItem(row, 2, QTableWidgetItem(p.pkwiu or ""))
+            self.table.setItem(row, 3, QTableWidgetItem(f"{p.net_price:.2f}"))
+            self.table.setItem(row, 4, QTableWidgetItem(p.unit))
             
             # Store ID in first item
             self.table.item(row, 0).setData(Qt.UserRole, p.id)

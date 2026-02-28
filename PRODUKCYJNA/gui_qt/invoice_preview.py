@@ -543,6 +543,8 @@ class InvoicePreviewDialog(QDialog):
             <tr class='{row_class}'>
                 <td class='center-col' style='{border_style}'>{i}</td>
                 <td style='{border_style}'><b>{item.product_name}</b></td>
+                <td class='center-col' style='{border_style}'>{item.sku if item.sku else ''}</td>
+                <td class='center-col' style='{border_style}'>{item.pkwiu if item.pkwiu else ''}</td>
                 <td class='center-col' style='{border_style}'>{item.quantity}</td>
                 <td class='center-col' style='{border_style}'>{item.unit}</td>
                 <td class='num-col' style='{border_style}'>{item.net_price:.2f}</td>
@@ -555,14 +557,14 @@ class InvoicePreviewDialog(QDialog):
             
             if has_desc:
                 desc_parts = []
-                if item.pkwiu and item.pkwiu != "ZW": desc_parts.append(f"PKWiU/CN: {item.pkwiu}")
+                # Column now visible directly in table
                 if desc_key or desc_val: desc_parts.append(f"{desc_key}: {desc_val}")
                 full_desc = " | ".join(desc_parts)
                 
                 items_html_rows += f"""
                 <tr class='desc-row'>
                     <td></td>
-                    <td colspan='8'>{full_desc}</td>
+                    <td colspan='10'>{full_desc}</td>
                 </tr>
                 """
 

@@ -24,14 +24,14 @@ class UpdateCheckerThread(QThread):
         download_url = None
 
         if self.system == "Windows":
-             check_url = "https://www.dyszczynski.pl/KSEF/version.txt"
-             download_url = "https://www.dyszczynski.pl/KSEF"
+             check_url = "https://www.ksefinvoice.pl/KSEF/version.txt"
+             download_url = "https://www.ksefinvoice.pl/KSEF"
         
         elif self.system == "Linux":
              # Sprawdź czy to AppImage
              if "APPIMAGE" in os.environ:
-                 check_url = "https://www.dyszczynski.pl/KSEF/version.txt"
-                 download_url = "https://www.dyszczynski.pl/KSEF"
+                 check_url = "https://www.ksefinvoice.pl/KSEF/version.txt"
+                 download_url = "https://www.ksefinvoice.pl/KSEF"
              else:
                  # Jeśli Flatpak lub inne źródła - pomijamy
                  return
