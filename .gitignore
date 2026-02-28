@@ -1,0 +1,34 @@
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.env
+venv/
+.venv/
+env/
+ksef_invoice.db
+.vscode/
+
+# Build artifacts
+DEPLOY/
+*/Binary/linux/dist/
+*/Binary/linux/release/
+*/Binary/linux/repo/
+*,flatpak
+# Ignorujemy wszystko
+*
+
+# Wyjątki - to co chcemy mieć w repozytorium FlatHub
+!FlatHub/
+!LICENSE
+!README.md
+# !pub_flathub.sh  <-- zakomentowane, więc będzie ignorowane (nie trafi do gita)
+# !update_flathub_fork.sh <-- zakomentowane (nie trafi do gita)
+!.gitignore
+
+# Dodatkowe ignorowane (na wszelki wypadek, gdyby jakieś wyjątki wpadły)
+__pycache__/
+*.pyc
+.vscode/
+.venv/
+
