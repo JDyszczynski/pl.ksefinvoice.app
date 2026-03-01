@@ -3,6 +3,7 @@
   <id>pl.ksefinvoice.KsefInvoice</id>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>LicenseRef-proprietary</project_license>
+  <!-- License text: https://github.com/JDyszczynski/pl.ksefinvoice.app/blob/main/LICENSE -->
   <name>KsefInvoice</name>
   <summary>Faktury KSeF Polska</summary>
   <developer_name>Jarosław Dyszczyński</developer_name>
@@ -59,6 +60,7 @@
   <url type="homepage">https://ksefinvoice.pl/</url>
   <url type="bugtracker">https://github.com/JDyszczynski/pl.ksefinvoice.app/issues</url>
   <url type="vcs-browser">https://github.com/JDyszczynski/pl.ksefinvoice.app</url>
+  <url type="contribute">https://github.com/JDyszczynski/pl.ksefinvoice.app</url>
   <url type="donation">https://buycoffee.to/jarekd</url>
   <content_rating type="oars-1.1" />
   <releases>
