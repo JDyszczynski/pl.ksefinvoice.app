@@ -2,9 +2,8 @@
 <component type="desktop-application">
   <id>pl.ksefinvoice.KsefInvoice</id>
   <metadata_license>CC0-1.0</metadata_license>
-  <project_license>LicenseRef-proprietary</project_license>
+  <project_license>LicenseRef-proprietary=https://github.com/JDyszczynski/pl.ksefinvoice.app/blob/main/LICENSE</project_license>
   <name>KsefInvoice</name>
-  <url type="license">https://github.com/JDyszczynski/pl.ksefinvoice.app/blob/main/LICENSE</url>
   <summary>Faktury KSeF Polska</summary>
   <developer_name>Jarosław Dyszczyński</developer_name>
   <description>
