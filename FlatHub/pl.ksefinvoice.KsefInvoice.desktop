@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=KsefInvoice
+Comment=Faktury KSeF Polska
+Exec=ksef_wrapper.sh
+Icon=pl.ksefinvoice.KsefInvoice
+Terminal=false
+Type=Application
+Categories=Office;Finance;
+Keywords=KSeF;Invoice;Faktura;
+StartupNotify=true
