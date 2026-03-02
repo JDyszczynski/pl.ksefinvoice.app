@@ -6,7 +6,7 @@ KsefInvoice to nowoczesne fakturowanie z pełną integracją KSeF — za darmo, 
 Jest to w pełni darmowa, bezpieczna aplikacja desktopowa do zarządzania fakturami, kontrahentami i wysyłką do Krajowego Systemu e-Faktur (KSeF).
 Bez abonamentu, bez reklam i ukrytych opłat. Twoje dane pozostają lokalnie na Twoim komputerze.
 
-![Główny ekran aplikacji](FlatHub/dashboard.png)
+![Główny ekran aplikacji](https://www.ksefinvoice.pl/img/dashboard.png)
 
 ## Funkcje
 
@@ -14,12 +14,12 @@ Bez abonamentu, bez reklam i ukrytych opłat. Twoje dane pozostają lokalnie na 
 *   **Baza Kontrahentów:** Automatyczne pobieranie danych firm z GUS, weryfikacja numeru VAT EU w VIES oraz sprawdzanie Białej Listy Podatników VAT.
 *   **Fakturowanie:** Kompletna obsługa dokumentów sprzedażowych (Faktury VAT, Korekty, Rachunki, Marża, Ryczałt) w dowolnej walucie.
 
-![Edytor Faktur](FlatHub/invoice_editor.png)
+![Edytor Faktur](https://www.ksefinvoice.pl/img/invoice_editor.png)
 
 *   **JPK i Rejestry:** Generowanie plików JPK_V7M, JPK_V7K, deklaracji PPE oraz podgląd rejestrów VAT.
 *   **Rozrachunki:** Monitoruj należności i zobowiązania, kontroluj terminy płatności i oznaczaj faktury jako opłacone.
 
-![Rozrachunki](FlatHub/rozrachunki.png)
+![Rozrachunki](https://www.ksefinvoice.pl/img/rozrachunki.png)
 
 ## Instalacja (Flatpak)
 
@@ -27,7 +27,7 @@ Aplikacja jest przystosowana do dystrybucji poprzez Flatpak.
 Po opublikowaniu w FlatHub, instalacja będzie możliwa komendą:
 
 ```bash
-flatpak install flathub pl.ksefinvoice.app
+flatpak install flathub pl.ksefinvoice.KsefInvoice
 ```
 
 ## Licencja
