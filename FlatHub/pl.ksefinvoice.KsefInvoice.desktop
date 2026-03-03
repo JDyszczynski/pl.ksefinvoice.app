@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=KsefInvoice
 Comment=Faktury KSeF Polska
-Exec=ksef_wrapper.sh
+Exec=KsefInvoice
 Icon=pl.ksefinvoice.KsefInvoice
 Terminal=false
 Type=Application
