@@ -67,6 +67,26 @@
   <url type="donation">https://buycoffee.to/jarekd</url>
   <content_rating type="oars-1.1" />
   <releases>
+    <release version="1.0.6" date="2026-03-04">
+      <description>
+        <ul>
+          <li>Kody QR (Offline): Naprawiono błąd "Link nieprawidłowy" w Aplikacji Podatnika KSeF.</li>
+          <li>Zmieniono algorytm podpisu cyfrowego na `RSA-SHA256` z paddingiem `PKCS#1 v1.5` (wymagany przez MF), zamiast PSS.</li>
+          <li>Wprowadzono kanonizację XML (Inclusive C14N) przed wyliczeniem skrótu SHA-256 dla kodu QR, co zapewnia zgodność sumy kontrolnej.</li>
+          <li>Naprawiono format daty w linku QR (standard ISO 8601).</li>
+          <li>Logika Wysyłki (Online): Zoptymalizowano proces wysyłki faktur.</li>
+          <li>Aplikacja teraz wysyła do KSeF dokładnie ten sam "snapshot" XML, który został użyty do wygenerowania podglądu i kodu QR.</li>
+          <li>Eliminuje to rozbieżności w sumach kontrolnych (Hash) pomiędzy kodem QR a plikiem w KSeF.</li>
+          <li>UI: Usunięto nadmiarowe (podwójne) okno potwierdzenia wysyłki w widoku listy faktur.</li>
+          <li>UI (Edycja Faktury): przeniesiono sekcję "Warunki Transakcji" (Zamówienie / Umowa) do zakładki "KSeF / Opcje".</li>
+          <li>UI (Lista faktur): Dodano możliwość zmiany szerokości kolumn oraz dodano kolumne z przyciskami akcji dla list faktur</li>
+          <li>Logika: naprawiono błąd wyświetlania pustych dat zamówienia/umowy na podglądzie faktury, gdy opcja była odznaczona.</li>
+          <li>Logika: zoptymalizowano działanie opcji "Odwrotne obciążenie" (VAT). Po usunięciu wszystkich pozycji ze stawką "oo" opcja odznacza się automatycznie, przywracając możliwość edycji innych stawek.</li>
+          <li>Naprawy: usunięto błędy (TypeError) związane z inicjalizacją okna dialogowego faktury i duplikacją metod.</li>
+          <li>Konfiguracja (certyfikat linku): dodano przycisk testu hasła do pliku klucza.</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.0.5-2" date="2026-03-02">
       <description>
         <p>Fix: Updated directory structure and permissions for better Flatpak compliance.</p>
