@@ -30,6 +30,10 @@
     <category>Office</category>
     <category>Finance</category>
   </categories>
+  <branding>
+    <color type="primary" scheme_preference="light">#e01b24</color>
+    <color type="primary" scheme_preference="dark">#c01c28</color>
+  </branding>
   <screenshots>
     <screenshot type="default">
       <image>https://ksefinvoice.pl/img/dashboard.png</image>
