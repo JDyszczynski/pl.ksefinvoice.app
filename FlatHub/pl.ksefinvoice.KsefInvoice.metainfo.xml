@@ -67,6 +67,13 @@
   <url type="donation">https://buycoffee.to/jarekd</url>
   <content_rating type="oars-1.1" />
   <releases>
+    <release version="1.0.7" date="2026-03-05">
+      <description>
+        <ul>
+          <li>System: Dodano obsługę automatycznego wykrywania ciemnego motywu systemu (wsparcie dla Windows oraz Linux/Flatpak - XDG Portal).</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.0.6" date="2026-03-04">
       <description>
         <ul>

@@ -17,8 +17,8 @@
             "buildsystem": "simple",
             "build-commands": [
                 "mkdir -p /app/lib /app/bin",
-                "cp -r ./* /app/lib/",
-                "ln -sf /app/lib/KsefInvoice /app/bin/KsefInvoice",
+                "cp -r usr AppRun /app/lib/",
+                "ln -sf /app/lib/usr/bin/KsefInvoice/KsefInvoice /app/bin/KsefInvoice",
                 "install -Dm644 pl.ksefinvoice.KsefInvoice.metainfo.xml /app/share/metainfo/pl.ksefinvoice.KsefInvoice.metainfo.xml",
                 "install -Dm644 pl.ksefinvoice.KsefInvoice.desktop /app/share/applications/pl.ksefinvoice.KsefInvoice.desktop",
                 "install -Dm644 pl.ksefinvoice.KsefInvoice.png /app/share/icons/hicolor/128x128/apps/pl.ksefinvoice.KsefInvoice.png",
@@ -27,8 +27,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://github.com/JDyszczynski/pl.ksefinvoice.app/releases/download/v1.0.6/KsefInvoice-1.0.6.tar.gz",
-                    "sha256": "a323bd0ea79ef44888da51a767acd1d31c7d3fa26276a3c8014c32536a37b26f",
+                    "url": "https://github.com/JDyszczynski/pl.ksefinvoice.app/releases/download/v1.0.7/KsefInvoice-1.0.7.tar.gz",
+                    "sha256": "6a1a2de11a04f550e0faf19ec8738920265205174c12e40f9b6efbc799c9d629",
                     "strip-components": 1
                 }
             ]
