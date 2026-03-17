@@ -13,13 +13,15 @@
       Jest to w pełni darmowa, bezpieczna aplikacja desktopowa do zarządzania fakturami, kontrahentami i wysyłką do Krajowego Systemu e-Faktur (KSeF). 
       Bez abonamentu, bez reklam i ukrytych opłat. Twoje dane pozostają lokalnie na Twoim komputerze.
     </p>
-    <p>Główne moduły aplikacji:</p>
+    <p>Główne moduły i rozszerzone funkcje aplikacji:</p>
     <ul>
       <li><em>Integracja z KSeF:</em> Pełna obsługa Krajowego Systemu e-Faktur. Wysyłaj faktury sprzedaży i pobieraj faktury zakupu bezpośrednio z serwerów Ministerstwa Finansów. Obsługa autoryzacji tokenem/podpisem, masowa wysyłka oraz pobieranie UPO.</li>
-      <li><em>Baza Kontrahentów:</em> Automatyczne pobieranie danych firm z GUS, weryfikacja numeru VAT EU w VIES oraz sprawdzanie Białej Listy Podatników VAT.</li>
-      <li><em>Fakturowanie:</em> Kompletna obsługa dokumentów sprzedażowych (Faktury VAT, Korekty, Rachunki, Marża, Ryczałt) w dowolnej walucie.</li>
-      <li><em>JPK i Rejestry:</em> Generowanie plików JPK_V7M, JPK_V7K, deklaracji PPE oraz podgląd rejestrów VAT.</li>
-      <li><em>Rozrachunki:</em> Monitoruj należności i zobowiązania, kontroluj terminy płatności i oznaczaj faktury jako opłacone.</li>
+      <li><em>Aplikacja Podatnika (QR):</em> Zgodne z wytycznymi MF generowanie wizualnych kodów QR dla weryfikacji dokumentów offline i podgląg struktury XML.</li>
+      <li><em>Baza Kontrahentów:</em> Automatyczne pobieranie danych firm z rejestrów GUS, weryfikacja numeru VIES oraz Białej Listy Podatników z obsługą wielooddziałowości pod jednym numerm NIP.</li>
+      <li><em>Fakturowanie i Waluty:</em> Kompletna obsługa dokumentów (Faktury VAT, Korekty, Marża, Ryczałt) w różnych walutach, <b>wzbogacona o automatyczne dociąganie codziennych kursów z Tabeli A (NBP)</b> i tłumaczenie faktur na j. angielski.</li>
+      <li><em>JPK i Rejestry:</em> Inteligentne generowanie plików JPK_V7M, plików JPK_FA (wsparcie tagów dokumentów m.in. procedur GTU_12/13/odwrotnego obciążenia), oraz uwzględnianie przewalutowań w ewidencji VAT.</li>
+      <li><em>Rozwiqzania Księgowe (Kompensaty):</em> Monitoruj należności i zobowiązania, zarządzaj terminami płatności i korzystaj ze zbiorczych wpłat (kompensat obustronnych na jednym kontrahencie).</li>
+      <li><em>Ergonomia pracy:</em> Natywne wsparcie ciemnego motywu (Dark Mode) oraz błyskawiczne podglądy statusu opłacenia.</li>
     </ul>
     <p>
       Ta wersja jest darmowa i w pełni funkcjonalna, bez reklam i ukrytych opłat.
@@ -67,6 +69,23 @@
   <url type="donation">https://buycoffee.to/jarekd</url>
   <content_rating type="oars-1.1" />
   <releases>
+    <release version="1.0.9" date="2026-03-17">
+      <description>
+        <ul>
+          <li>Księgowość (Rozrachunki): Wprowadzono narzędzie do "Rozliczeń Zbiorczych" (kompensat). Pozwala to rozliczać wiele należności (WN) i zobowiązań (MA) z danym kontrahentem naraz na zadeklarowaną łączną kwotę wpłaty. System automatycznie dystrybuuje środki na poczet najstarszych dokumentów i wyświetla obustronne bilanse.</li>
+          <li>KSeF (JPK_FA i JPK_V7M): Zaktualizowano mapowanie tagów dla list faktur i pozycji faktur z odwrotnym obciążeniem (K_11 dla zagranicznych, K_31 dla krajowych). Usługi objęte procedurami GTU_12 i GTU_13 są od teraz rzutowane celnie w K_12 raportu JPK.</li>
+          <li>Waluty i Kursy (NBP): Wprowadzono automatyczne dociąganie na żywo kursu waluty z odpowiednich tabel (Tabela A NBP) dla wybranego dnia sprzedaży na oknie faktury uwzględniające święta i weekendy (skok wstecz).</li>
+          <li>Deklaracje i Raportowanie (Księgowość): Naprawiono rozliczanie faktur walutowych - obecnie ewidencja VAT oraz moduł sumowań deklaracji w JPK prawidłowo aplikują kurs (wskaźnik `currency_rate`) celem przekonwertowania kwot netto/brutto w tabelach z EUR/USD na PLN stosownie do algorytmów Ministerstwa.</li>
+          <li>Księgowość (Rozrachunki): Pod prawym przyciskiem myszy dodano szybki podgląd ("Pokaż wpłaty") umożliwiający wgląd w historię księgowania należności dla danego dokumentu rozrachunkowego z opcją na cofnięcie / usunięcie wpłaty.</li>
+          <li>UI (Lista faktur): Dodano nową kolumnę "R" ze statusem zapłaty (ikona check / ostrzeżenie / X) oraz interaktywnym dymkiem informującym o kwocie pozostałej do zapłaty. Skorelowano to z systemem rozrachunków.</li>
+          <li>UI (Lista faktur): Dodano objaśniające dymki (tooltips) nad przyciskami akcji (Podgląd, Edycja, Wysyłka do KSeF) na liście faktur.</li>
+          <li>Baza Kontrahentów: Umożliwiono dodawanie wielu oddziałów firmy z tym samym numerem NIP, ale różnymi adresami. Zmodyfikowano sprawdzanie duplikatów i usunięto blokadę unikalności NIP-u z bazy danych.</li>
+          <li>Podgląd Faktury: Naprawiono błąd wyświetlania danych na podglądzie, PDF i wydrukach faktur zakupowych pobieranych z KSeF. Jako sprzedawca są teraz prawidłowo ujęte dane kontrahenta (zamiast dotychczasowego "Brak danych" oraz danych nabywcy w nieswoim miejscu).</li>
+          <li>Wysyłka KSEF: Poprawiono moduł wyroczni szyfrowania dla metody autoryzacji w KSeF za pomocą tokenu dostępowego.</li>
+          <li>Podgląd Faktury: Dodano dynamiczne tłumaczenie faktur na język angielski.</li>
+        </ul>
+      </description>
+    </release>
   <release version="1.0.8" date="2026-03-12">
       <description>
         <ul>
