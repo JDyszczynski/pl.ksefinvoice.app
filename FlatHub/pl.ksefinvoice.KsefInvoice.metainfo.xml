@@ -18,7 +18,7 @@
       <li><em>Integracja z KSeF:</em> Pełna obsługa Krajowego Systemu e-Faktur. Wysyłaj faktury sprzedaży i pobieraj faktury zakupu bezpośrednio z serwerów Ministerstwa Finansów. Obsługa autoryzacji tokenem/podpisem, masowa wysyłka oraz pobieranie UPO.</li>
       <li><em>Aplikacja Podatnika (QR):</em> Zgodne z wytycznymi MF generowanie wizualnych kodów QR dla weryfikacji dokumentów offline i podgląg struktury XML.</li>
       <li><em>Baza Kontrahentów:</em> Automatyczne pobieranie danych firm z rejestrów GUS, weryfikacja numeru VIES oraz Białej Listy Podatników z obsługą wielooddziałowości pod jednym numerm NIP.</li>
-      <li><em>Fakturowanie i Waluty:</em> Kompletna obsługa dokumentów (Faktury VAT, Korekty, Marża, Ryczałt) w różnych walutach, <b>wzbogacona o automatyczne dociąganie codziennych kursów z Tabeli A (NBP)</b> i tłumaczenie faktur na j. angielski.</li>
+      <li><em>Fakturowanie i Waluty:</em> Kompletna obsługa dokumentów (Faktury VAT, Korekty, Marża, Ryczałt) w różnych walutach, <em>wzbogacona o automatyczne dociąganie codziennych kursów z Tabeli A (NBP)</em> i tłumaczenie faktur na j. angielski.</li>
       <li><em>JPK i Rejestry:</em> Inteligentne generowanie plików JPK_V7M, plików JPK_FA (wsparcie tagów dokumentów m.in. procedur GTU_12/13/odwrotnego obciążenia), oraz uwzględnianie przewalutowań w ewidencji VAT.</li>
       <li><em>Rozwiqzania Księgowe (Kompensaty):</em> Monitoruj należności i zobowiązania, zarządzaj terminami płatności i korzystaj ze zbiorczych wpłat (kompensat obustronnych na jednym kontrahencie).</li>
       <li><em>Ergonomia pracy:</em> Natywne wsparcie ciemnego motywu (Dark Mode) oraz błyskawiczne podglądy statusu opłacenia.</li>
