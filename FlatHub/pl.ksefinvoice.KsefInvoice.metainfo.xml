@@ -69,6 +69,21 @@
   <url type="donation">https://buycoffee.to/jarekd</url>
   <content_rating type="oars-1.1" />
   <releases>
+    <release version="1.0.10" date="2026-03-19">
+      <description>
+        <ul>
+          <li>KSeF (Schemat XML FA 3): Gruntownie przebudowano logikę generowania pliku XML rozliczającego faktury międzynarodowe i transgraniczne:</li>
+          <li>Zaimplementowano prawidłowe mapowanie procedury "odwrotnego obciążenia" i stawki 0% na podstawie kodów krajów (geolokalizacji ISO i przynależności do EU). Zabezpiecza to precyzyjny zrzut kwot netto do autoryzowanych węzłów deklaracji. Tym samym wyeliminowano błąd wrzucania wszystkich faktur walutowych do krajowego tagu.</li>
+          <li>Dodano obsługę opcjonalnego węzła OkresFa wykorzystującego pola P_6_Od oraz P_6_Do. W momencie ustanowienia na fakturze ramowego okresu, XML poprawnie zgłosi przedział, zamiast twardo ustawiać ujednoliconą sztywną datę do tagu P_6.</li>
+          <li>System ERP / Podgląd: Ustabilizowano obsługę prefiksów numerycznych NIP-ów państw dla wizualizacji faktur.</li>
+          <li>KSeF API: Rozwiązano problem przerywania pobierania wielu faktur z KSeF (błąd po ok. 16 sztukach). Wprowadzono automatyczną obsługę limitów zapytań (Rate Limiting) ustawionych przez serwery Ministerstwa Finansów. Aplikacja radzi sobie teraz z błędami "429 Too Many Requests" poprzez mechanizm automatycznego wstrzymywania i wznawiania (retry) zadań oraz mikropauzy (0.5s) pozwalające płynnie zsynchronizować bez limitów setki dokumentów.</li>
+          <li>Wizualizacja faktur: Usunięto zbędny komunikat ostrzegawczy o wykryciu zagranicznego kontrahenta podczas samej edycji utworzonej wcześniej faktury. Ponadto, komunikat ten oraz automatyczne ustawienie flagi "Odwrotne obciążenie" aktywują się teraz wyłącznie dla zagranicznych kontrahentów należących do UE z poprawnie oznaczonym parametrem "Płatnik VAT-UE".</li>
+          <li>Wizualizacja faktur: Zaktualizowano styl wydruku danych bankowych (polski i angielski PDF). Jeżeli wydruk generuje się z kontem firmowym, rachunek prezentowany jest w międzynarodowym formacie IBAN z rozbiciem na spacje wraz z kodem kraju, a kod SWIFT wyświetlany jest z przedrostkiem BIC/SWIFT</li>
+          <li>Dla faktur zagranicznych numer identyfikacji podatkowej własnej firmy (wystawcy) i nabywcy jest teraz zawsze przymusowo formatowany do międzynarodowego standardu przedrostka z kodem państwa (np. wyświetla się PL1234567890 na dokumentach trans-granicznych).</li>
+          <li>Wprowadzono obsługę pola "Okres od-do" (wydruki wszystkich faktur). Jeżeli jako punkt odniesienia podatkowego wskazano dany okres ramowy wykonywania zlecenia, na wydrukach pojawi się specjalna rubryka „Okres od-do” z jego zakresem, a „Data sprzedaży” pokaże datę pomyślnego zamknięcia okresu („do”), ściślej odzwierciedlając ramy rachunkowe na dokumencie eksportu.</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.0.9" date="2026-03-17">
       <description>
         <ul>
