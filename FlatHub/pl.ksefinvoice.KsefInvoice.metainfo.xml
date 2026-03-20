@@ -69,6 +69,19 @@
   <url type="donation">https://buycoffee.to/jarekd</url>
   <content_rating type="oars-1.1" />
   <releases>
+    <release version="1.0.11" date="2026-03-20">
+      <description>
+        <ul>
+          <li>UI (Lista faktur i Rozrachunki): Uporządkowano działanie statusów płatności dla faktur korygujących. System czytelniej rozróżnia teraz sytuacje: „Do zwrotu”, „Do zapłaty” oraz „Zapłacono”.</li>
+          <li>UI (Podpowiedzi statusu): Rozszerzono opisy statusów niezapłaconych dokumentów, aby szybciej ocenić termin płatności i opóźnienia.</li>
+          <li>KSeF (Walidacja biznesowa): Dodano zabezpieczenie, które blokuje wysyłkę korekty, jeśli faktura pierwotna nie została wcześniej wysłana do KSeF.</li>
+          <li>Kartoteka i pozycje faktury: Dodano obsługę rozróżnienia pozycji jako towar lub usługa, wraz z zachowaniem zgodności dla istniejących danych.</li>
+          <li>Edycja faktury (UX): Rozszerzono formularz o opcjonalne pole „Typ” dla pozycji i dopracowano zachowanie tej opcji w praktycznych scenariuszach pracy.</li>
+          <li>Podgląd i tłumaczenia: Poprawiono spójność podglądu korekt oraz uzupełniono tłumaczenia (EN) w kluczowych miejscach.</li>
+          <li>Stabilność aplikacji: Wprowadzono serię poprawek porządkujących edycję i podgląd faktur oraz usunięto regresję wpływającą na wysyłkę dokumentów do KSeF.</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.0.10" date="2026-03-19">
       <description>
         <ul>
