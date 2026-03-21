@@ -69,6 +69,14 @@
   <url type="donation">https://buycoffee.to/jarekd</url>
   <content_rating type="oars-1.1" />
   <releases>
+    <release version="1.0.12" date="2026-03-21">
+      <description>
+        <ul>
+          <li>KSeF (Import faktur zakupowych i korekt): Rozszerzono mapowanie płatności z XML o obsługę metod mieszanych (`ZaplataCzesciowa`) i zapis rozbić płatności, z zachowaniem zgodności z logiką faktur sprzedażowych.</li>
+        <li>Build i dystrybucja (Windows/AppImage/Flatpak): Naprawiono pakowanie zasobów tłumaczeń podglądu poprzez dołączenie katalogu `locale` do konfiguracji buildów.</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.0.11" date="2026-03-20">
       <description>
         <ul>
