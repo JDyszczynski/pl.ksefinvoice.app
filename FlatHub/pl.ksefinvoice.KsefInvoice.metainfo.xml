@@ -69,6 +69,16 @@
   <url type="donation">https://buycoffee.to/jarekd</url>
   <content_rating type="oars-1.1" />
   <releases>
+    <release version="1.0.13" date="2026-03-23">
+      <description>
+        <ul>
+          <li>KSeF (Import nowych faktur zakupowych): Uszczelniono mapowanie dat podczas importu, aby `date_sale` zawsze miało bezpieczny fallback na `date_issue` i nie zapisywało domyślnego znacznika czasu importu.</li>
+          <li>UI (Lista faktur, kolumna "R"): Naprawiono logikę statusu rozliczenia dla faktur korygujących. Po domknięciu bilansu korekty znacznik w kolumnie "R" poprawnie przechodzi na stan "rozliczono", także gdy wpłata została zaksięgowana na dokumencie bazowym wątku.</li>
+          <li>UI (Rozrachunki, kolumna "Dni"): Dla w pełni rozliczonych pozycji ukryto wartość liczby dni (+/-). Kolumna „Dni” pokazuje teraz odchylenie od terminu wyłącznie dla pozycji nierozliczonych.</li>
+          <li>Wydruki (Faktury zakupu): Poprawiono formatowanie i układ wydruków faktur zakupowych, dla pól StopkiDokumentu.</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.0.12" date="2026-03-21">
       <description>
         <ul>
