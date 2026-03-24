@@ -9,7 +9,7 @@
   <description>
     <p><em>Note: This application is currently only available in Polish.</em></p>
     <p>
-      KsefInvoice to nowoczesne fakturowanie z pełną integracją KSeF — za darmo, na zawsze!
+      KsefInvoice to nowoczesne fakturowanie z pełną integracją KSeF — za darmo, bez reklam na zawsze!
       Jest to w pełni darmowa, bezpieczna aplikacja desktopowa do zarządzania fakturami, kontrahentami i wysyłką do Krajowego Systemu e-Faktur (KSeF). 
       Bez abonamentu, bez reklam i ukrytych opłat. Twoje dane pozostają lokalnie na Twoim komputerze.
     </p>
@@ -18,9 +18,9 @@
       <li><em>Integracja z KSeF:</em> Pełna obsługa Krajowego Systemu e-Faktur. Wysyłaj faktury sprzedaży i pobieraj faktury zakupu bezpośrednio z serwerów Ministerstwa Finansów. Obsługa autoryzacji tokenem/podpisem, masowa wysyłka oraz pobieranie UPO.</li>
       <li><em>Aplikacja Podatnika (QR):</em> Zgodne z wytycznymi MF generowanie wizualnych kodów QR dla weryfikacji dokumentów offline i podgląg struktury XML.</li>
       <li><em>Baza Kontrahentów:</em> Automatyczne pobieranie danych firm z rejestrów GUS, weryfikacja numeru VIES oraz Białej Listy Podatników z obsługą wielooddziałowości pod jednym numerm NIP.</li>
-      <li><em>Fakturowanie i Waluty:</em> Kompletna obsługa dokumentów (Faktury VAT, Korekty, Marża, Ryczałt) w różnych walutach, <em>wzbogacona o automatyczne dociąganie codziennych kursów z Tabeli A (NBP)</em> i tłumaczenie faktur na j. angielski.</li>
+      <li><em>Fakturowanie i Waluty:</em> Kompletna obsługa dokumentów (Faktury VAT, Korekty, Marża, Ryczałt) w różnych walutach, <em>wzbogacona o automatyczne dociąganie codziennych kursów z Tabeli A (NBP)</em> i tłumaczenie faktur na j. angielski oraz niemiecki.</li>
       <li><em>JPK i Rejestry:</em> Inteligentne generowanie plików JPK_V7M, plików JPK_FA (wsparcie tagów dokumentów m.in. procedur GTU_12/13/odwrotnego obciążenia), oraz uwzględnianie przewalutowań w ewidencji VAT.</li>
-      <li><em>Rozwiqzania Księgowe (Kompensaty):</em> Monitoruj należności i zobowiązania, zarządzaj terminami płatności i korzystaj ze zbiorczych wpłat (kompensat obustronnych na jednym kontrahencie).</li>
+      <li><em>Rozwiązania Księgowe (Kompensaty):</em> Monitoruj należności i zobowiązania, zarządzaj terminami płatności i korzystaj ze zbiorczych wpłat (kompensat obustronnych na jednym kontrahencie).</li>
       <li><em>Ergonomia pracy:</em> Natywne wsparcie ciemnego motywu (Dark Mode) oraz błyskawiczne podglądy statusu opłacenia.</li>
     </ul>
     <p>
@@ -46,12 +46,24 @@
       <caption>Lista faktur KSeF - Integracja z Ministerstwem Finansów</caption>
     </screenshot>
     <screenshot>
+      <image>https://ksefinvoice.pl/img/ksef_list_en.png</image>
+      <caption>Lista faktur KSeF - Podgląd w języku angielskim</caption>
+    </screenshot>
+    <screenshot>
       <image>https://ksefinvoice.pl/img/invoice_editor.png</image>
       <caption>Edytor faktury - Wystawianie dokumentów w wielu walutach</caption>
     </screenshot>
     <screenshot>
+      <image>https://ksefinvoice.pl/img/towar.png</image>
+      <caption>Kartoteka towarów i usług</caption>
+    </screenshot>
+    <screenshot>
       <image>https://ksefinvoice.pl/img/rozrachunki.png</image>
       <caption>Moduł Rozrachunków - Kontrola płatności</caption>
+    </screenshot>
+    <screenshot>
+      <image>https://ksefinvoice.pl/img/rozliczenia_zbiorcze.png</image>
+      <caption>Rozliczenia zbiorcze - Kompensaty i bilans kontrahenta</caption>
     </screenshot>
     <screenshot>
       <image>https://ksefinvoice.pl/img/jpk_v7.png</image>
@@ -59,7 +71,15 @@
     </screenshot>
     <screenshot>
       <image>https://ksefinvoice.pl/img/kontrahent_edit.png</image>
-      <caption>Edycja kontrahenta - Pobieranie danych z GUS</caption>
+      <caption>Edycja kontrahenta - Pobieranie danych z Rejestrów</caption>
+    </screenshot>
+    <screenshot>
+      <image>https://ksefinvoice.pl/img/konfiguracja.png</image>
+      <caption>Konfiguracja firmy i parametrów systemu</caption>
+    </screenshot>
+    <screenshot>
+      <image>https://ksefinvoice.pl/img/login_page.png</image>
+      <caption>Ekran logowania aplikacji</caption>
     </screenshot>
   </screenshots>
   <url type="homepage">https://ksefinvoice.pl/</url>
@@ -69,8 +89,19 @@
   <url type="donation">https://buycoffee.to/jarekd</url>
   <content_rating type="oars-1.1" />
   <releases>
-    <release version="1.0.13" date="2026-03-23">
+    <release version="1.0.14" date="2026-03-24">
       <description>
+        <ul>
+          <li>JPK (Słowniki US): Zaktualizowano słownik kodów urzędów skarbowych.</li>
+          <li>KSeF (Faktury zakupu): Dodano pobieranie faktur w paczkach zgodnie z nowym endpointem udostępnionym przez KSeF.</li>
+          <li>Podgląd dokumentów (Języki): Dodano niemiecką wersję podglądu dokumentów. W podglądzie można teraz wybrać wersję: Polski, Angielski lub Niemiecki, wraz z obsługą niemieckiej kwoty słownie i pakietem tłumaczeń szablonów.</li>
+          <li>UI (Czytelność kolorów): Poprawiono kontrast kolorów w wersji Qt dla kolumny „Typ” w rozrachunkach oraz niebieskich oznaczeń w sekcji Konfiguracja → KSeF, aby były czytelne zarówno w jasnym, jak i ciemnym motywie.</li>
+          <li>Rozrachunki (Kolumna Dni): Zmieniono sposób prezentowania dni do terminu: kolor zielony bez znaków +/-, dni po terminie: kolor czerwony z znakiem minus.</li>
+        </ul>
+      </description>
+    </release>
+    <release version="1.0.13" date="2026-03-23">
+     <description>
         <ul>
           <li>KSeF (Import nowych faktur zakupowych): Uszczelniono mapowanie dat podczas importu, aby `date_sale` zawsze miało bezpieczny fallback na `date_issue` i nie zapisywało domyślnego znacznika czasu importu.</li>
           <li>UI (Lista faktur, kolumna "R"): Naprawiono logikę statusu rozliczenia dla faktur korygujących. Po domknięciu bilansu korekty znacznik w kolumnie "R" poprawnie przechodzi na stan "rozliczono", także gdy wpłata została zaksięgowana na dokumencie bazowym wątku.</li>
