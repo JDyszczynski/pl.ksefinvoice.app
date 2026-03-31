@@ -18,10 +18,10 @@
       <li><em>Integracja z KSeF i Monitoring:</em> Pełna obsługa Krajowego Systemu e-Faktur. Wysyłaj faktury sprzedaży, monitoruj nowe dokumenty (badge z liczbą oczekujących faktur) i automatycznie pobieraj faktury zakupu z wyborem zakresu dat lub kontynuacją od ostatniej synchronizacji. Obsługa autoryzacji tokenem/podpisem, masowa wysyłka oraz pobieranie UPO.</li>
       <li><em>Stany Magazynowe:</em> Zarządzaj kartoteką towarów i śledź ruchy magazynowe w czasie rzeczywistym. Stany aktualizują się automatycznie po zapisie faktury sprzedaży i zakupu. Rozróżnienie pozycji towar/usługa, historia ruchów, korekty stanów oraz opcjonalne zapisywanie nowych produktów w katalogu podczas wystawiania dokumentów.</li>
       <li><em>Aplikacja Podatnika (QR):</em> Zgodne z wytycznymi MF generowanie wizualnych kodów QR dla weryfikacji dokumentów offline i podgląd struktury XML.</li>
-      <li><em>Baza Kontrahentów:</em> Weryfikacja kontrahentów przez VIES (VAT EU) i Białą Listę Podatników VAT. Obsługa wielooddziałowości pod jednym numerem NIP.</li>
+      <li><em>Baza Kontrahentów:</em> Zaawansowana integracja z GUS (BIR1): automatyczne pobieranie danych po NIP, mapowanie jednostek lokalnych (REGON14), wybór oddziału z listy oraz aktualizacja karty kontrahenta (nazwa, adres, kod, telefon/e-mail jeśli dostępne). Dodatkowo weryfikacja kontrahentów przez VIES (VAT EU) i Białą Listę Podatników VAT.</li>
       <li><em>Fakturowanie i Waluty:</em> Kompletna obsługa dokumentów (Faktury VAT, Korekty, Marża, Ryczałt) w różnych walutach, <em>wzbogacona o automatyczne dociąganie codziennych kursów z Tabeli A (NBP)</em> i tłumaczenie faktur na j. angielski oraz niemiecki.</li>
       <li><em>JPK i Rejestry:</em> Inteligentne generowanie plików JPK_V7M, plików JPK_FA (wsparcie tagów dokumentów m.in. procedur GTU_12/13/odwrotnego obciążenia), oraz uwzględnianie przewalutowań w ewidencji VAT.</li>
-      <li><em>Rozwiązania Księgowe (Kompensaty):</em> Monitoruj należności i zobowiązania, zarządzaj terminami płatności i korzystaj ze zbiorczych wpłat (kompensat obustronnych na jednym kontrahencie).</li>
+      <li><em>Rozwiązania Księgowe (Kompensaty):</em> Monitoruj należności i zobowiązania, zarządzaj terminami płatności i korzystaj ze zbiorczych wpłat (kompensat obustronnych na jednym kontrahencie). W module danych do przelewu możesz dodatkowo zweryfikować numer rachunku na Białej Liście VAT na podstawie NIP i numeru konta.</li>
       <li><em>Ergonomia pracy:</em> Natywne wsparcie ciemnego motywu (Dark Mode) oraz błyskawiczne podglądy statusu opłacenia.</li>
     </ul>
     <p>
@@ -102,6 +102,26 @@
   <url type="donation">https://buycoffee.to/jarekd</url>
   <content_rating type="oars-1.1" />
   <releases>
+    <release version="1.0.16" date="2026-03-31">
+      <description>
+        <ul>
+          <li>Faktury (Walidacja zapisu): Uniemożliwiono zapis faktury bez wybranego kontrahenta, bez co najmniej jednej pozycji dokumentu oraz z wartością brutto równą zero. Blokada wartości zerowej nie dotyczy faktur korygujących, które mogą wyzerować dokument pierwotny.</li>
+          <li>KSeF (Kontrola przy zamykaniu programu): Dodano ostrzeżenie przy próbie wyjścia z aplikacji, jeśli w bieżącym dniu istnieją dokumenty sprzedaży niewysłane do KSeF, z możliwością pozostania w programie.</li>
+          <li>KSeF (Faktury zakupu, monitoring): Dodano automatyczne sprawdzanie nowych faktur zakupowych po zalogowaniu, z opcjonalnym trybem cyklicznym, powiadomieniami systemowymi, znacznikiem przy przycisku „Pobierz z KSeF” oraz opcją automatycznego pobierania dokumentów.</li>
+          <li>Faktury (Stabilność wyliczeń pozycji): Usunięto zapętlenie sygnałów w edycji pozycji, które mogło prowadzić do błędu rekurencji podczas przeliczania wartości wierszy i sum dokumentu.</li>
+          <li>Faktury (Ikony GTIN/powiązania): Ujednolicono ikonę informacji na kolumnie SKU oraz doprecyzowano jej widoczność: przy wyłączonych stanach magazynowych oznaczenia są pokazywane wyłącznie dla GTIN.</li>
+          <li>Faktury zakupu (Tryb tylko do odczytu): Dla dokumentów z blokadą edycji dopracowano zapis kartoteki i powiązań: przycisk „Zapisz” jest aktywowany dopiero po zaznaczeniu opcji zapisu do kartoteki; zapis działa również bez modułu stanów magazynowych (bez ruchów stanów).</li>
+          <li>Faktury zakupu (Komunikaty po zapisie): Uproszczono podsumowanie zapisu. W trybie magazynowym komunikat pokazuje liczbę: nowych pozycji, pozycji istniejących w kartotece, dodanych i usuniętych powiązań; poza trybem magazynowym pokazuje liczbę zapisanych nowych pozycji i pozycji istniejących w kartotece.</li>
+          <li>Kartoteka Towary i usługi (UI): Dodano kolumnę ID oraz wyszukiwanie po: ID, Nazwa, SKU, GTIN z automatycznym przewinięciem i zaznaczeniem pierwszego wyniku (domyślnie wyszukiwanie po nazwie).</li>
+          <li>Kartoteka Kontrahenci (UI): Dodano wyszukiwanie po NIP i Nazwa z przyciskami „Szukaj”/„Wyczyść”, obsługą Enter oraz domyślnym trybem wyszukiwania po nazwie.</li>
+          <li>Faktury (pole GTIN/EAN): Dodano obsługę pola GTIN/EAN dla pobieranych dokumentów i wysyłanych, wartość można dodać z menu kontekstowego edycji pozycji faktury, a obecność wartości jest oznaczana ikonką etykiety w kolumnie index.</li>
+          <li>Faktury (Edycja): Dodano możliwość wiązania pozycji z dokumentów z towarami dla trybu kontroli stanów magazynowych.</li>
+          <li>Stany Magazynowe: Dodano funkcjonalność kontroli stanów magazynowych aktywowanej z poziomu konfiguracji podmiotu. Włączenie funkcjonalności implikuje uruchomienie zliczania stanów magazynowych towarów względem ilości oraz ceny zakupu(magazynowej)</li>
+          <li>Raporty (renament): dodano funkcjonalności w module deklaracje generowania renamentów względem ilości oraz względem ilości z podziałem na ceny zakupu.</li>
+          <li>Towary (Ruchy towarowe):Dodano funkcjonalność sprawdzenia ruchów magazynowych oraz ręcznego definiowania stanów magazynowych w menu kontekstowym modułu kartoteki towarów.</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.0.15" date="2026-03-27">
       <description>
         <ul>
