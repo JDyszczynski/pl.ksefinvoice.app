@@ -102,6 +102,23 @@
   <url type="donation">https://buycoffee.to/jarekd</url>
   <content_rating type="oars-1.1" />
   <releases>
+    <release version="1.0.17" date="2026-04-02">
+      <description>
+        <ul>
+          <li>Faktury zakupu (wykluczenie z księgowości): Dodano możliwość oznaczania faktur zakupu i korekt zakupu jako nieautoryzowane z poziomu menu kontekstowego listy faktur. Wykluczony dokument jest ukrywany na liście, ale pozostaje w bazie, dzięki czemu ponowne pobranie z KSeF nie tworzy duplikatu.</li>
+          <li>Faktury zakupu (czyszczenie powiązań po wykluczeniu): Wykluczenie dokumentu automatycznie usuwa jego rozrachunek, odłącza kontrahenta, czyści powiązania pozycji z kartoteką towarów/usług oraz usuwa powiązane ruchy magazynowe.</li>
+          <li>Deklaracje (zestawienie wykluczonych dokumentów): Dodano nową zakładkę „Wykluczone z ewidencji” z listą dokumentów nieautoryzowanych oraz możliwością ich przywrócenia do ewidencji.</li>
+          <li>Deklaracje (raport wykluczonych dokumentów): Dodano druk i eksport PDF zestawienia dokumentów wykluczonych wraz z danymi podmiotu, kwotami netto/brutto oraz datą wykluczenia.</li>
+          <li>Deklaracje (filtr okresu dla wykluczonych): Dla zestawienia wykluczonych dokumentów dodano filtr miesięczny z domyślnym ustawieniem na bieżący miesiąc oraz automatyczny backfill daty wykluczenia dla starszych rekordów.</li>
+          <li>Księgowość / JPK / Ewidencje: Dokumenty oznaczone jako nieautoryzowane zostały wykluczone z wyliczeń JPK_V7, JPK_FA, ewidencji VAT oraz zestawień przychodów i rozchodów na poziomie usług logiki biznesowej.</li>
+          <li>Podgląd faktury (stawki VAT na pozycjach): Poprawiono prezentację kolumny VAT w tabeli pozycji dokumentu. Dla stawek opisowych wykorzystywana jest teraz etykieta pozycji (np. `ZW`, `0% WDT`, `NP`, `OO`) zamiast wymuszonego `0%`.</li>
+          <li>Kartoteka towarów i usług (stawki VAT 0%): Naprawiono przenoszenie stawek VAT z kartoteki na fakturę. Dla pozycji o tej samej wartości liczbowej stawki (np. `ZW` i `0% WDT`) system zapamiętuje i odtwarza właściwą etykietę, zamiast wybierać pierwszą pasującą po samym `0.0`.</li>
+          <li>Podgląd dokumentów (język niemiecki): Uporządkowano niemieckie tłumaczenia dokumentów zgodnie z praktyką DE/A/CH, m.in. dla nagłówków faktur, reverse charge, kwoty do zapłaty, samofakturowania oraz opisów adnotacji podatkowych.</li>
+          <li>Podgląd dokumentów (samofakturowanie DE): Dla niemieckiego podglądu dokumentów z opcją samofakturowania nagłówek zmienia się teraz na `Gutschrift`.</li>
+          <li>Kody QR KSeF (środowisko produkcyjne/testowe): Naprawiono wybór domeny dla linków QR. Nowe dokumenty zapisują środowisko KSeF zgodne z aktywną konfiguracją firmy, a generatory QR w podglądzie faktury i rozrachunkach używają bezpiecznego fallbacku, dzięki czemu w trybie produkcyjnym nie pojawiają się już linki do `qr-demo.ksef.mf.gov.pl`.</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.0.16" date="2026-03-31">
       <description>
         <ul>
