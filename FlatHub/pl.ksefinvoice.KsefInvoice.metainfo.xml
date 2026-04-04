@@ -22,6 +22,7 @@
       <li><em>Fakturowanie i Waluty:</em> Kompletna obsługa dokumentów (Faktury VAT, Korekty, Marża, Ryczałt) w różnych walutach, <em>wzbogacona o automatyczne dociąganie codziennych kursów z Tabeli A (NBP)</em> i tłumaczenie faktur na j. angielski oraz niemiecki.</li>
       <li><em>JPK i Rejestry:</em> Inteligentne generowanie plików JPK_V7M, plików JPK_FA (wsparcie tagów dokumentów m.in. procedur GTU_12/13/odwrotnego obciążenia), oraz uwzględnianie przewalutowań w ewidencji VAT.</li>
       <li><em>Rozwiązania Księgowe (Kompensaty):</em> Monitoruj należności i zobowiązania, zarządzaj terminami płatności i korzystaj ze zbiorczych wpłat (kompensat obustronnych na jednym kontrahencie). W module danych do przelewu możesz dodatkowo zweryfikować numer rachunku na Białej Liście VAT na podstawie NIP i numeru konta.</li>
+      <li><em>Nowe funkcje ewidencyjne i podmiotowe:</em> Lista dokumentów wykluczonych z ewidencji z raportowaniem oraz wsparcie fakturowania dla JST i Grupy VAT.</li>
       <li><em>Ergonomia pracy:</em> Natywne wsparcie ciemnego motywu (Dark Mode) oraz błyskawiczne podglądy statusu opłacenia.</li>
     </ul>
     <p>
@@ -102,6 +103,24 @@
   <url type="donation">https://buycoffee.to/jarekd</url>
   <content_rating type="oars-1.1" />
   <releases>
+    <release version="1.0.18" date="2026-04-04">
+      <description>
+        <ul>
+          <li>Adnotacje KSeF (UI): Ujednolicono logikę współzależności opcji (WDT, odwrotne obciążenie, marża, zwolnienie z VAT, metoda kasowa) oraz poprawiono domyślny dobór stawki VAT przy OO.</li>
+          <li>Procedura marży (formularz + model): Uporządkowano zapis i odczyt typu marży jako kodu logicznego (`TURYSTYKA`, `UZYWANE`, `DZIELA`, `ANTYKI`).</li>
+          <li>PMarzy (eksport/import XML): Dodano pełne mapowanie `PMarzy` w obie strony: poprawna emisja pól `P_PMarzy_*` w XML i odczyt tych pól do `margin_procedure_type` podczas importu.</li>
+          <li>KSeF (import korekt zakupu, rekoncyliacja): Dodano inteligentne podpinanie korekty z KSeF do istniejącej lokalnej korekty zakupu (fuzzy match numeru po normalizacji), z aktualizacją danych z dokumentu KSeF zamiast tworzenia duplikatu.</li>
+          <li>KSeF (stabilność rekoncyliacji pozycji i płatności): Poprawiono odtwarzanie pozycji i rozbić płatności przy rekoncyliacji, aby eliminować przypadki błędnego `INSERT` i konfliktu unikalności numeru faktury.</li>
+          <li>Faktury (duplikacja, termin płatności): Przy duplikacji zachowywana jest metoda płatności z dokumentu źródłowego, a termin płatności wyliczany jest ponownie z ustawień kontrahenta (`default_payment_days`) zamiast ustawiania daty bieżącej.</li>
+          <li>Lista faktur (filtr dat): Zastąpiono pola „Od/Do” jednym filtrem „Pokaż z” z presetami: Dzisiaj, 3 dni, 7 dni, 30 dni, bieżący miesiąc, kwartał, rok oraz „Bez ograniczeń”. Ustawienie jest zapamiętywane osobno dla listy sprzedaży i zakupu.</li>
+          <li>KSeF (dialog pobierania, zakres): Opcja zakresu pobierania (wg filtra listy / kontynuuj od ostatniej faktury) jest zapamiętywana i przywracana przy kolejnym otwarciu dialogu.</li>
+          <li>Deklaracje / JPK (stawki 0%): Dodano rozbicie stawek 0% na etykiety podatkowe (np. `ZW`, `0% WDT`, `NP`, `OO`) jeśli występują.</li>
+          <li>Deklaracje (raport wykluczonych dokumentów): Uproszczono układ raportu pod wysyłkę e-mail: orientacja pionowa A4, kolumny kluczowe dla księgowości (NIP, numer faktury, dostawca, kwoty), bez kolumny daty wykluczenia, wiersz w jednej lini.</li>
+          <li>KSeF (Podmiot 3): Dodane obsługę Podmiot 3 z wyborem ról i uwzględnieniem ID_Wew dla Grupy Vat i Jednostek samorządu terytorialnego.</li>
+          <li>KSeF (zakres importu Dla podmiot3): Doprecyzowano zakres automatycznego pobierania: obsługa ról `Subject1`/`Subject2` z importem danych `Podmiot3` jako kontekstu; przypadki „firma tylko jako `Podmiot3`” pozostają poza domyślną ścieżką.</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.0.17" date="2026-04-02">
       <description>
         <ul>
