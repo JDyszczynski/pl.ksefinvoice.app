@@ -103,6 +103,30 @@
   <url type="donation">https://buycoffee.to/jarekd</url>
   <content_rating type="oars-1.1" />
   <releases>
+    <release version="1.0.19" date="2026-04-07">
+      <description>
+        <ul>
+          <li>Magazyn (sprzedaż usług z kartoteki): Poprawiono walidację stanów magazynowych przy zapisie pozycji faktury. Pozycje oznaczone jako `usługa` (także wybrane z katalogu) nie są blokowane stanem magazynowym `0`; kontrola ilości dotyczy wyłącznie towarów.</li>
+          <li>UI (okno edycji faktury, Podmiot 3): Uszczelniono zachowanie zakładki `KSeF / Opcje` po rozwinięciu sekcji Podmiot 3. Zawartość zakładki jest przewijana (scroll), dzięki czemu okno nie rozszerza się pionowo poza pulpit i przyciski `Zapisz` / `Anuluj` pozostają dostępne.</li>
+          <li>UI (lista faktur sprzedaży i zakupu): Dodano sortowanie po kliknięciu nagłówków kolumn na listach faktur (wspólny widok dla modułów sprzedaż/zakup), z obsługą sortowania rosnąco/malejąco dla kluczowych kolumn.</li>
+          <li>KSeF (Podmiot 3, role odbiorcze): Rozszerzono zasady identyfikacji dla roli `ODBIORCA` do modelu jak dla JST/GV: można użyć `ID-Wew`, a gdy `ID-Wew` jest puste, wymagany jest `NIP`.</li>
+          <li>KSeF (Podmiot 3 + WDT): Dla faktur sprzedaży z aktywnym `WDT` i rolą `ODBIORCA` ukryto pole `ID-Wew` oraz wymuszono `NIP`; w eksporcie XML identyfikator jest emitowany jako `NIP`/`NrVatUE` (z `KodUE`) zamiast `IDWew`.</li>
+          <li>Podgląd faktury (Podmiot 3, identyfikator): Jeśli dla Podmiotu 3 zdefiniowano `ID-Wew`, podgląd pokazuje `ID-Wew` zamiast `NIP`.</li>
+          <li>Podgląd i edycja (Podmiot 3, dane adresowe opcjonalne): Uszczelniono logikę widoczności danych adresowych, aby sam domyślny `country_code=PL` nie włączał sekcji adresowej i nie wyświetlał kraju bez realnych danych adresowych.</li>
+          <li>KSeF XML Generator (stabilność): Naprawiono błąd `UnboundLocalError` (`cannot access local variable 'EU_COUNTRIES'`) wynikający z lokalnego cieniowania stałej w metodzie generowania XML.</li>
+          <li>Kartoteka kontrahentów (dane bankowe): Dodano pola `Numer konta`, `SWIFT/BIC` i `Nazwa banku` (opcjonalne, zgodne wstecz). Numer konta ma formatowanie i walidację `26 cyfr` jak w danych podmiotu.</li>
+          <li>Podmiot 3 (rola Faktor/Płatnik) – sprzedaż i zakup: Dodano dedykowane pola bankowe (`Nr konta`, `SWIFT/BIC`, `Nazwa banku`) z auto-uzupełnianiem z kartoteki, walidacją konta (`26 cyfr`), synchronizacją z sekcją płatności dla zakupów oraz blokadą ręcznej edycji pól płatności przy aktywnej roli Faktor/Płatnik (edycja z sekcji Podmiot 3).</li>
+          <li>KSeF XML i podgląd (sekcja płatności, Faktor/Płatnik): `Platnosc/RachunekBankowy` i podgląd dokumentu korzystają z danych podmiotu 3 (konto/SWIFT/nazwa banku) dla ról Faktor i Płatnik zamiast danych podmiotu. Dla faktur i korekt zakupu priorytetem odczytu jest sekcja płatności XML (`Platnosc/RachunekBankowy`), także przy pierwszym otwarciu podglądu.</li>
+          <li>KSeF (FA(3) 1-0E, Podmiot 2): Uporządkowano generowanie sekcji `Podmiot2` do pełnej zgodności ze schematem. Znaczniki `JST` i `GV` są teraz emitowane zawsze (wartość `1` albo `2`), co eliminuje błędy walidacji typu „Podmiot2 has incomplete content”.</li>
+          <li>KSeF (import/eksport, round-trip JST/GV): Przy imporcie faktur z KSeF flagi `JST`/`GV` z `Podmiot2` są zapisywane także do `buyer_snapshot`, dzięki czemu ponowny eksport zachowuje te dane bez utraty.</li>
+          <li>Podmiot 3 (role JST/GV odbiorcy): Doprecyzowano logikę krzyżowych znaczników. Dla ról odbiorczych Podmiotu 3 znaczniki odnoszą się do Odbiorcy (`Podmiot2`) i są odpowiednio mapowane do XML.</li>
+          <li>UI (Podmiot 3, opisy i podpowiedzi): Ujednoznaczniono komunikaty przy checkboxach JST/GV i w podpowiedziach, aby jasno wskazywały, że znaczniki dotyczą `Podmiot2`.</li>
+          <li>Walidacja (Podmiot 3, Faktor/Płatnik): Dla ról `Faktor` i `Płatnik` wymagane są teraz jednocześnie: `NIP` oraz numer konta (`26 cyfr`).</li>
+          <li>Walidacja (Podmiot 3, zmiana roli): Przy przełączeniu na role, które nie obsługują `ID-Wew`, pole `ID-Wew` jest automatycznie czyszczone, aby nie wpływało na walidację i wybór identyfikatora w XML.</li>
+          <li>UI (Podmiot 3, pola bankowe): Naprawiono edycję pól `SWIFT/BIC` i `Nazwa banku` dla Podmiotu 3. Można je teraz poprawnie wyczyścić do pustej wartości (bez odtwarzania ostatniej litery przez synchronizację).</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.0.18" date="2026-04-04">
       <description>
         <ul>
