@@ -29,7 +29,8 @@ Po opublikowaniu w FlatHub, instalacja będzie możliwa komendą:
 ```bash
 flatpak install flathub pl.ksefinvoice.KsefInvoice
 ```
-
+## Instalacja (Windows, Linux AppImage)
+Instalatory wersji aplikacji pod windows 10 i windows 11 oraz w wersji AppImage pod systemy linux dostępne na stronie domowej projektu: https://www.ksefinvoice.pl/
 ## Licencja
 
 Program jest udostępniany na licencji bezpłatnej (Freeware).
