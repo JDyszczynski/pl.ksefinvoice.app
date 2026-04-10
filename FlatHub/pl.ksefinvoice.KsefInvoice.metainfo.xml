@@ -16,13 +16,15 @@
     <p>Główne moduły i rozszerzone funkcje aplikacji:</p>
     <ul>
       <li><em>Integracja z KSeF i Monitoring:</em> Pełna obsługa Krajowego Systemu e-Faktur. Wysyłaj faktury sprzedaży, monitoruj nowe dokumenty (badge z liczbą oczekujących faktur) i automatycznie pobieraj faktury zakupu z wyborem zakresu dat lub kontynuacją od ostatniej synchronizacji. Obsługa autoryzacji tokenem/podpisem, masowa wysyłka oraz pobieranie UPO.</li>
+      <li><em>Łatwy start i migracja sprzedaży:</em> Dla nowej firmy dostępny jest dedykowany import sprzedaży z KSeF (migracja historycznych dokumentów, także korekt). Rozwiązanie przyspiesza pierwsze uruchomienie aplikacji i pozwala szybko rozpocząć pracę bez ręcznego przepisywania danych.</li>
       <li><em>Stany Magazynowe:</em> Zarządzaj kartoteką towarów i śledź ruchy magazynowe w czasie rzeczywistym. Stany aktualizują się automatycznie po zapisie faktury sprzedaży i zakupu. Rozróżnienie pozycji towar/usługa, historia ruchów, korekty stanów oraz opcjonalne zapisywanie nowych produktów w katalogu podczas wystawiania dokumentów.</li>
       <li><em>Aplikacja Podatnika (QR):</em> Zgodne z wytycznymi MF generowanie wizualnych kodów QR dla weryfikacji dokumentów offline i podgląd struktury XML.</li>
       <li><em>Baza Kontrahentów:</em> Zaawansowana integracja z GUS (BIR1): automatyczne pobieranie danych po NIP, mapowanie jednostek lokalnych (REGON14), wybór oddziału z listy oraz aktualizacja karty kontrahenta (nazwa, adres, kod, telefon/e-mail jeśli dostępne). Dodatkowo weryfikacja kontrahentów przez VIES (VAT EU) i Białą Listę Podatników VAT.</li>
       <li><em>Fakturowanie i Waluty:</em> Kompletna obsługa dokumentów (Faktury VAT, Korekty, Marża, Ryczałt) w różnych walutach, <em>wzbogacona o automatyczne dociąganie codziennych kursów z Tabeli A (NBP)</em> i tłumaczenie faktur na j. angielski oraz niemiecki.</li>
       <li><em>JPK i Rejestry:</em> Inteligentne generowanie plików JPK_V7M, plików JPK_FA (wsparcie tagów dokumentów m.in. procedur GTU_12/13/odwrotnego obciążenia), oraz uwzględnianie przewalutowań w ewidencji VAT.</li>
       <li><em>Rozwiązania Księgowe (Kompensaty):</em> Monitoruj należności i zobowiązania, zarządzaj terminami płatności i korzystaj ze zbiorczych wpłat (kompensat obustronnych na jednym kontrahencie). W module danych do przelewu możesz dodatkowo zweryfikować numer rachunku na Białej Liście VAT na podstawie NIP i numeru konta.</li>
-      <li><em>Nowe funkcje ewidencyjne i podmiotowe:</em> Lista dokumentów wykluczonych z ewidencji z raportowaniem oraz wsparcie fakturowania dla JST i Grupy VAT.</li>
+      <li><em>Nowe funkcje ewidencyjne i podmiotowe:</em> Lista dokumentów wykluczonych z ewidencji z raportowaniem, obsługa Podmiotu 3 oraz wsparcie ról JST i GV (Grupa VAT).</li>
+      <li><em>Numeracja sprzedaży:</em> Możliwość ustawienia własnego pierwszego numeru faktury (numer startowy) dla nowego okresu numeracyjnego.</li>
       <li><em>Ergonomia pracy:</em> Natywne wsparcie ciemnego motywu (Dark Mode) oraz błyskawiczne podglądy statusu opłacenia.</li>
     </ul>
     <p>
@@ -103,6 +105,41 @@
   <url type="donation">https://buycoffee.to/jarekd</url>
   <content_rating type="oars-1.1" />
   <releases>
+    <release version="1.0.20" date="2026-04-09">
+      <description>
+        <ul>
+          <li>Podgląd faktury (tabela VAT): Ujednolicono klasyfikację stawek VAT między pozycjami a tabelą podsumowania, dzięki czemu etykiety `ZW` / `OO` / `NP` / `0% WDT` są prezentowane spójnie i bez zamian.</li>
+          <li>KSeF (zwolnienie z VAT, eksport XML): Poprawiono logikę `P_19` / `P_19A` / `P_19B` / `P_19C` / `P_19N`. System emituje właściwy wariant podstawy prawnej zwolnienia oraz ustawia `P_19` także dla dokumentów mieszanych zawierających pozycje `ZW`.</li>
+          <li>KSeF (zwolnienie z VAT, zapis i walidacja): Uporządkowano zapis typu podstawy zwolnienia jako kodu logicznego (zamiast tekstu UI), poprawiono odczyt przy edycji dokumentu oraz dodano walidację wymagającą podstawy prawnej dla faktur z pozycjami `ZW`.</li>
+          <li>KSeF (import XML, round-trip): Rozszerzono import o pełne odtwarzanie danych zwolnienia z pól `P_19A/B/C` (typ i treść podstawy), aby ponowna edycja i eksport zachowywały komplet informacji.</li>
+          <li>UI (Konfiguracja firmy i Edycja faktury): Dodano przyciski pomocy `?` oraz okna objaśniające wybór podstawy zwolnienia (`P_19A/B/C`) wraz z przypomnieniem o konieczności podania konkretnego przepisu.</li>
+          <li>Adnotacje KSeF (podgląd faktury): Naprawiono mapowanie wskaźników adnotacji. Znacznik „Brak wystąpienia procedur marży” jest liczony na podstawie rzeczywistego `margin_procedure_type` (zamiast typu dokumentu), co usuwa rozjazdy między formularzem, podglądem i XML.</li>
+          <li>KSeF (P_23, faktura uproszczona): Uporządkowano przepływ danych dla `P_23` / `is_simplified` w obie strony. Import XML zapisuje flagę uproszczenia, a generator XML i podgląd wykorzystują ją konsekwentnie.</li>
+          <li>Adresy (podgląd faktury + KSeF XML): Ujednolicono eksport XML do wariantu zgodnego z walidatorem schematu: `Adres/KodKraju + AdresL1 (+ opcjonalnie AdresL2)` dla podmiotów krajowych i zagranicznych. `AdresL1` zawiera linię ulicy, a `AdresL2` linię `Kod + Poczta`. W podglądzie przy różnicy `Miasto/Poczta` format linii ulicy to `Ulica, Miasto`.</li>
+          <li>Adresy (Poczta vs Miasto, eksport PL): W wariancie krajowym `AdresL2` stosuje `Kod + Poczta` (z fallbackiem do `Miasto`). Dodatkowo parser importu odczytuje `AdresL2` w formacie `NN-NNN MIEJSCOWOSC` i mapuje go do pól `postal_code`/`city`.</li>
+          <li>Adresy (import fallback, zgodność międzynarodowa): Rozszerzono fallback importu dla przypadków, gdy nadawca zapisze cały adres w `AdresL1` (bez `AdresL2`) oraz dodano bardziej elastyczne rozpoznawanie kodów/miejscowości dla formatów zagranicznych.</li>
+          <li>Numeracja faktur sprzedaży (ręczna sekwencja przy starcie okresu): W generatorze numeru dodano możliwość podania ręcznego numeru sekwencyjnego wyłącznie wtedy, gdy dla bieżącej daty kolejnym numerem jest `1` (pierwsza faktura w roku dla numeracji rocznej lub pierwsza faktura w miesiącu dla numeracji miesięcznej). Jeśli po ustawieniu ręcznej sekwencji data zostanie zmieniona na inny okres numeracyjny, system automatycznie przywraca numerację domyślną dla nowej daty i wyświetla komunikat informacyjny.</li>
+          <li>Numeracja faktur sprzedaży (zmiana numeru startowego): Dla pierwszego dokumentu w okresie numeracyjnym można ustawić własny numer startowy sekwencji (zamiast domyślnego `1`), co pozwala kontynuować numerację z innego systemu przy starcie nowego roku/miesiąca.</li>
+          <li>Lista faktur (filtr dat, sprzedaż i zakup): Usunięto górną blokadę daty do dnia bieżącego. Presety `Pokaż z` działają teraz jako filtr `od daty` (limit wstecz pozostaje), dzięki czemu dokumenty z datą przyszłą są widoczne na liście.</li>
+          <li>Migracja sprzedaży z KSeF (osobny mechanizm): Dodano dedykowany przycisk `Importuj sprzedaż z KSeF` dostępny tylko dla pustego modułu sprzedaży. Mechanizm jest rozdzielony od bieżącej synchronizacji zakupów i uruchamia własny przepływ importu dokumentów sprzedażowych (`Subject1`, w tym korekt). W trybie migracji mapowane są także pola `sequence_number` / `sequence_year` / `sequence_month` na podstawie numeru dokumentu i aktywnego wzorca numeracji (z fallbackiem best-effort).</li>
+          <li>Migracja sprzedaży z KSeF (wybór okresu): Po uruchomieniu importu sprzedaży pojawia się dialog wyboru zakresu: `bieżący miesiąc` lub `bieżący rok`. Domyślna opcja jest ustawiana automatycznie na podstawie konfiguracji numeracji sprzedaży (miesięczna/roczna).</li>
+          <li>Migracja sprzedaży z KSeF (opcje importu): W dialogu migracji dodano konfigurację: `Dodaj towary/usługi do kartoteki` (mapowanie po GTIN lub Index/SKU z aktualizacją danych istniejących rekordów) oraz `Dodaj rozrachunki` (tworzenie danych planowanych płatności: metoda, kwota, termin; z uwagą, że KSeF nie udostępnia historii realnych spłat).</li>
+          <li>KSeF (parowanie korekt z dokumentem nadrzędnym, sprzedaż i zakup): Ujednolicono mechanizm wiązania po `DaneFaKorygowanej/NrKSeFFaKorygowanej` (z fallbackiem do `NrFaKorygowanej`) dla całego łańcucha korekt. Dodano także obligatoryjny backfill `parent_id` po każdym imporcie, dzięki czemu korekty odebrane wcześniej jako osierocone są automatycznie podpinane po późniejszym pobraniu dokumentu nadrzędnego.</li>
+          <li>Migracja sprzedaży z KSeF (towar vs usługa w kartotece): Uszczelniono klasyfikację pozycji przy imporcie kartoteki. Jeśli pozycja ma `GTIN` lub `Index/SKU`, jest traktowana jako towar (`is_service = False`) zarówno przy tworzeniu nowego rekordu, jak i przy aktualizacji istniejącego.</li>
+          <li>Migracja sprzedaży z KSeF (odporność na limity API): Uszczelniono ścieżkę pobierania XML per-faktura (fallback po paczce): dodano bezpieczny throttling zgodny z limitem KSeF oraz retry dla `429 Too Many Requests` z odczytem czasu oczekiwania z komunikatu API.</li>
+          <li>Faktury uproszczone (zakup, logika kwot): Dla dokumentów oznaczonych jako uproszczone dodano dedykowane zasady prezentacji i sumowania: wyrocznią pozostaje końcowa kwota brutto dokumentu, z bezpiecznym wyrównaniem różnic zaokrągleń.</li>
+          <li>Faktury uproszczone (stawki VAT na pozycjach): Rozszerzono obsługę pozycji o wariant mieszany: jeśli na pozycji uproszczonej podano liczbową stawkę VAT, system rozbija kwotę brutto pozycji na netto/VAT; dla stawek nienumerycznych utrzymuje tryb uproszczony bez rozbicia.</li>
+          <li>Podgląd faktur zakupowych z importu KSeF: Naprawiono przypadki zaniżonego/pustego netto i zawyżonego VAT (czasem VAT = brutto) dla części dokumentów uproszczonych i korekt. Poprawka dotyczy wyłącznie warstwy podglądu.</li>
+          <li>Podgląd korekt (Przed/Po, import KSeF): Uszczelniono renderowanie pozycji korekt dla układów mieszanych (`StanPrzed` + `Po`) i scenariuszy ręcznych, tak aby podgląd nie gubił sekcji `Po`.</li>
+          <li>Ewidencja VAT i JPK (łańcuch korekt): Doprecyzowano wyliczanie delty korekt także przy brakującym `parent_id` (fallback po `related_ksef_number` / `related_invoice_number`), co eliminuje ryzyko dublowania wartości w łańcuchu dokumentów.</li>
+          <li>Import kontrahenta zagranicznego (TIN/NIP): Poprawiono mapowanie identyfikatora podatkowego przy imporcie z KSeF: prefiks kraju (np. `DE`) jest zapisywany w `country_code`, a w `nip` pozostaje część numerowa.</li>
+          <li>JPK (NrKontrahenta / NrDostawcy): Ujednolicono eksport TIN: `KodKrajuNadaniaTIN` jest emitowany osobno, a pola numeru kontrahenta/dostawcy są normalizowane bez prefiksu kraju.</li>
+          <li>Migracja bazy v11 (normalizacja TIN): Dodano migrację porządkującą historyczne dane kontrahentów i snapshotów (`DE123...` -> `123...` przy `country_code=DE`).</li>
+          <li>Podgląd dokumentów (lokalizacja nazw krajów): Nazwy państw kontrahenta są teraz tłumaczone zgodnie z wybraną wersją językową podglądu (`PL` / `EN` / `DE`).</li>
+          <li>Stabilność i zgodność ścieżek: Zachowano pełną kompatybilność wsteczną dla faktur nieuproszczonych (`is_simplified = False`) — dotychczasowa logika VAT i podglądu działa bez zmian.</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.0.19" date="2026-04-07">
       <description>
         <ul>
