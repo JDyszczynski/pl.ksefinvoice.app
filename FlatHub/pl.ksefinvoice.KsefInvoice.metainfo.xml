@@ -105,6 +105,13 @@
   <url type="donation">https://buycoffee.to/jarekd</url>
   <content_rating type="oars-1.1" />
   <releases>
+    <release version="1.0.22" date="2026-04-12">
+      <description>
+        <ul>
+          <li>KSeF (import zakupów/migrator, waluty obce): Poprawiono import faktur zakupowych w walucie innej niż `PLN` w module Qt. Importer zapisuje teraz `KodWaluty` oraz `KursWaluty` (z fallbackiem na wyliczenie kursu z pól `P_14_x/P_14_xW`), dzięki czemu faktury z KSeF zachowują poprawną walutę i kurs.</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.0.21" date="2026-04-12">
       <description>
         <ul>
