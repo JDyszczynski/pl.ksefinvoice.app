@@ -105,6 +105,21 @@
   <url type="donation">https://buycoffee.to/jarekd</url>
   <content_rating type="oars-1.1" />
   <releases>
+    <release version="1.0.21" date="2026-04-12">
+      <description>
+        <ul>
+          <li>Faktury (walidacja OO, kontrahenci UE): Usunięto zbyt restrykcyjne ograniczenie wymagające wyłącznie stawki `OO` po zaznaczeniu opcji odwrotnego obciążenia.</li>
+          <li>KSeF (zgodność ze schematem P_12): Dopuszczono również warianty `NP` (`NP`, `NP I`, `NP II`) dla pozycji na fakturze przy aktywnym odwrotnym obciążeniu, zgodnie z dozwolonymi wartościami pola `P_12`.</li>
+          <li>UI (lista faktur sprzedaży i zakupu, kolumna R): Po kliknięciu prawym przyciskiem myszy na kolumnie `R` wyświetlane jest dedykowane menu rozrachunków: `Pokaż dane do przelewu`, `Rozlicz`, `Rozlicz zbiorczo`, `Pokaż wpłaty`. Akcje wykorzystują istniejące mechanizmy modułu rozrachunków (bez duplikowania logiki) oraz poprawnie mapują operacje dla całego łańcucha korekt.</li>
+          <li>Rozrachunki (łańcuch korekt, saldo i status): Naprawiono przekłamanie statusu częściowego rozliczenia dla faktury bazowej z korektami. Bilans i oznaczenie kolumny `R` są liczone względem ostatniego dokumentu wątku (z uwzględnieniem sumy wpłat całej rodziny), co eliminuje przypadki typu `80 -> korekta 70` z błędnym „brakuje 10”.</li>
+          <li>Kontrahenci (Informator, PPM): Dodano opcję `Informator` pod prawym przyciskiem myszy na kontrahencie. Okno zawiera zakładki `Sprzedaż` i `Zakup` z listą dokumentów (`Data`, `Numer`, `Numer KSeF`, `Kwota netto`, `Kwota brutto`) oraz podsumowaniem kwot na dole.</li>
+          <li>Kontrahenci (Informator, podgląd i kopiowanie): W tabelach Informatora podgląd faktury otwiera się po `PPM -> Podgląd faktury`, podwójnym kliknięciu oraz klawiszu `Enter`. Dodano także kopiowanie: `Kopiuj zaznaczony wiersz` i `Kopiuj całą listę`.</li>
+          <li>Towary i usługi (Informator, PPM): Dodano opcję `Informator` pod prawym przyciskiem myszy na pozycji kartoteki. Okno zawiera zakładki `Zakup` i `Sprzedaż` z listą dokumentów (`Kontrahent`, `Numer faktury`, `Numer faktury KSeF`, `Data`, `Cena netto`, `Cena brutto`) oraz podsumowaniem na dole.</li>
+          <li>Towary i usługi (Informator, ilość/podgląd/kopiowanie): Kolumna i suma `Ilość` są pokazywane tylko przy włączonej kontroli stanów magazynowych. W tabelach Informatora podgląd faktury działa po `PPM -> Podgląd faktury`, podwójnym kliknięciu i klawiszu `Enter`; dodano też `Kopiuj zaznaczony wiersz` oraz `Kopiuj całą listę`.</li>
+          <li>Towary i usługi (Informator, sortowanie i układ kolumn): W zakładkach `Zakup` i `Sprzedaż` kolumna `Data` została przeniesiona na początek tabeli. Dodano sortowanie po nagłówkach z trwałym zapisem i odtwarzaniem ustawień (kolumna + kierunek) po ponownym uruchomieniu aplikacji.</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.0.20" date="2026-04-09">
       <description>
         <ul>
