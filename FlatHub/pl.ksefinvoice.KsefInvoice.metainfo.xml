@@ -105,6 +105,23 @@
   <url type="donation">https://buycoffee.to/jarekd</url>
   <content_rating type="oars-1.1" />
   <releases>
+    <release version="1.0.23" date="2026-04-14">
+      <description>
+        <ul>
+          <li>Kontrahenci (Qt, typ Dostawca/Odbiorca): Naprawiono zapis i edycję typu kontrahenta. Zmiana typu na `Dostawca` nie jest już nadpisywana na `Odbiorca`; usunięto także fallbacki wymuszające `Odbiorca` i uodporniono mapowanie typu przy zapisie z dialogów.</li>
+          <li>Dokumenty podgląd (Faktury, korekty): W wizualizacji dokumentów dodano odstęp pomiędzy sekcją płątności a uwagami oraz rozdzielono delikatną pionową kresą obie sekcje.</li>
+          <li>Deklaracje (PIT, liniowy/skala): Uporządkowano logikę zestawienia dla form opodatkowania innych niż ryczałt. Zakładka zmienia teraz nazwę zgodnie z konfiguracją (`Podatek Liniowy` / `Skala Podatkowa`), a wyliczenie zaliczki PIT opiera się na uproszczonym dochodzie (`sprzedaż netto - zakupy netto`) zamiast samego przychodu.</li>
+          <li>Deklaracje (PIT, korekty i rozrachunki): Dla akcji `Dodaj zaliczkę PIT` dodano dymek informacyjny oraz dialog korekty (szacunek, korekta ręczna, odliczenie ZUS). Zatwierdzona kwota jest zapisywana jako „wyrocznia” miesięczna i wpływa na wyliczenia kolejnych miesięcy.</li>
+          <li>Deklaracje (Ewidencja VAT, korekty i rozrachunki): Rozszerzono tabelę VAT o kolumnę `VAT do Rozrach. (wyrocznia)` oraz akcję `Dodaj VAT` z dialogiem korekty. Skorygowana kwota VAT jest zapisywana jako miesięczna „wyrocznia” i jest używana jako punkt odniesienia w dalszych wyliczeniach narastających.</li>
+          <li>Deklaracje (limity zwolnienia VAT): Dodano banner statusu progów dla podmiotów korzystających ze zwolnienia podmiotowego z VAT (próg ostrzegawczy / przekroczenie limitu), zgodnie z wartościami z konfiguracji firmy.</li>
+          <li>Ewidencja VAT (korekty zakupowe): Uszczelniono wyliczenia dla korekt zakupowych bez `parent_id` (tzw. korekty osierocone) przez fallback powiązania po numerach referencyjnych, co eliminuje ryzyko podwójnego naliczenia wartości w rejestrze.</li>
+          <li>Deklaracje (kopiowanie danych z tabel): Dodano menu kontekstowe kopiowania dla zestawień PIT i VAT: `Kopiuj zaznaczony miesiąc/kwartał` oraz `Kopiuj całe zestawienie`. Dane są kopiowane do schowka w formacie TSV (tabulacje + nowe linie), gotowym do wklejenia np. do Excela lub LibreOffice Calc.</li>
+          <li>Faktury (zwolnienie VAT, podstawa prawna): W polu podstawy zwolnienia VAT dodano autouzupełnianie z historii wpisów (osobno dla `USTAWA` / `DYREKTYWA` / `INNE`) oraz przycisk usuwania błędnej pozycji z historii. Historia jest zapamiętywana per podmiot (NIP), a przy wymuszonej podstawie z konfiguracji podmiotu mechanizm podpowiedzi i edycji historii pozostaje wyłączony.</li>
+          <li>KSeF (kontrahenci spoza UE, kody krajów): Poprawiono błąd mapowania zagranicznych kodów literowych. Wpisanie kodu państwa spoza UE (np. `NO`) nie wymusza już błędnej nazwy "Zagranica", ale prawidłowo przypisuje kraj (np. "Norwegia") ze słownika ISO. Rozwiązuje to problem, przez który KSeF całkowicie odrzucał faktury wystawiane dla podmiotów spoza Unii Europejskiej z powodu błędów weryfikacji semantycznej (niezgodność wzorca literowego kraju).</li>
+          <li>UI (zgłaszanie błędów, kontakt): Usunięto zewnętrzne przekierowania przeglądarki na formularze webowe i zaimplementowano je sprzętowo bezpośrednio z okna programu (pod przyciskiem "Zgłoś błąd" w błędach komunikacji KSeF). Autouzupełniają one pola od razu z profilu bieżącego użytkownika lub nazwy firmy. Dodano zaawansowaną interpretację komunikatów błędów KSeF, usuwającą surowe treści JSON z głównych okienek na rzecz skróconych, bardziej czytelnych opisywań błędu.</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.0.22" date="2026-04-12">
       <description>
         <ul>
