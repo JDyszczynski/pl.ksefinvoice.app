@@ -105,6 +105,17 @@
   <url type="donation">https://buycoffee.to/jarekd</url>
   <content_rating type="oars-1.1" />
   <releases>
+    <release version="1.0.24" date="2026-04-16">
+      <description>
+        <ul>
+          <li>Szablony faktur sprzedaży (nowa funkcja): Dodano możliwość zapisywania i wczytywania szablonów formularza faktury. Szablon przechowuje: kontrahenta, walutę, typ ceny, pozycje (wraz z opisem, GTIN i powiązaniem z kartoteką), warunki płatności, adnotacje KSeF (OO, WDT, marża, kasowa, ZW + podstawa), Podmiot 3 oraz uwagi i miejsce wystawienia. Szablony są dostępne z poziomu okna edycji faktury (przyciski „Zapisz szablon" / „Wczytaj szablon") oraz w module Ustawienia → Szablony faktur (podgląd, usuwanie).</li>
+          <li>Szablony faktur (waluta obca): Wczytanie szablonu z walutą inną niż PLN poprawnie pokazuje pola „Kurs" i „Data kursu" oraz automatycznie pobiera aktualny kurs NBP na podstawie bieżącej daty sprzedaży – nie przywraca historycznych wartości z szablonu.</li>
+          <li>Szablony faktur (termin płatności): Przy wczytywaniu szablonu termin płatności jest wyznaczany inteligentnie: jeśli wybrany kontrahent ma skonfigurowany domyślny termin (`default_payment_days`) w kartotece, używane są jego ustawienia; w przeciwnym razie delta dni (różnica między datą sprzedaży a terminem z szablonu) jest przenoszona na bieżącą datę sprzedaży.</li>
+          <li>Numeracja faktur (błąd daty): Zmiana daty faktury na okres, dla którego nie można wyznaczyć kolejnego numeru, wywołuje teraz czytelny komunikat „Błąd numeracji" zamiast cichego traceback w konsoli.</li>
+          <li>KSeF XML (pusty AdresL1, kod 450): Naprawiono błąd weryfikacji semantycznej schematu FA(3). Gdy kontrahent nie miał uzupełnionych pól adresowych (ulica, miasto), generator emitował pusty element `<AdresL1></AdresL1>`, co naruszało ograniczenie `MinLength=1` schematu KSeF i skutkowało odrzuceniem faktury z kodem 450. Blok `<Adres>` jest teraz pomijany w całości, gdy nie ma czego tam wpisać; analogicznie zabezpieczono sekcję adresu Podmiotu 3.</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.0.23" date="2026-04-14">
       <description>
         <ul>
