@@ -105,6 +105,17 @@
   <url type="donation">https://buycoffee.to/jarekd</url>
   <content_rating type="oars-1.1" />
   <releases>
+    <release version="1.0.25" date="2026-04-19">
+      <description>
+        <ul>
+          <li>KSeF (import sprzedaży, kontrahent spoza UE): Naprawiono brak rozpoznawania kontrahenta zagranicznego identyfikowanego przez `NrID` (pole dla podmiotów spoza UE) podczas importu faktur sprzedaży z KSeF. Importer nie odczytywał tego identyfikatora, przez co nabywca spoza UE nie był tworzony w kartotece i `buyer_snapshot` nie zawierał NIP — co skutkowało błędem 450 przy próbie wysyłki korekty do takiej faktury.</li>
+          <li>KSeF XML (nabywca bez NIP — BrakID): Naprawiono błąd generowania XML FA(3) dla faktur wystawianych dla osób fizycznych lub podmiotów bez żadnego identyfikatora podatkowego. Teraz brak identyfikatora powoduje emisję znacznika `BrakID` zgodnie z wymaganiami schematu.</li>
+          <li>KSeF (import, kontrahent z BrakID): Podczas importu faktury z KSeF, gdy nabywca/sprzedawca nie posiada żadnego identyfikatora podatkowego (`BrakID`), program tworzy wpis w kartotece kontrahentów na podstawie nazwy (z flagą „osoba fizyczna"). Przy ponownym imporcie faktury dla tej samej osoby istniejący wpis jest wyszukiwany po nazwie i reużywany zamiast duplikowany.</li>
+          <li>KSeF (import zakupów, komentarze XML): Naprawiono błąd pobierania faktur zakupowych z KSeF pojawiający się dla dokumentów zawierających węzły komentarzy XML. Biblioteka lxml zwraca dla takich węzłów obiekt Cython zamiast stringa jako wartość atrybutu tag, co powodowało wyjątek przy próbie wywołania metody startswith. Dodano pomijanie węzłów niebędących elementami XML w obu miejscach iteracji po zawartości sekcji Fa.</li>
+          <li>Migracja bazy v17 (naprawa historycznych importów KSeF): Automatyczna jednorazowa naprawa faktur pobranych z KSeF: uzupełnienie poprawnej waluty i kursu oraz tworzenie brakujących wpisów kontrahentów dla dokumentów z identyfikatorami `NrID` (podmioty spoza UE) lub `BrakID` (osoby fizyczne bez NIP).</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.0.24" date="2026-04-16">
       <description>
         <ul>
