@@ -105,6 +105,19 @@
   <url type="donation">https://buycoffee.to/jarekd</url>
   <content_rating type="oars-1.1" />
   <releases>
+    <release version="1.0.26" date="2026-04-22">
+      <description>
+        <ul>
+          <li>UI (lista faktur, kolumna R — ciemny motyw): Naprawiono nieczytelność ikon i tekstu w kolumnie `R` (rozliczenie) na ciemnym motywie systemowym. Ikony statusu są teraz tintowane kolorem tekstu z palety Qt, dzięki czemu pozostają widoczne zarówno na jasnym, jak i ciemnym tle.</li>
+          <li>UI (lista faktur, kolumna Akcje — ciemny motyw): Naprawiono nieczytelność ikon przycisków w kolumnie `Akcje` na ciemnym motywie. Ikony standardowe Qt są automatycznie tintowane jasnym kolorem dla ciemnego tła i ciemnym dla jasnego, a delegat preferuje teraz ikony tematyczne systemu (`document-print-preview`, `document-edit`, `document-send`) z zachowaniem pełnego fallbacku.</li>
+          <li>UI (lista faktur, kolor korekt — ciemny motyw): Kolor tekstu wierszy z korektami jest teraz dobierany względem aktywnego motywu: jasna pomarańcz (`#FF8C40`) w trybie ciemnym, ciemna rdza (`#E65100`) w trybie jasnym, zapewniając czytelność w obu przypadkach.</li>
+          <li>VAT 0% (NP, słowniki i migracja danych): Ujednolicono etykiety stawek `NP` do wariantów `NP I` i `NP II` (z zachowaniem obsługi legacy `NP`). Dodano migrację danych historycznych oraz aktualizację słowników/seedów i walidacji, aby zapis, podgląd, JPK i eksport KSeF używały spójnych oznaczeń.</li>
+          <li>VAT (brakujące stawki KSeF, migracja v19): Dodano brakujące stawki `22%`, `7%`, `4%`, `3%` oraz `0 KR` do słowników VAT i migracji wersjonowanej bazy. Eksport XML FA(3) mapuje teraz te stawki poprawnie do `P_12`.</li>
+          <li>VAT 0% (NP, uszczelnienie reguł biznesowych): Doprecyzowano walidację `NP II`: stawka jest dozwolona wyłącznie dla usług w sprzedaży UE (kraj nabywcy inny niż `PL`) przy aktywnym odwrotnym obciążeniu. W pozostałych przypadkach mechanizm eksportu KSeF stosuje bezpieczny fallback do `NP I`.</li>
+          <li>Faktury sprzedaży i korekty sprzedaży (zwolnienie VAT): Przy zaznaczonym `Zwolnienie z VAT (P_19)` pozycje dokumentu są automatycznie ustawiane na stawkę `ZW`, pole stawki VAT jest blokowane do edycji, a zapis dokumentu jest blokowany jeśli jakakolwiek pozycja ma inną stawkę.</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.0.25" date="2026-04-19">
       <description>
         <ul>
