@@ -105,6 +105,15 @@
   <url type="donation">https://buycoffee.to/jarekd</url>
   <content_rating type="oars-1.1" />
   <releases>
+    <release version="1.0.27" date="2026-04-25">
+      <description>
+        <ul>
+          <li>UI (lista faktur, kolumny R i Akcje — spójność między buildami): Ujednolicono renderowanie ikon w trybie ciemnym dla Windows, AppImage i Flatpak. Ikony statusu rozliczeń (`R`) oraz przycisków w kolumnie `Akcje` są teraz konsekwentnie tintowane kolorem tekstu z palety Qt, dzięki czemu nie pojawia się rozjazd jasne/ciemne między platformami.</li>
+          <li>Ustawienia VAT (aktualizacja z KSeF schema): Zablokowano ręczne dodawanie i edycję własnych stawek VAT oraz dodano akcję `Aktualizuj stawki z KSeF`. Mechanizm pobiera wartości `TStawkaPodatku` bezpośrednio ze schemy KSeF XSD, a w razie braku dostępu do schemy stosuje bezpieczny fallback hardcoded, aby zachować zgodność działania dla podglądu, wydruków i importowanych dokumentów.</li>
+          <li>JPK / Deklaracje (stawki 0%, spójność klasyfikacji): Ujednolicono normalizację etykiet VAT 0% (`ZW`, `OO`, `NP`, `NP I`, `NP II`, `0 KR`, `0 WDT`, `0 EX`) w logice JPK. Eksport JPK_FA (`P_12`) oraz agregacje do JPK_V7 korzystają teraz ze wspólnego mechanizmu klasyfikacji, co ogranicza rozjazdy między danymi faktury, raportami i deklaracjami.</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.0.26" date="2026-04-22">
       <description>
         <ul>
