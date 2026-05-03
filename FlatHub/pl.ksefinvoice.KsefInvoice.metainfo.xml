@@ -109,6 +109,26 @@
   <url type="donation">https://buycoffee.to/jarekd</url>
   <content_rating type="oars-1.1" />
   <releases>
+    <release version="1.0.29" date="2026-05-03">
+      <description>
+        <ul>
+          <li>KSeF (lista faktur, menu wysyłki i zaznaczenia wielokrotne): Uporządkowano akcje wysyłki w menu kontekstowym. Dla dokumentów o statusie `Wysłano` oraz `Wysłana i Potwierdzona` ukryto opcję ponownej wysyłki (`Wyślij ponownie`). Przy zaznaczeniu wielu dokumentów ponowne wysyłanie jest wyłączone, a akcja batch pokazuje teraz `Wyślij do KSeF (N)`, gdzie `N` oznacza faktycznie wysyłalne dokumenty (po odfiltrowaniu już wysłanych i dokumentów niewysyłalnych). Jeśli `N=0`, akcja jest nieaktywna.</li>
+          <li>UI (okno główne, skalowanie pionowe): Naprawiono blokadę zmniejszania okna głównego w pionie. `QStackedWidget` z osadzonymi widokami raportował duże minimum pionowe, które propagowało się do `QMainWindow`. Ustawienie polityki `QSizePolicy.Ignored` w pionie na stosie widoków powoduje, że Qt zeruje minimalne wymaganie pionowe przed nałożeniem ograniczeń layoutu, dzięki czemu okno główne można swobodnie zmniejszać zarówno poziomo, jak i pionowo.</li>
+          <li>UI (okno główne, przyciski menu): Naprawiono zanikanie przycisków modułów po zastosowaniu polityki `QSizePolicy.Ignored`. Przyciski mają teraz ustawioną politykę `Preferred/Fixed` z minimalną szerokością 72 px, co pozwala oknu zwężać się bez ukrywania przycisków.</li>
+          <li>UI (okno edycji faktury, dynamiczna wysokość tabeli pozycji): Tabela pozycji faktury dostosowuje teraz minimalną wysokość do liczby wierszy (minimum 2 wiersze zawsze widoczne). Sekcja sum (netto/brutto/VAT) oraz przyciski dodawania/usuwania pozycji są umieszczone poza obszarem przewijania i pozostają zawsze widoczne niezależnie od wysokości okna. Górna część formularza (daty, kontrahent, waluta) jest przewijalna i nie blokuje dostępu do tabeli przy małym oknie.</li>
+          <li>UI (okno edycji faktury, przyciski Minimalizuj/Maksymalizuj): Dodano przyciski minimalizacji i maksymalizacji do okna edycji faktury (`Qt.WindowMinMaxButtonsHint`).</li>
+          <li>UI (okno edycji faktury, przywracanie geometrii): Naprawiono wychodzenie okna edycji faktury poza obszar roboczego ekranu po przywróceniu zapisanej pozycji. Geometria jest teraz przycinana do dostępnego obszaru ekranu zarówno przy otwieraniu, jak i przy zmianie rozmiaru okna.</li>
+          <li>Wiele podmiotów i baz danych (rozbudowa selektora i stabilność zamykania): Rozszerzono wykrywanie baz o skanowanie wszystkich skonfigurowanych lokalizacji i agregację zgodnych baz w jednym oknie wyboru (z pre-selekcją ostatnio użytej bazy). W tabeli wyboru dodano kolumnę `Ostatnio wybrana`, podpowiedź z pełną ścieżką pliku oraz akcję PPM `Idź do lokalizacji`. Dodatkowo uszczelniono zamykanie aplikacji po `Anuluj` w selektorze, aby nie uruchamiać zapytań do tabel przed pełną inicjalizacją bazy.</li>
+          <li>Rozrachunki (tabela, nowe kolumny): Dodano w widoku rozrachunków kolumny `Kwota Netto` oraz `VAT`, aby szybciej ocenić strukturę kwoty dokumentu bez otwierania podglądu.</li>
+          <li>Rozrachunki (PPM, podgląd dokumentu): Rozszerzono menu kontekstowe o akcję `Podgląd dokumentu`. Dla pozycji powiązanych z fakturą akcja jest aktywna i otwiera podgląd ostatniego dokumentu w łańcuchu korekt; dla pozycji bez powiązanego dokumentu pozostaje nieaktywna.</li>
+          <li>Rozrachunki (Dane do przelewu, Typ Split TAK/NIE): W oknie danych do przelewu dodano przełącznik `Typ Split` (`TAK`/`NIE`) z zapisem stanu do dokumentu. Dostępność opcji jest kontrolowana regułami biznesowymi (m.in. status VAT podmiotu i typ dokumentu).</li>
+          <li>Rozrachunki (Dane do przelewu, szczegóły Split Payment): Dodano sekcję `Szczegóły Split Payment` z prezentacją `Kwota Netto` i `Kwota VAT`. Sekcja jest pokazywana dynamicznie pod polem `Kwota do zapłaty` po włączeniu trybu split.</li>
+          <li>Rozrachunki (Dane do przelewu, UI i motywy): Usprawniono wygląd przełącznika split (bardziej subtelny, mniejszy) i dopasowanie kolorów do jasnego/ciemnego motywu aplikacji. Ramka `Szczegóły Split Payment` została rozciągnięta poziomo na pełną szerokość obszaru formularza.</li>
+          <li>Rozrachunki (Dane do przelewu, QR płatności): Zaktualizowano generowanie kodu bankowego QR tak, aby w trybie split uwzględniał podział kwot netto/VAT, a po zmianie przełącznika odświeżał dane kodu zgodnie z aktualnym trybem.</li>
+          <li>Wiele podmiotów i baz danych: Dodano obsługę pracy na wielu podmiotach z oddzielnymi bazami danych. Przed logowaniem można wybrać podmiot, a system automatycznie wyszukuje dostępne bazy i pozwala szybko przełączyć się na właściwą. Tworzenie nowej bazy działa teraz w tej samej lokalizacji co aktualnie używana baza.</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.0.28" date="2026-05-01">
       <description>
         <ul>
