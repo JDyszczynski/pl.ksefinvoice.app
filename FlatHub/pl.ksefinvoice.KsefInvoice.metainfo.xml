@@ -109,6 +109,20 @@
   <url type="donation">https://buycoffee.to/jarekd</url>
   <content_rating type="oars-1.1" />
   <releases>
+    <release version="1.0.32" date="2026-05-17">
+      <description>
+        <ul>
+          <li>Kwota DO ZAPŁATY w podglądzie i wydruku faktury zawsze pobierana z nagłówka faktury (pole total_gross), niezależnie od sumy pozycji.</li>
+          <li>Rozwiązano problem różnicy 0,01 zł przy pobieraniu tej samej faktury z KSeF przez różne podmioty.</li>
+          <li>Lista faktur (operacje hurtowe, PDF/druk - numeracja stron): Naprawiono numerację stron podczas hurtowego zapisu PDF i wydruku wielu dokumentów. Numeracja jest teraz liczona osobno dla każdej faktury (`Strona X z N` w obrębie danego dokumentu), zamiast globalnie dla całego pakietu.</li>
+          <li>Podgląd korekt (podsumowanie VAT, sekcje PRZED/PO): Naprawiono sposób budowania tabeli podsumowania VAT dla korekt odtwarzanych z dokumentu nadrzędnego (gdy brak sekcji `StanPrzed` w XML). Ujednolicono etykiety stawek VAT (np. `23`, `23%`, `KOR 23%`), dodano czytelny układ sekcji `(PRZED)` i `(PO)`, a wiersz `RAZEM` pokazuje końcowy stan `PO`.</li>
+          <li>Faktury sprzedaży (numeracja): Dodano końcową kontrolę kolizji numeru faktury (`UNIQUE invoices.number`) i automatyczne nadanie kolejnego wolnego numeru przed zapisem, co eliminuje błąd `sqlite3.IntegrityError: UNIQUE constraint failed: invoices.number`.</li>
+          <li>UI (okno tworzenia/edycji faktury, scroll i listy rozwijane): Wyłączono przypadkową zmianę wartości pól rozwijanych i spinboxów podczas przewijania całej karty kółkiem myszy. Zmiana wartości następuje dopiero po świadomym kliknięciu danej kontrolki, co ogranicza ryzyko niezamierzonych modyfikacji.</li>
+          <li>KSeF XML (stawka ZW, zapis/podgląd): Naprawiono regresję, przez którą dla dokumentów z pozycjami `ZW` nie zapisywał się poprawnie XML i nie był generowany podgląd XML. Przywrócono mapowanie stawek 0%/ZW do kodów FA(3), dzięki czemu eksport i podgląd działają ponownie dla pozycji zwolnionych z VAT.</li>
+          <li>Rozrachunki (kolumna Kontrahent, Podmiot 3): W widoku rozrachunków dodano drugi, niebieski wiersz z informacją o Podmiocie 3 przy kontrahencie, tak jak na liście dokumentów. Wiersze z Podmiotem 3 mają teraz identycznie zwiększaną wysokość, co ułatwia identyfikację przy kilku odbiorcach.</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.0.31" date="2026-05-13">
       <description>
         <ul>

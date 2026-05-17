@@ -27,8 +27,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://github.com/JDyszczynski/pl.ksefinvoice.app/releases/download/v1.0.31/KsefInvoice-1.0.31.tar.gz",
-                    "sha256": "6e47b7b0463d8d08de203c8da3005371a97d0e567ae5aaa0ee49134839e140e5",
+                    "url": "https://github.com/JDyszczynski/pl.ksefinvoice.app/releases/download/v1.0.32/KsefInvoice-1.0.32.tar.gz",
+                    "sha256": "52939ceec7b7da95b3a3561896e98f113f08558ca8dcf231963a6d77a062fdec",
                     "strip-components": 1
                 }
             ]
