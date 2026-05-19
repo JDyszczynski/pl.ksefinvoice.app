@@ -109,6 +109,16 @@
   <url type="donation">https://buycoffee.to/jarekd</url>
   <content_rating type="oars-1.1" />
   <releases>
+    <release version="1.0.34" date="2026-05-19">
+      <description>
+        <ul>
+          <li>KSeF (eksport/import, ceny netto/brutto): Naprawiono rozpoznawanie i zachowanie trybu cen w dokumentach KSeF. Dla dokumentów wystawianych od brutto generator XML emituje wartości brutto pozycji w polu `P_11A`, a importer poprawnie odczytuje tryb brutto na podstawie obecności `P_11A` w `FaWiersz`.</li>
+          <li>Rozrachunki (korekty, prezentacja rozliczenia): Dodano pokazywanie rozliczenia korekty w interfejsie, aby status i kwota rozliczenia dokumentu korygującego były czytelne bez potrzeby ręcznej weryfikacji całego łańcucha dokumentów.</li>
+          <li>KSeF XML (stawki 0%/ZW, stabilność generowania): Naprawiono błąd `NameError: name 'zero_rate_code_for_item' is not defined`, który mógł wystąpić podczas generowania XML dla pozycji ze stawką `ZW`/`0%` (także przy podmiotach będących VAT-owcami).</li>
+          <li>KSeF (token i hasła kluczy certyfikatów, trwałość po aktualizacji): Naprawiono znikanie tokenu i haseł do kluczy certyfikatów po aktualizacji aplikacji. Klucz szyfrowania danych uwierzytelniających jest teraz trwale przechowywany w pliku konfiguracyjnym, a odczyt zachowuje kompatybilność wsteczną ze starszym sposobem szyfrowania.</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.0.33" date="2026-05-18">
       <description>
         <ul>
