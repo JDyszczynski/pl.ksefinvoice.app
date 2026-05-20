@@ -109,6 +109,15 @@
   <url type="donation">https://buycoffee.to/jarekd</url>
   <content_rating type="oars-1.1" />
   <releases>
+    <release version="1.0.35" date="2026-05-20">
+      <description>
+        <ul>
+          <li>KSeF (korekty importowane, edycja pozycji): Naprawiono ponowne otwieranie do edycji korekt pobranych z KSeF. Dla dokumentów z sekcjami `StanPrzed/PO` formularz nie gubi już pozycji stanu `PO` i nie pokazuje tylko pierwszego wiersza.</li>
+          <li>Podgląd/druk/rozrachunki korekt KSeF (kwota końcowa): Ujednolicono wyliczanie kwoty `Do zapłaty` / `Do zwrotu` dla korekt importowanych z KSeF. Podgląd HTML, wydruk i dialog rozliczenia używają teraz efektywnej wartości stanu `PO` z XML zamiast surowego `total_gross` z bazy, co eliminuje przypadki podwojenia kwoty przy korektach zawierających jednocześnie wiersze `PRZED` i `PO`.</li>
+          <li>KSeF XML (korekty, agregaty P_13/P_14/P_15): Poprawiono wyliczanie agregatów nagłówka korekty dla pozycji liczonych od kwoty brutto lub po rabacie. Generator opiera sumy na rzeczywistych wartościach wierszy, co usuwa rozjazdy groszowe w polach `P_13_x`, `P_14_x` i `P_15`.</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.0.34" date="2026-05-19">
       <description>
         <ul>
