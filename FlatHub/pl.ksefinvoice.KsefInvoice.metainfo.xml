@@ -109,6 +109,14 @@
   <url type="donation">https://buycoffee.to/jarekd</url>
   <content_rating type="oars-1.1" />
   <releases>
+    <release version="1.0.36" date="2026-05-25">
+      <description>
+        <ul>
+          <li>JPK_V7 / JPK_FA (stawki 0%, pola deklaracyjne i zgodność z etykietami KSeF): Naprawiono mapowanie wymuszonych etykiet `0 KR`, `0 WDT`, `0 EX`, `NP I`, `NP II` oraz `OO` w raportach JPK. JPK_V7 zachowuje teraz kanoniczną etykietę stawki 0% podczas agregacji i poprawnie rozdziela przypadki krajowe, WDT i eksport do odpowiednich pól (`K_13/P_13`, `K_21/P_21`, `K_22/P_22`), a JPK_FA prawidłowo kieruje `0 WDT` i `0 EX` do `P_13_5` zamiast do krajowego `P_13_6`. Dodatkowo przywrócono emisję szczegółowych pól deklaracji sprzedaży zagranicznej, takich jak `P_11` i `P_12`, zamiast ograniczania się wyłącznie do sum zbiorczych.</li>
+          <li>Dialog O mnie / Rejestr zmian (kontakt, strona, podgląd zmian): Zaktualizowano dane kontaktowe w dialogu `O mnie` — adres e-mail zmieniono na `info@ksefinvoice.pl`, dodano link do strony `https://ksefinvoice.pl` oraz przycisk `Rejestr zmian`. Nowe okno Rejestru zmian pobiera `changelog.md` bezpośrednio ze strony projektu, ma awaryjny fallback do lokalnego `CHANGELOG.md`, pokazuje wyraźną informację o dostępności nowszej wersji aplikacji i skraca widok do wersji istotnych względem aktualnie zainstalowanego wydania.</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.0.35" date="2026-05-20">
       <description>
         <ul>
