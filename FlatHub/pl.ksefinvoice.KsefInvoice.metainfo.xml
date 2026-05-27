@@ -109,6 +109,14 @@
   <url type="donation">https://buycoffee.to/jarekd</url>
   <content_rating type="oars-1.1" />
   <releases>
+    <release version="1.0.37" date="2026-05-27">
+      <description>
+        <ul>
+          <li>GUI / edycja faktury (tryb brutto, przeliczenia pozycji): Uporządkowano zachowanie formularza faktury i przeliczanie pozycji w trybie cen brutto. Zmiany ilości, ceny i stawki VAT odświeżają teraz wartości netto, VAT i brutto spójnie w wierszach oraz w podsumowaniu dokumentu.</li>
+          <li>Faktury mieszane VAT (`ZW` + `23%` / `8%`): Usunięto zbędną blokadę zapisu dla czynnych podatników VAT. Znacznik `Zwolnienie z VAT (P_19)` nie wymusza już ustawienia wszystkich pozycji na `ZW`, dzięki czemu można poprawnie zapisywać faktury mieszane zawierające jednocześnie pozycje zwolnione i opodatkowane.</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.0.36" date="2026-05-25">
       <description>
         <ul>
