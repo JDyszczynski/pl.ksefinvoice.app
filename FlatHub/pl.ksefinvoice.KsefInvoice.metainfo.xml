@@ -109,6 +109,21 @@
   <url type="donation">https://buycoffee.to/jarekd</url>
   <content_rating type="oars-1.1" />
   <releases>
+    <release version="1.0.38" date="2026-05-29">
+      <description>
+        <ul>
+          <li>Szablony faktur sprzedaży (zapis i lista w konfiguracji): Naprawiono odświeżanie listy zapisanych szablonów. Szablon zapisany z poziomu okna wystawiania faktury jest teraz widoczny od razu bez restartu aplikacji, także po przejściu do Konfiguracja → Inne.</li>
+          <li>Szablony faktur sprzedaży (wczytywanie, wyszukiwanie): Dodano wyszukiwanie po nazwie w dialogu wczytywania szablonu, dzięki czemu przy większej liczbie zapisanych pozycji można szybciej odfiltrować właściwy szablon.</li>
+          <li>Podgląd faktury / e-mail (wysyłka dokumentów): Dodano możliwość przygotowania wiadomości e-mail z dokumentem PDF bezpośrednio z poziomu podglądu faktury. Program uzupełnia odbiorcę, temat, treść oraz nazwę załącznika zgodnie z aktualnym językiem podglądu.</li>
+          <li>Deklaracje / Wykluczone z ewidencji (podgląd dokumentu): Dodano możliwość otwierania podglądu dokumentu bezpośrednio z listy wykluczonych z ewidencji, zarówno z paska akcji, jak i z menu pod prawym przyciskiem myszy.</li>
+          <li>KSeF XML (korekty sprzedaży, kwota końcowa `P_15`): Naprawiono eksport korekt do KSeF, aby pole `P_15` było liczone z końcowego stanu dokumentu (`stan po`), a nie z błędnej różnicy prowadzącej do rozjazdów typu `0.01` w XML.</li>
+          <li>KSeF XML (Podmiot 3, dane adresowe): Przywrócono pełny eksport adresu Podmiotu 3. Do XML trafiają teraz nie tylko ulica i kod kraju, ale także komplet linii adresowych zgodnych z danymi widocznymi w PDF/podglądzie.</li>
+          <li>KSeF (import/edycja korekt, znaki i wiersze brutto): Uszczelniono obsługę korekt i importu z KSeF. Formularz nie gubi już znaków ujemnych przy tworzeniu korekty do dokumentu z KSeF, a importer poprawnie przetwarza wiersze zawierające jednocześnie `P_11` i `P_11A`, bez pomijania pozycji i ostrzeżeń parsera.</li>
+          <li>Numeracja faktur (zapis dokumentu, pomijany numer): Naprawiono błąd `cannot access local variable 'PeriodType' where it is not associated with a value`, który mógł przerwać zapis dokumentu i sprawiać wrażenie pominięcia jednego numeru faktury. Usunięto konflikt lokalnego importu z logiką nadawania numeracji okresowej.</li>
+          <li>Logowanie / wybór bazy danych (AppImage, otwieranie lokalizacji): Naprawiono przycisk otwierania katalogu bazy danych w wersji AppImage. Aplikacja uruchamia teraz menedżer plików z bezpiecznym fallbackiem systemowym i oczyszczonym środowiskiem, co eliminuje błędy otwarcia katalogu wynikające z bibliotek bundlowanych przez AppImage.</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.0.37" date="2026-05-27">
       <description>
         <ul>
