@@ -109,6 +109,15 @@
   <url type="donation">https://buycoffee.to/jarekd</url>
   <content_rating type="oars-1.1" />
   <releases>
+    <release version="1.0.39" date="2026-05-30">
+      <description>
+        <ul>
+          <li>Podgląd faktury / e-mail (workflow wysyłki na różnych platformach): Uporządkowano sposób otwierania wiadomości e-mail z załączonym PDF. W wersji Flatpak program korzysta teraz z `xdg-desktop-portal Email.ComposeEmail`, aby przekazać temat, treść i załącznik zgodnie z ograniczeniami sandboxa. W zwykłej wersji Linuksa, AppImage oraz na Windows przywrócono klasyczny workflow sprzed eksperymentów portalowych: przygotowanie draftu i otwarcie go przez systemowe skojarzenie klienta pocztowego.</li>
+          <li>Podgląd faktury / e-mail (treść wiadomości i nazewnictwo dokumentu): Ujednolicono generowanie tematu i treści wiadomości z podglądem dokumentu. Dla dokumentów sprzedaży ryczałtowych wiadomość używa teraz nazwy `Faktura` zamiast `Rachunek`, a tekst plain-text otrzymał czytelniejszy układ z separatorami ASCII, wyrównaniem pól oraz sekcją skrótu dokumentu i danych płatności.</li>
+          <li>Numeracja dokumentów (unikatowość numerów): Poprawiono regułę unikatowości numeracji dokumentów. Ten sam numer nie jest już blokowany łącznie dla sprzedaży i zakupów; unikalność numeru jest teraz egzekwowana wyłącznie w obrębie dokumentów sprzedaży, dzięki czemu numer użyty w zakupach nie koliduje z numeracją sprzedaży.</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.0.38" date="2026-05-29">
       <description>
         <ul>
