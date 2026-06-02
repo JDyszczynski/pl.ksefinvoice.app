@@ -109,6 +109,17 @@
   <url type="donation">https://buycoffee.to/jarekd</url>
   <content_rating type="oars-1.1" />
   <releases>
+    <release version="1.0.40" date="2026-06-02">
+      <description>
+        <ul>
+          <li>KSeF / Korekty / Rozrachunki (`P_15`): Ujednolicono kwoty rozrachunków dla korekt importowanych z KSeF. Widok rozrachunków, dialog rozliczenia i dane do przelewu korzystają teraz z zapisanej wartości nagłówkowej dokumentu (`total_gross` z pola `P_15`), zamiast rekonstruować kwotę z wierszy `FaWiersz` (`stan PO`). Dzięki temu korekty „na minus” nie są już prezentowane jak dopłata wynikająca z końcowego stanu pozycji.</li>
+          <li>Lista dokumentów / Korekty KSeF (`P_15`, `P_13_x`, `P_14_x`): Doprecyzowano prezentację korekt na liście dokumentów. Kolumny netto/brutto oraz status `Do zapłaty` / `Do zwrotu` dla korekt są spójne z wartościami nagłówkowymi importu KSeF (`P_15`, agregaty `P_13_x`/`P_14_x`), niezależnie od tego, czy korekta została wystawiona jako różnicowa, czy metodą „jak ma być”.</li>
+          <li>Podgląd korekt KSeF (tabela VAT, `PRZED` / `KOR` / `RAZEM`): Uporządkowano semantykę podsumowania VAT w podglądzie korekt. Wiersze `KOR` korzystają z agregatów XML `P_13_x` / `P_14_x`, a wiersz `RAZEM` pokazuje faktyczne podliczenie `PRZED + KOR`, zamiast samej różnicy lub samego stanu po korekcie.</li>
+          <li>Podgląd pozycji dokumentu (tryb cen netto/brutto): Dodano rozróżnienie dokumentów liczonych od netto i od brutto w tabeli pozycji. Dla dokumentów importowanych/oznaczonych jako `GROSS` nazwy kolumn zmieniają się z `Cena/Wartość netto` na `Cena/Wartość brutto`, a wartości pozycji są pobierane bezpośrednio z danych brutto (`gross_value`, `P_9B`, `P_11A`), bez sztucznego przeliczania od netto.</li>
+          <li>Podgląd pozycji dokumentu (informacja o bazie cen, lokalizacja): Nad tabelą pozycji dodano lokalizowaną informację `Dokument liczony od netto` / `Dokument liczony od brutto`. Nota jest renderowana małą granatową czcionką bezpośrednio na górnej krawędzi tabeli i działa w wersjach językowych podglądu (`PL` / `EN` / `DE`).</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.0.39" date="2026-05-30">
       <description>
         <ul>
