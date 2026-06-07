@@ -8,6 +8,7 @@
         "--share=ipc",
         "--socket=fallback-x11",
         "--socket=wayland",
+        "--socket=cups",
         "--share=network",
         "--device=dri"
     ],
@@ -28,8 +29,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://github.com/JDyszczynski/pl.ksefinvoice.app/releases/download/v1.0.40/KsefInvoice-1.0.40.tar.gz",
-                    "sha256": "060642ba0d93c40d3ad6e873129ba7187dea773d425e4f42cbc0b55b3feaef5f",
+                    "url": "https://github.com/JDyszczynski/pl.ksefinvoice.app/releases/download/v1.0.41/KsefInvoice-1.0.41.tar.gz",
+                    "sha256": "f3dff545f6e2fed164bd80760ab4aa0445f69be830c60be736480a228b1c89bc",
                     "strip-components": 1
                 }
             ]
