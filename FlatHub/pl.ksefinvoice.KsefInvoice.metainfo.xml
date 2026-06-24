@@ -109,6 +109,18 @@
   <url type="donation">https://buycoffee.to/jarekd</url>
   <content_rating type="oars-1.1" />
   <releases>
+    <release version="1.0.42" date="2026-06-25">
+      <description>
+        <ul>
+          <li>Kontrahenci (Qt, lista kontrahentów): Dodano sortowanie po kliknięciu nagłówków kolumn w głównej tabeli kontrahentów oraz trwałe zapamiętywanie ustawień sortowania (kolumna + kierunek rosnąco/malejąco). Po ponownym uruchomieniu aplikacji i po odświeżeniu listy (np. zmianie filtra typu kontrahenta) widok automatycznie przywraca ostatnio użyte sortowanie.</li>
+          <li>Faktury (Qt, dialog wyboru kontrahenta w nowym dokumencie): Wdrożono ręczną zmianę szerokości kolumn (`Nazwa`, `NIP`, `Miasto`) z natychmiastowym i trwałym zapisem ustawień. Dodano logikę kompensacji szerokości (przy poszerzaniu jednej kolumny zwężane są kolejne), aby tabela nie wychodziła poza obszar okna i nie pojawiał się poziomy pasek przewijania. Uzupełniono też automatyczne dopasowanie kolumn do zmiany rozmiaru okna dialogowego z zachowaniem proporcji ostatniego układu użytkownika oraz poprawiono odtwarzanie ustawień po ponownym otwarciu okna i restarcie aplikacji.</li>
+          <li>KSeF (Podmiot 3, odbieranie faktur i role): Dodano obsługę odbierania faktur dla Podmiotu 3 wraz z konfiguracją zachowania zależną od wybranej roli Podmiotu 3.</li>
+          <li>KSeF (import FA(3) z zewnętrznych programów, spójność pozycji z agregatami): Naprawiono rozjazdy między wyliczeniami pozycji a sumami nagłówkowymi (`P_13_x`, `P_15`) dla faktur importowanych z innych systemów. Gdy w wierszu występuje `P_11` i/lub `P_11A`, cena jednostkowa jest teraz odtwarzana z wartości pozycji i ilości (`P_11`/`P_11A` ÷ `P_8B`) zamiast polegać wyłącznie na `P_9A`, które bywa zaokrąglone.</li>
+          <li>Faktury sprzedaży (rabatowanie, konfiguracja): Dodano rabatowanie na dokumentach sprzedaży z możliwością włączenia funkcji w konfiguracji: `Inne`.</li>
+          <li>JPK_V7M (okres rozliczeniowy, data sprzedaży/dostawy vs data wystawienia): Naprawiono kwalifikację dokumentów do miesiąca deklaracji. Dla metody memoriałowej sprzedaż i zakupy są teraz przypisywane do okresu na podstawie `date_sale` (z fallbackiem do `date_issue`), zamiast wyłącznie po `date_issue`. Dzięki temu faktura wystawiona w czerwcu z datą sprzedaży 31 maja trafia do JPK za maj. Dla metody kasowej (`MK`) zachowano dotychczasową regułę rozpoznawania okresu po dacie zapłaty (`paid_date`).</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.0.41" date="2026-06-07">
       <description>
         <ul>
