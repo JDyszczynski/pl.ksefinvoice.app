@@ -109,6 +109,14 @@
   <url type="donation">https://buycoffee.to/jarekd</url>
   <content_rating type="oars-1.1" />
   <releases>
+    <release version="1.0.44" date="2026-07-28">
+      <description>
+        <ul>
+          <li>Rozrachunki (menu kontekstowe i kolumna Akcje, Dane do przelewu): Naprawiono regres, przez który otwieranie okna `Dane do przelewu` mogło kończyć się błędem (`NameError`) i brakiem reakcji akcji z PPM/kolumny `Akcje`. Przywrócono poprawne otwieranie dialogu dla dokumentów rozrachunkowych.</li>
+          <li>Rozrachunki / Podgląd dokumentu (stabilność DB, QueuePool): Naprawiono wycieki sesji SQLAlchemy powodujące błąd `QueuePool limit size 5 overflow 10 reached, connection timed out` przy wielokrotnym otwieraniu okien z rozrachunków (m.in. `Podgląd dokumentu`, `Dane do przelewu`). Dialogi domykają teraz sesję DB w ścieżkach `done()` oraz `closeEvent()`, co eliminuje kumulację połączeń.</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.0.43" date="2026-07-29">
       <description>
         <ul>
