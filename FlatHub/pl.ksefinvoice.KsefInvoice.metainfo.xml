@@ -109,6 +109,20 @@
   <url type="donation">https://buycoffee.to/jarekd</url>
   <content_rating type="oars-1.1" />
   <releases>
+    <release version="1.0.43" date="2026-07-29">
+      <description>
+        <ul>
+          <li>Faktury (nowe typy dokumentów: `ZAL`, `ROZ`, `KOR_ZAL`, `KOR_ROZ`): Dodano pełną obsługę nowych typów dokumentów zaliczkowych i rozliczeniowych w całym workflow aplikacji: tworzenie/edycja, import/eksport KSeF FA(3), prezentacja na liście dokumentów, podgląd oraz rozrachunki. Ujednolicono też zasady wyliczeń dla łańcucha zaliczek i rozliczeń (`P_15`, `P_15ZK`, agregaty `P_13_x`/`P_14_x`) oraz powiązań dokumentów korygujących.</li>
+          <li>Faktury (nowa zakładka opisów): Dodano nową zakładkę w formularzu faktury z możliwością dodawania dodatkowych opisów dokumentu i pozycji. Wpisy opisowe są zapisywane wraz z dokumentem i przenoszone do podglądu oraz do XML KSeF jako `DodatkowyOpis` (zarówno wariant pozycyjny z `NrWiersza`, jak i dokumentowy bez powiązania z wierszem).</li>
+          <li>Rozrachunki (odnotowywanie wpłat): Zmieniono format wyświetlania dat przy rejestracji i edycji wpłat z `RRRR-MM-DD` na `DD-MM-RRRR`. Ujednolicono też prezentację dat w powiązanych widokach rozrachunków oraz zachowano poprawne sortowanie kolumn dat po zmianie formatu.</li>
+          <li>Dane podmiotu (JPK / adresy): Dodano brakujące pola `Gmina`, `Powiat` oraz `Województwo` w konfiguracji podmiotu, wraz z możliwością wyboru województwa z listy. Dane te są teraz zapisywane w bazie i wykorzystywane przy generowaniu plików JPK.</li>
+          <li>Deklaracje (JPK_PKPIR): Wdrożono eksport `JPK_PKPIR` zgodny ze schemą Ministerstwa Finansów (`JPK_PKPIR (3)`), z generowaniem nagłówka, danych podmiotu, wierszy księgi i sum kontrolnych. (Funkcja eksperymentalna, bez możliwości określania pozycji kosztowych)</li>
+          <li>Deklaracje (PPE, zaokrąglenie podatku): Ujednolicono zaokrąglanie podatku PPE do pełnych złotych zgodnie z regułą podatkową `50 gr w górę` (ROUND_HALF_UP), zamiast zaokrąglenia bankierskiego.</li>
+          <li>Podgląd faktury (pozycje, dodatkowe opisy): Naprawiono przypadek pojawiania się pustych dodatkowych wierszy opisu pozycji. Wiersz opisu jest teraz renderowany wyłącznie wtedy, gdy faktycznie zawiera treść (`Klucz` i/lub `Wartość`).</li>
+          <li>Faktury (Qt, nowy dokument/edycja dokumentu - pola ilości i ceny w pozycjach): Naprawiono obsługę wklejanych wartości liczbowych zawierających dodatkowe znaki (np. walutę, spacje, symbole) oraz różne separatory dziesiętne (`przecinek`/`kropka`). Formularz pozycji nie „gubi” już przeliczeń ani nie wpada w błędne stany przy wartościach typu `1 234,56 PLN`, `1.234,56` lub `1234.56`; niepoprawny ciąg jest bezpiecznie normalizowany do liczby lub domyślnej wartości `0.0` bez destabilizacji okna.</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.0.42" date="2026-06-25">
       <description>
         <ul>
