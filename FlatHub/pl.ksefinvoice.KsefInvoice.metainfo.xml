@@ -109,6 +109,16 @@
   <url type="donation">https://buycoffee.to/jarekd</url>
   <content_rating type="oars-1.1" />
   <releases>
+    <release version="1.0.45" date="2026-07-30">
+      <description>
+        <ul>
+          <li>Podgląd i wydruk faktur (sekcja Rozliczenie: Obciążenia/Odliczenia): Dodano opcję w `Konfiguracja -> Inne -> Opcje wydruku` pozwalającą pokazywać tabelę `Rozliczenie` z pozycjami `Obciążenia`/`Odliczenia`, ich sumami oraz kwotą `Do zapłaty` dla dokumentów pobranych z KSeF. Nad tabelą wyświetlany jest nagłówek `Rozliczenie`. Opcja jest domyślnie włączona.</li>
+          <li>Szablony faktur sprzedaży (zamówienie/umowa, zapis i wczytywanie): Naprawiono błąd, przez który po wczytaniu szablonu mogły samoczynnie zaznaczać się pola `Zamówienie` i `Umowa` oraz ustawiać daty, mimo że na fakturze wzorcowej checkboxy były odznaczone. Zapis szablonu utrwala teraz numer i datę zamówienia/umowy tylko wtedy, gdy odpowiadający checkbox jest włączony, a wczytywanie respektuje jawne flagi `has_order` i `has_contract` (z zachowaniem kompatybilności dla starszych szablonów).</li>
+          <li>Logowanie / start aplikacji (wydajność dla większych baz): Zoptymalizowano czas przejścia od kliknięcia `Zaloguj` do wyświetlenia głównego okna. Ciężkie moduły (m.in. widoki faktur) są teraz inicjalizowane leniwie, dopiero przy pierwszym wejściu w daną zakładkę, a nie wszystkie naraz podczas logowania.</li>
+          <li>Faktury(imienne):Naprawiono błąd skłądni xml dla podmiotu 2 w wypadku wystawiania faktury dla osoby nie posiadającej numeru nip.</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.0.44" date="2026-07-28">
       <description>
         <ul>
