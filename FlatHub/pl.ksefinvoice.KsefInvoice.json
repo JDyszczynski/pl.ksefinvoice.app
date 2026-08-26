@@ -30,7 +30,7 @@
                 {
                     "type": "archive",
                     "url": "https://github.com/JDyszczynski/pl.ksefinvoice.app/releases/download/v1.0.46/KsefInvoice-1.0.46.tar.gz",
-                    "sha256": "dba5b8b8404759f6413dd5e1c53a4013dbb1b4ef53789a3d32b315a38edcaa9c",
+                    "sha256": "81192aa50642767328e98bc78bd3820c5543d0f9ca6e7d1a4cc552b4b1bfa5fb",
                     "strip-components": 1
                 }
             ]
