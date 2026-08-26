@@ -109,6 +109,18 @@
   <url type="donation">https://buycoffee.to/jarekd</url>
   <content_rating type="oars-1.1" />
   <releases>
+    <release version="1.0.46" date="2026-08-26">
+      <description>
+        <ul>
+          <li>Podgląd i PDF dokumentów liczonych od brutto (kolumna netto): Dodano opcję `Konfiguracja -> Inne -> Opcje wydruków -> Pokaż kolumnę wartość netto dla dokumentów liczonych od cen brutto`. Po jej włączeniu tabela pozycji w podglądzie i PDF pokazuje dodatkową kolumnę `Wartość netto` dla dokumentów wystawionych od kwot brutto; gdy XML nie zawiera wartości netto pozycji, jest ona wyliczana z kwoty brutto i stawki VAT. Opcja jest domyślnie wyłączona.</li>
+          <li>Faktury (status zapłaty w podglądzie, PDF i edycji): Naprawiono błędne wyświetlanie napisu „DO ZAPŁATY” przy głównej kwocie dokumentu, mimo obecności w XML znacznika `<Zaplacono>1</Zaplacono>`. Podgląd i PDF pokazują teraz „Zapłacono”, a przy ponownej edycji istniejącej faktury poprawnie przywracane jest również zaznaczenie checkboxa „Oznacz fakturę jako w pełni zapłaconą”, także dla płatności przelewem.</li>
+          <li>KSeF XML (ilości pozycji z miejscami po przecinku): Naprawiono zaokrąglanie ilości pozycji podczas generowania XML FA(3). Ilości mogą teraz zachować do czterech miejsc po przecinku, np. `1,2345` jest zapisywane w XML jako `1.2345`; dotyczy to również ilości w pozycjach zaliczkowych.</li>
+          <li>KSeF XML (korekty sprzedaży, sekcja Rozliczenie / DoRozliczenia): Ujednolicono źródło kwoty `DoRozliczenia` z nagłówkiem dokumentu. Dla korekt sprzedaży (`KOR`) wartość w `Rozliczenie/DoRozliczenia` jest teraz wyliczana z tej samej podstawy co `P_15` (z uwzględnieniem już rozliczonej części dokumentu), zamiast z rekonstrukcji stanu `PO`.</li>
+          <li>KSeF XML (korekty sprzedaży, znak kwoty DoRozliczenia): Uszczelniono zapis kwoty w `Rozliczenie/DoRozliczenia` tak, aby była zawsze nieujemna. Dla korekt z ujemnym `P_15` do XML trafia dodatnia wartość bezwzględna (np. `P_15=-26.97` -> `DoRozliczenia=26.97`).</li>
+          <li>Podgląd korekt KSeF (pozycje PRZED/PO, nierówne grupy): Zmieniono render pozycji korekty dla przypadków, gdzie liczba wierszy `StanPrzed=1` jest inna niż liczba wierszy `PO`. W takim układzie podgląd nie paruje już pozycji 1:1, tylko prezentuje je grupowo: najpierw wszystkie wiersze `PRZED`, następnie wszystkie wiersze `PO`.</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.0.45" date="2026-07-30">
       <description>
         <ul>
