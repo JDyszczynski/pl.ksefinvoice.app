@@ -109,6 +109,18 @@
   <url type="donation">https://buycoffee.to/jarekd</url>
   <content_rating type="oars-1.1" />
   <releases>
+    <release version="1.0.47" date="2026-09-06">
+      <description>
+        <ul>
+          <li>JPK (korekty: V7/EWP/PKPIR, kwoty i okresy): Naprawiono błędne raportowanie kwot części korekt. Dla korekt typu <code>przed_po</code> wprowadzono tryb mieszany: gdy korekta zmienia <code>date_sale</code> lub <code>date_period_end</code>, raportowana jest pełna wartość stanu <code>PO</code> (z wykluczeniem dokumentu korygowanego <code>parent</code> z tego samego raportu); gdy nie zmienia okresu, pozostaje klasyczne liczenie delta (<code>korekta - parent</code>). Poprawka została ujednolicona w eksportach <code>JPK_V7</code>, <code>JPK_EWP</code> i <code>JPK_PKPIR</code>.</li>
+          <li>JPK_V7 (ZakupWiersz, daty dokumentu): Naprawiono zamianę znaczników <code>DataZakupu</code> i <code>DataWplywu</code> w części zakupowej eksportu. <code>DataZakupu</code> jest teraz mapowana z <code>date_sale</code> (fallback: <code>date_issue</code>), a <code>DataWplywu</code> z <code>date_issue</code>.</li>
+          <li>JPK_V7 (korekty zakupu KSeF, pola <code>K_42</code>/<code>K_43</code>): Naprawiono przypadek zawyżonych wartości ujemnych przy korektach z parami <code>StanPrzed</code>/<code>PO</code>. Gdy dokument KSeF zawiera oba stany, delta jest teraz liczona bezpośrednio z XML korekty (<code>PO - PRZED</code>) zamiast przez odjęcie całego dokumentu korygowanego, co eliminuje błędne wartości typu <code>K_42=-682.27</code>, <code>K_43=-40.59</code> dla korekt o małej różnicy.</li>
+          <li>Deklaracje (Ewidencja VAT/PPE, JPK_EWP/JPK_PKPIR; korekty KSeF PRZED/PO): Ujednolicono logikę poza <code>JPK_V7</code>: dla korekt zawierających pary <code>StanPrzed</code>/<code>PO</code> serwisy <code>Revenue</code>, <code>JPK_EWP</code> i <code>JPK_PKPIR</code> preferują teraz bezpośrednią deltę z XML (<code>PO - PRZED</code>) zamiast odejmowania całego dokumentu korygowanego z pozycji w bazie. Eliminuje to rozjazdy między raportami deklaracji przy korektach częściowych importowanych z KSeF.</li>
+          <li>Lista dokumentów (Qt, sprzedaż/zakup/inne; filtry dat i układ paska filtrów): Dodano dodatkowy, ręczny filtr zakresu dat <code>od-do</code> dla list: <code>Faktury Sprzedaży</code>, <code>Faktury Zakupu</code> oraz modułu <code>Faktury inne</code> (Podmiot3). Zachowano presety <code>Pokaż z</code>, a zakres ręczny jest teraz dostępny warunkowo: pojawia się wyłącznie przy wyborze opcji <code>Bez ograniczeń</code>. Przebudowano też układ paska filtrów: wyszukiwarka pozostała po lewej, a blok ręcznego zakresu dat jest wyrównany do prawej strony w tym samym wierszu, z elastyczną pustą przestrzenią pośrodku podczas zmiany szerokości okna.</li>
+          <li>Faktury sprzedaży (duplikacja jako nowy + szablony, status VAT i P_19): Ujednolicono inicjalizację nowych dokumentów tworzonych z duplikatu i ze wzorca. Status VAT dokumentu (<code>vatowiec</code> / <code>zwolniony</code>) oraz pola zwolnienia (<code>P_19</code>, typ i opis podstawy) są teraz zawsze synchronizowane z bieżącą konfiguracją firmy: dla podmiotu zwolnionego wymuszane są aktualne wartości z konfiguracji, a dla podmiotu będącego VAT-owcem usuwane są historyczne wartości zwolnienia przeniesione ze starego dokumentu/szablonu.</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.0.46" date="2026-08-26">
       <description>
         <ul>
