@@ -1,7 +1,7 @@
 {
     "app-id": "pl.ksefinvoice.KsefInvoice",
     "runtime": "org.freedesktop.Platform",
-    "runtime-version": "25.08",
+    "runtime-version": "26.08",
     "sdk": "org.freedesktop.Sdk",
     "command": "KsefInvoice",
     "finish-args": [
@@ -29,8 +29,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://github.com/JDyszczynski/pl.ksefinvoice.app/releases/download/v1.0.47/KsefInvoice-1.0.47.tar.gz",
-                    "sha256": "c8fd4b43082187de9d511e878b2aeae56f4efef0bb9dee3f8ef6243bb71a1038",
+                    "url": "https://github.com/JDyszczynski/pl.ksefinvoice.app/releases/download/v1.0.48/KsefInvoice-1.0.48.tar.gz",
+                    "sha256": "022f94cedb7e7015a630ff14bfb924621012907d2eee7e052b303669f24a3934",
                     "strip-components": 1
                 },
                 {
