@@ -109,6 +109,19 @@
   <url type="donation">https://buycoffee.to/jarekd</url>
   <content_rating type="oars-1.1" />
   <releases>
+    <release version="1.0.49" date="2026-11-02">
+      <description>
+        <ul>
+          <li>Podgląd i PDF dokumentów liczonych od brutto (cena jednostkowa netto): Rozszerzono opcję <code>Konfiguracja -&gt; Inne -&gt; Opcje wydruków</code>, która nazywa się teraz <code>Pokaż kolumnę wartość netto i przeliczaj ceny jednostkowe do netto dla faktur liczonych od cen brutto</code>. Po jej włączeniu, poza dotychczasową dodatkową kolumną <code>Wartość netto</code>, kolumna <code>Cena brutto</code> zmienia nagłówek na <code>Cena netto</code>, a prezentowana cena jednostkowa (w tym <code>Cena przed rabatem</code>) jest przeliczana do netto (cena brutto pomniejszona o VAT) i zaokrąglana do 4 miejsc po przecinku.</li>
+          <li>Podgląd i PDF (kolumny rabatu, dokumenty od netto i od brutto): Kolumny <code>Cena przed rabatem</code> i <code>Rabat %</code> nie są już prezentowane, gdy na żadnej pozycji dokumentu różnica między ceną przed rabatem a ceną nie przekracza 5 groszy. Dotyczy to dokumentów liczonych zarówno od cen netto, jak i od cen brutto.</li>
+          <li>Faktury sprzedaży (duplikuj jako nowy, zmiana pozycji a płatność): Naprawiono aktualizację kwoty pojedynczej standardowej płatności po zmianie wartości pozycji. Synchronizacja działa, gdy kwota płatności początkowo odpowiadała kwocie brutto dokumentu źródłowego; ręcznie zmienione kwoty, zaliczki i płatności rozbite pozostają bez zmian.</li>
+          <li>KSeF FA(3) (rabaty pozycji <code>P_10</code>, zakup i sprzedaż): Poprawiono mapowanie rabatów jednostkowych przy imporcie, podglądzie i eksporcie dokumentów. Pole <code>P_9A</code> jest teraz traktowane jako cena jednostkowa przed rabatem, <code>P_10</code> jako jednostkowa kwota rabatu nieuwzględniona w <code>P_9A</code>, a cena po rabacie jest wyznaczana z <code>P_11 / P_8B</code>. Procent rabatu jest liczony jako <code>P_10 / P_9A</code>, dzięki czemu cena przed rabatem, cena netto po rabacie i wartość netto pozycji są prezentowane spójnie. Generator faktur sprzedaży zapisuje teraz <code>P_9A</code>, <code>P_10</code> i <code>P_11</code> zgodnie z tą zależnością.</li>
+          <li>JPK_V7 (kontrahenci bez identyfikatora podatkowego, <code>NrKontrahenta</code>/<code>NrDostawcy</code>): Naprawiono błąd walidacji XSD przy pustych identyfikatorach kontrahenta. Jeśli numer po normalizacji TIN jest pusty lub placeholderowy (<code>BRAK</code>/<code>BARK</code>/<code>BRAKID</code>), eksport wpisuje teraz <code>BRAK</code> (bez nawiasów), zamiast emitować pusty element.</li>
+          <li>JPK_V7 (Podmiot1, <code>OsobaNiefizyczna</code>, przestrzeń nazw <code>NIP</code>/<code>PelnaNazwa</code>): Poprawiono namespace elementów identyfikacyjnych podatnika w sekcji <code>Podmiot1</code>. Pola <code>NIP</code> i <code>PelnaNazwa</code> są teraz zapisywane w przestrzeni głównej schemy <code>JPK_V7M(3)</code> (<code>14090</code>), co usuwa błąd walidacji dotyczący nieprawidłowego potomka <code>etd:NIP</code>.</li>
+          <li>JPK_FA(4) (pola wymagane <code>P_3A</code>-<code>P_3D</code>, walidacja <code>TZnakowyJPK</code>): Uszczelniono generowanie obowiązkowych pól tekstowych nabywcy/sprzedawcy. Dla pustych danych źródłowych eksport stosuje fallback <code>BRAK</code>, dzięki czemu <code>P_3D</code> (adres sprzedawcy) i pozostałe pola nie trafiają do XML jako puste wartości.</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.0.48" date="2026-09-25">
       <description>
         <ul>
