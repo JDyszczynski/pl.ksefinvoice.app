@@ -109,6 +109,24 @@
   <url type="donation">https://buycoffee.to/jarekd</url>
   <content_rating type="oars-1.1" />
   <releases>
+    <release version="1.0.50" date="2026-11-30">
+      <description>
+        <ul>
+          <li>Faktury sprzedaży (duplikuj jako nowy, okres dat): Przy duplikowaniu faktury z okresem dat zakres jest przesuwany o miesiąc kalendarzowy. Dni nieistniejące w miesiącu docelowym są ograniczane do jego ostatniego dnia (np. 31 stycznia -&gt; 28 lub 29 lutego).</li>
+          <li>Pierwsze uruchomienie (lokalizacja bazy): Gdy nie znaleziono istniejącej bazy, można wybrać katalog jej utworzenia spośród obsługiwanych lokalizacji. AppImage wyszukuje również bazy obok pliku aplikacji; istniejące pliki nie są nadpisywane.</li>
+          <li>Podgląd i wydruk dokumentów (sekcja <code>Rozliczenie</code>): Tabelę obciążeń i odliczeń przeniesiono nad kod QR i uwagi oraz usunięto znajdujący się nad nią nagłówek <code>Rozliczenie</code>. Dodatkową kwotę pod wartością dokumentu opisano jako <code>Saldo u kontrahenta</code>.</li>
+          <li>Rozrachunki (saldo z dokumentu): Do menu kontekstowego dodano opcję <code>Saldo z dokumentu</code>, dostępną po zaznaczeniu jednego wiersza, gdy wyświetlany dokument zawiera sekcję rozliczenia. Otwiera ona okno z tabelą obciążeń i odliczeń; kolory tabeli są dopasowane do motywu aplikacji.</li>
+          <li>Rozrachunki (dane do przelewu i bankowy kod QR): Obok kwoty do zapłaty dodano pole <code>Saldo dokumentu</code> i domyślnie odznaczony checkbox <code>Użyj do QR</code>. Jego zaznaczenie przełącza kwotę w bankowym kodzie QR na saldo z dokumentu, a odznaczenie przywraca kwotę do zapłaty. Gdy saldo nie jest dostępne w dokumencie, checkbox jest nieaktywny.</li>
+          <li>Rozrachunki (wydajność dla dużych baz): Listę dokumentów wczytuje się porcjami — na start pobierana jest liczba pozycji dopasowana do widocznego obszaru, a kolejne są doczytywane podczas przewijania. Wielkość porcji dostosowuje się po zmianie rozmiaru okna. Ograniczono też zbędne zapytania przy wyszukiwaniu kontrahenta i dodano indeksy bazy danych dla najczęściej używanych powiązań oraz filtrów.</li>
+          <li>Deklaracje i raporty (ładowanie zakładek): Przy otwarciu modułu obliczana jest tylko zawartość aktywnej zakładki. Dane kolejnych zakładek są wczytywane przy pierwszym wejściu, a podsumowania VAT za te same miesiące są współdzielone między widokami. Odświeżenie lub zmiana roku ponownie przelicza aktywną zakładkę.</li>
+          <li>Ewidencja VAT (zgodność z JPK_V7, okresy i metoda kasowa): Ujednolicono miesięczne podsumowania sprzedaży i zakupów z wierszami generowanymi do JPK_V7. Ewidencja korzysta teraz z tych samych reguł doboru dokumentów i kwot, w tym dat sprzedaży/otrzymania oraz dat zapłaty dla metody kasowej, dzięki czemu dokumenty nie są przypisywane do różnych miesięcy w ewidencji i JPK.</li>
+          <li>KSeF (pobieranie faktur, podział zakresów dat): Naprawiono pomijanie faktur z ostatniego dnia okna pobierania. Granice dzielonych zakresów obejmują teraz cały dzień i nie pozostawiają przerw między paczkami.</li>
+          <li>Rozrachunki (rozliczenie zbiorcze): Po zaznaczeniu pozycji pole <code>Wpłata / Nasza zapłata</code> automatycznie uzupełnia kwotę potrzebną po skompensowaniu należności WN i zobowiązań MA, a rozliczenie zapisuje faktyczne wpłaty. Dodano menu kontekstowe z opcjami zaznaczania i odznaczania wszystkich pozycji oraz osobno pozycji WN lub MA.</li>
+          <li>Faktury inne (Podmiot3, menu kontekstowe → Operacje): Dodano podmenu <code>Operacje</code> analogiczne do list <code>Faktury Sprzedaży</code> i <code>Faktury Zakupu</code>. Zawiera opcje: <code>Zapisz XML</code>, <code>Zapisz jako PDF (jeden plik)</code>, <code>Zapisz jako PDF (wiele plików)</code>, <code>Drukuj</code>, <code>Odznacz zaznaczone</code> oraz <code>Odznacz wszystkie nowe</code>. Dodatkowo odświeżono logikę odznaczania „nowych” tak, aby nie resetowała bieżącego zaznaczenia wierszy na liście.</li>
+          <li>Podgląd i PDF dokumentów liczonych od brutto (cena jednostkowa netto): Rozszerzono opcję <code>Konfiguracja -&gt; Inne -&gt; Opcje wydruków</code>, która nazywa się teraz <code>Pokaż kolumnę wartość netto i przeliczaj ceny jednostkowe do netto dla faktur liczonych od cen brutto</code>. Po jej włączeniu, poza dotychczasową dodatkową kolumną <code>Wartość netto</code>, kolumna <code>Cena brutto</code> zmienia nagłówek na <code>Cena netto</code>, a prezentowana cena jednostkowa (w tym <code>Cena przed rabatem</code>) jest przeliczana do netto (cena brutto pomniejszona o VAT) i zaokrąglana do 4 miejsc po przecinku.</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.0.49" date="2026-11-02">
       <description>
         <ul>
